@@ -17,8 +17,7 @@ function App() {
       <Route element={<AuthMiddleware />}>
         <Route path={'/home'} element={<HomeScreen />} />
         <Route path={'/workspace/:workspace_id'} element={<Workspace />} />
-        {/* Ruta protegida, solo puede entrar si el usuario esta loggeado */}
-        {/* Nuestro objetivo es que si una ruta esta protegida y no tenemos autorizacion nos redireccione al login */}
+        {/* TODO= Crear un workspace y un workspace member y asociarlo al usuario */}
       </Route>
     </Routes>
   );
