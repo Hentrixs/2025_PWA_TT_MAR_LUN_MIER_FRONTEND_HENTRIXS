@@ -13,15 +13,13 @@ const useRequest = () => {
 
     const sendRequest = async ({ requestCb }: useRequestProps) => {
         try {
-            setResponse(null); // limpiamos los states?
+            setResponse(null); // limpiamos los states
             setError(null);
             setLoading(true);
 
             const res = await requestCb(); // almacenamos en es el return del requestCb();
             setResponse(res); // seteamos response
-
         } catch (err) { // seteamos err si es necesario y al final siempre seteamos setLoading a false
-            console.log(err);
             setError(err);
         } finally {
             setLoading(false);

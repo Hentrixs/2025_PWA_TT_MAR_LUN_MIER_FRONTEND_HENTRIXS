@@ -1,9 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import RegisterScreen from './Components/RegisterScreen/RegisterScreen';
 import LoginScreen from './Components/LoginScreen/LoginScreen';
 import ResetPasswordRequestScreen from './Components/ResetPasswordRequestScreen/ResetPasswordRequestScreen';
 import AuthMiddleware from './Middlewares/AuthMiddleware';
 import HomeScreen from './Components/HomeScreen/HomeScreen';
+import Workspace from './Components/Workspace/Workspace';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Route path={'/reset-password-request'} element={<ResetPasswordRequestScreen />} />
       <Route element={<AuthMiddleware />}>
         <Route path={'/home'} element={<HomeScreen />} />
+        <Route path={'/workspace/:workspace_id'} element={<Workspace />} />
         {/* Ruta protegida, solo puede entrar si el usuario esta loggeado */}
         {/* Nuestro objetivo es que si una ruta esta protegida y no tenemos autorizacion nos redireccione al login */}
       </Route>

@@ -1,14 +1,12 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import './RegisterScreen.css';
-// Importamos nuestros ayudantes
 import useForm from '../../hooks/useForm/useForm';
-import useRequest from '../../hooks/useRequest/useRequest';
-import { register } from '../../services/authService';
+import useRegister from '../../hooks/useRegister/useRegister';
+import { useEffect } from 'react';
 
 const RegisterScreen = () => {
 
-    // 1. Invocamos nuestro hook useRequest para manejar los estados automáticamente
-    const { sendRequest, error, response, loading } = useRequest();
+    const { registerSubmit, response, error, loading } = useRegister();
 
     const REGISTER_FORM_FIELDS = { // Diccionario para evitar errores de tipeo en los nombres
         EMAIL: 'email',
@@ -22,25 +20,19 @@ const RegisterScreen = () => {
         [REGISTER_FORM_FIELDS.PASSWORD]: ''
     };
 
-    // 2. Aquí es donde ocurre la conexión real
-    const onRegister = async (formState: any) => {
-        // Envolvemos el envío dentro del sendRequest del Hook
-        await sendRequest({
-            requestCb: async () => {
-                // Ejecutamos la función register que hicimos en authService.ts mandándole los 3 campos exactos
-                return await register({
-                    name: formState[REGISTER_FORM_FIELDS.NAME],
-                    email: formState[REGISTER_FORM_FIELDS.EMAIL],
-                    password: formState[REGISTER_FORM_FIELDS.PASSWORD]
-                });
-            }
-        });
-    };
-
     const { handleChangeInput, onSubmit, formState } = useForm({
         initialFormState,
-        submitFn: onRegister
-    })
+        submitFn: registerSubmit
+    });
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        () => {
+            if (response && response.ok) {
+                navigate('/login');
+            };
+        };
+    }, [response]);
 
     // 3. Pequeño espía en consola para que veas qué hace React tras bastidores
     console.log(`ESPIA DE ESTADOS (REGISTER): Response: ${response}, Error: ${error}, Loading: ${loading}`);

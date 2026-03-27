@@ -1,14 +1,13 @@
-import { Link } from 'react-router';
-import useForm from '../../hooks/useForm/useForm';
-import './LoginScreen.css'
-import useRequest from '../../hooks/useRequest/useRequest';
-import { login } from '../../services/authService';
+import { Link, useNavigate } from 'react-router';
 import { useContext, useEffect } from 'react';
+import './LoginScreen.css'
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import useForm from '../../hooks/useForm/useForm';
+import useLogin from '../../hooks/useLogin/useLogin';
 
 const LoginScreen = () => {
 
-    const { sendRequest, error, response, loading } = useRequest(); // se le pide al useRequest() todos los estados.
+    // es decir, hacer redirecciones a otra pagina
 
     const LOGIN_FORM_FIELDS = { // Esto es lo que se conoce como un diccionario
         EMAIL: 'email', // sirve para que en caso de que querer modificar el nombre solamente cambiemos 'email' por otra cosa una sola vez y facil
@@ -20,34 +19,24 @@ const LoginScreen = () => {
         [LOGIN_FORM_FIELDS.PASSWORD]: ''
     };
 
-    const { saveToken, isLogged } = useContext(AuthContext);
+    const { hacerLogin, error, response, loading } = useLogin();
 
-    const onLogin = (formState: any) => { // esta es la funcion del login. ok.
-        sendRequest({
-            requestCb: async () => {
-                return await login({
-                    email: formState[LOGIN_FORM_FIELDS.EMAIL], // y aca porque si se usa formato email: email , password: password
-                    password: formState[LOGIN_FORM_FIELDS.PASSWORD]
-                });
-            }
-        });
-    };
+    const { manageLogin } = useContext(AuthContext);
+
 
     const { handleChangeInput, onSubmit } = useForm({ // aca se desetructura 3 funciones del useForm y ademas se le pasa el initialFormState y el submitFn.
         initialFormState: initialFormState,
-        submitFn: onLogin // aca es donde le pasamos como callback la funcion onLogin al submitFn
+        submitFn: hacerLogin // aca es donde le pasamos como callback la funcion onLogin al submitFn
     });
 
-    console.log(`ESPIA DE ESTADOS: Response: ${response}, Error: ${error}, Loading: ${loading
-
-        }`);
+    console.log(`ESPIA DE ESTADOS: Response: ${response}, Error: ${error}, Loading: ${loading}`);
 
     // la funcion se carga cada vez que carga response, si response.ok es true, se guarda el token en el contexto.
     useEffect(() => {
-        if (response && response.ok && saveToken) {
-            saveToken(response.data.auth_token);
+        if (response && response.ok && manageLogin) {
+            manageLogin(response.data.auth_token);
         }
-    }, [response, saveToken]);
+    }, [response, manageLogin]);
 
     return (
         <div>
