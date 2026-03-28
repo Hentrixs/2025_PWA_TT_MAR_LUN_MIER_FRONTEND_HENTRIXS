@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useContext, createContext } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { createContext } from "react";
+import { useNavigate } from "react-router";
 
 interface AuthContextType {
     isLogged: boolean | undefined;

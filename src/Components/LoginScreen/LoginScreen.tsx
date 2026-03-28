@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { useContext, useEffect } from 'react';
 import './LoginScreen.css'
 import { AuthContext } from '../../context/AuthContext/AuthContext';

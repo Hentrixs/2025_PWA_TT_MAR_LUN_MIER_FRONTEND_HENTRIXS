@@ -1,4 +1,4 @@
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import RegisterScreen from './Components/RegisterScreen/RegisterScreen';
 import LoginScreen from './Components/LoginScreen/LoginScreen';
 import ResetPasswordRequestScreen from './Components/ResetPasswordRequestScreen/ResetPasswordRequestScreen';

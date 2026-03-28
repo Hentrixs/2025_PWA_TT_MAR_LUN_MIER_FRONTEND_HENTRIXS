@@ -5,7 +5,7 @@ import useWorkspaces from "../../hooks/useWorkspaces/useWorkspaces";
 
 const HomeScreen = () => {
 
-    const { response, loading, error, workspaces } = useWorkspaces();
+    const { loading, workspaces } = useWorkspaces();
 
     return (
         <div className="hs-shell">
