@@ -2,7 +2,7 @@ import ENVIRONMENT from '../config/environment.config';
 import { LOCAL_STORAGE_TOKEN_KEY } from '../context/AuthContext/AuthContext';
 
 export const getWorkspaces = async () => {
-    const response_http = await fetch(ENVIRONMENT.API_URL + 'api/workspace', {
+    const response_http = await fetch(ENVIRONMENT.API_URL + '/api/workspace', {
         method: 'GET',
         headers: {          // porque se escribe eso de autorization asi y porque tenemos que hacerlo asi?
             'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`
