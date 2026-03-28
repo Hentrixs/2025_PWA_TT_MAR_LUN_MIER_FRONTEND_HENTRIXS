@@ -8,7 +8,7 @@ interface AuthContextType {
 }
 
 // al crear un contexto se le puede pasar un obj con los typos y los nombres para autocompletar al usar el contexto mas tarde
-export const AuthContext = createContext<AuthContextType>({ isLogged: false, manageLogin: (auth_token: string) => { } } as AuthContextType);
+export const AuthContext = createContext<AuthContextType>({ isLogged: false, manageLogin: () => { } } as AuthContextType);
 //que carajos es esto, 
 
 // maneje estado que indique si la sesion esta iniciada o no
