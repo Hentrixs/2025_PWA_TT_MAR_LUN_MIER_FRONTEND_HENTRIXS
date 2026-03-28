@@ -1,7 +1,7 @@
 import ENVIRONMENT from "../config/environment.config";
 
 export const login = async ({ email, password }: any) => {
-    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/login`, { // se hace fetch
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}api/auth/login`, { // se hace fetch
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -17,7 +17,7 @@ export const login = async ({ email, password }: any) => {
 export const register = async ({ name, email, password }: any) => {
 
     // TODO= meter la URL en el .env y importarla aca.
-    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/register`, {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -32,7 +32,7 @@ export const register = async ({ name, email, password }: any) => {
 };
 
 export const resetPassword = async ({ email }: any) => { // tengo qeu checkar despues que la URL este bien
-    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/reset-password-request`, {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}api/auth/reset-password-request`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
