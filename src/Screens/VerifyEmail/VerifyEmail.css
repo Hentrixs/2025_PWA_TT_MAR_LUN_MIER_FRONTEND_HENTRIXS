@@ -1,0 +1,19 @@
+.verify-email {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--bg-dark-mid);
+    color: var(--brand-secondary);
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.verify-email div {
+    background-color: var(--bg-light-mid);
+    margin: 1rem;
+    width: auto;
+    height: auto;
+    width: 40%;
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+}

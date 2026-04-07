@@ -7,13 +7,13 @@ const useWorkspaces = () => {
     const { sendRequest, response, loading, error } = useRequest();
 
     useEffect(() => {
-        sendRequest({
-            requestCb: getWorkspaces
-        }) // fijate qeu es normal que muchos hooks llamen a muchos hooks.
+        sendRequest({ requestCb: () => getWorkspaces() });
     }, []);
+
     let workspaces = null;
+
     if (response) {
-        workspaces = response?.data?.workspaces
+        workspaces = response;
     }
 
     return { response, loading, error, workspaces };

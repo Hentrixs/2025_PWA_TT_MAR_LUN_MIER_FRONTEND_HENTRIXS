@@ -31,7 +31,7 @@ const AuthContextProvider = ({ children }: any) => {
         localStorage.setItem('auth_token_slack', auth_token)
         // setItem('nombre','mati') setea en localstorage
         setIsLoggued(true); // ya estamos loggeados esto pasa a estar verdadero.
-        navigate('/home');
+        navigate('/workspace-selector');
     };
     // la idea es llegar hasta el punto donde el sistema sepa por el localstorage que ya estaba loggeado
 

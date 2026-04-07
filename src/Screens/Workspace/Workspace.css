@@ -1,0 +1,106 @@
+.workspace-layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.outer-sidebar {
+    background: var(--bg-dark);
+    width: 4rem;
+    color: var(--text-on-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: var(--space-sm);
+}
+
+.workspace-icon {
+    width: 90%;
+    height: 45px;
+    background: var(--brand-primary);
+    color: var(--text-on-dark);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: var(--text-lg);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: var(--space-md);
+}
+
+.workspace-icon:hover {
+    border-radius: var(--radius-sm);
+    background: var(--brand-primary-hover);
+}
+
+.inner-sidebar {
+    background: var(--bg-dark-mid);
+    width: 20%;
+    padding: 2rem;
+    color: var(--text-on-dark);
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+}
+
+.channels-title {
+    padding: 0.5rem 0rem;
+}
+
+.channel-item {
+    padding: 0.3rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    background-color: var(--bg-dark);
+    border-radius: var(--radius-md);
+    width: 100%;
+    display: flex;
+}
+
+.channel-list {
+    padding: 1rem 0rem;
+}
+
+.channel-item:hover {
+    background-color: var(--brand-primary-hover);
+    border-radius: var(--radius-md);
+}
+
+.chat-main {
+    background: var(--bg-light);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: var(--text-on-light);
+    justify-content: space-between;
+}
+
+.chat-header {
+    padding: 0.5rem 0rem;
+}
+
+.chat-history {
+    height: 85%;
+    background-color: var(--bg-chatmain);
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+}
+
+.chat-input-container {
+    height: min-content;
+
+    input {
+        height: 3rem;
+        border-radius: var(--radius-md);
+        border: 1.5px solid var(--brand-primary);
+        padding: 0rem 1rem;
+        width: 100%;
+        background: #FFFFFF;
+        color: var(--text-on-light);
+    }
+}

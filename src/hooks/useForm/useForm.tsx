@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 /*
-la interfaz obliga a que siempre se manden ÚNICAMENTE las 2 piezas del motor principales (initialFormState y submitFn). 
+la interfaz obliga a que siempre se manden ÚNICAMENTE las 2 piezas del motor principales 
+(initialFormState y submitFn). 
 Pero gracias a la T, lo que venga adentro del initialFormState puede ser infinito e ilimitado
 (correos, contraseñas, edades, nombres, fotos), y 
-TypeScript se adaptará solito a lo que sea que le pongas para devolvértelo idéntico al final y sin errores de tipeo.
+TypeScript se adaptará solito a lo que sea que le pongas para devolvértelo idéntico al final 
+y sin errores de tipeo.
 */
 
 interface useFormProps<T> {

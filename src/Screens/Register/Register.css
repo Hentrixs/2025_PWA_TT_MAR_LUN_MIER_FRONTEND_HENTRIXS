@@ -1,0 +1,69 @@
+.register-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: row;
+    color: var(--text-on-dark);
+}
+
+.split-left {
+    display: flex;
+    width: 65%;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-dark-gradient);
+}
+
+.split-right {
+    display: flex;
+    width: 35%;
+    background: var(--bg-light);
+    flex-direction: column;
+    padding: 2rem;
+    row-gap: var(--space-xl);
+    color: var(--text-on-light);
+}
+
+.split-right h1 {
+    font-size: var(--text-2xl);
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.register-form div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.register-form label {
+    font-size: var(--text-lg);
+}
+
+.register-form button {
+    background: var(--brand-primary);
+    color: var(--text-on-dark);
+    padding: var(--space-md);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: var(--space-md);
+    border-radius: var(--radius-lg);
+}
+
+.register-form div input {
+    width: 70%;
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--brand-primary);
+    color: var(--text-on-light);
+    background: #FFFFFF;
+}
+
+.register-form span {
+    font-size: var(--text-md);
+}
