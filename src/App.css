@@ -1,67 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
-    font-family: "Roboto Condensed";
+    font-family: "Inter", sans-serif;
 }
 
 :root {
 
-    /* backgrounds */
-    --bg-dark:          #052E16;
-    --bg-dark-mid:      #14532D;
-    --bg-light:         #F0FDF4;
-    --bg-light-mid:     #DCFCE7;
-    --bg-chatmain: #1B1C21;
-    --bg-dark-gradient: linear-gradient(135deg, #0A3D1F 0%, #052E16 100%);
+    /* backgrounds - Corporate Matte Flat */
+    --bg-dark: #161A1D;
+    /* Outer Sidebar - Darkest */
+    --bg-dark-mid: #1F2428;
+    /* Inner Sidebar - Mid */
+    --bg-light: #24292E;
+    /* Deprecated/Fallback */
+    --bg-light-mid: #2B3137;
+    /* Inputs, hovers */
+    --bg-chatmain: #24292E;
+    /* Chat Main Area */
+    --bg-dark-gradient: var(--bg-dark);
+    /* Removed gradient for flat look */
 
     /* brand */
-    --brand-primary:       #16A34A;
-    --brand-primary-hover: #22C55E;
-    --brand-secondary:     #15803D;
+    --brand-primary: #0BA561;
+    /* Professional Emerald */
+    --brand-primary-hover: #08834D;
+    --brand-secondary: #055230;
 
     /* text */
-    --text-on-dark:   #FFFFFF;
-    --text-on-light:  #166534;
-    --text-secondary: #D1D2D3;
-    --text-muted:     #6B9E7A;
+    --text-primary: #F0F2F5;
+    /* Main clean text */
+    --text-on-dark: #F0F2F5;
+    /* Compatible */
+    --text-on-light: #F0F2F5;
+    /* Flat UI is all dark mode */
+    --text-secondary: #ABB2BF;
+    --text-muted: #808A9D;
 
-    /* border colors */
-    --border-color-subtle: #166534;
-    --border-color-light:  rgba(255, 255, 255, 0.1);
+    /* borders & lines */
+    --border-color-subtle: #30363D;
+    --border-color-light: #161A1D;
 
-    /* border radius */
+    /* border radius - more professional tight radius */
     --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 24px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+    --radius-xl: 16px;
 
     /* font-size */
-    --text-xs:   0.75rem;
-    --text-sm:   0.85rem;
-    --text-base: 1rem;
-    --text-md:   1.15rem;
-    --text-lg:   1.5rem;
-    --text-xl:   2.5rem;
-    --text-2xl:  4rem;
+    --text-xs: 0.75rem;
+    --text-sm: 0.85rem;
+    --text-base: 0.95rem;
+    /* slightly smaller for desktop app feel */
+    --text-md: 1.1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 2rem;
+    --text-2xl: 3rem;
 
     /* max widths */
-    --max-width-page:    1100px;
+    --max-width-page: 1100px;
     --max-width-content: 800px;
 
     /* spacing */
-    --space-xs:  0.25rem;
-    --space-sm:  0.5rem;
-    --space-md:  1rem;
-    --space-lg:  1.5rem;
-    --space-xl:  2rem;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
     --space-2xl: 3rem;
 
     /* wheight */
-    --weight-xs: 400px;  
-    --weight-sm: 600px;
-    --weight-md: 800px;
-    --weight-lg: 900px
+    --weight-xs: 400;
+    --weight-sm: 500;
+    --weight-md: 600;
+    --weight-lg: 700;
 }

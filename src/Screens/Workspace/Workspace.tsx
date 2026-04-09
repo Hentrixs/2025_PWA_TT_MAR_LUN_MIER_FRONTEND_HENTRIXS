@@ -6,7 +6,7 @@ import { Link, Navigate, NavLink, Outlet, useParams } from 'react-router-dom';
 import { LOCAL_STORAGE_TOKEN_KEY } from '../../context/AuthContext/AuthContext';
 
 function Workspace() {
-    const { workspace_id } = useParams();
+    const { workspace_id, channel_id } = useParams();
 
     const {
         workspaces,
@@ -35,6 +35,9 @@ function Workspace() {
     if (!workspace_id && workspaces && workspaces.length > 0) {
         return <Navigate to={`/workspace/${workspaces[0]._id}`} replace />
     };
+    if (workspace_id && !channel_id && channel_list && channel_list.length > 0) {
+        return <Navigate to={`/workspace/${workspace_id}/channel/${channel_list[0]._id}`} replace />
+    };
 
     return (
         <div className='workspace-layout'>
@@ -57,7 +60,7 @@ function Workspace() {
                     })}
                 </div>
             </div>
-            <Outlet context={{ member_id: activeMember?.member_id, channel_list }}/>
+            <Outlet context={{ member_id: activeMember?.member_id, channel_list }} />
         </div>
     )
 }

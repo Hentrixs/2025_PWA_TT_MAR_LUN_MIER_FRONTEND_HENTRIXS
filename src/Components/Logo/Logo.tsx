@@ -1,16 +1,30 @@
-const Logo = ({ width = 120, height = 120 }: { width?: number; height?: number }) => {
+const Logo = ({ width = 120, height = 120, showText = true }: { width?: number; height?: number; showText?: boolean }) => {
     return (
-        <svg width={width} height={height} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="30" fill="url(#paint0_linear)" />
-            <path d="M28 42C28 35.3726 33.3726 30 40 30H60C66.6274 30 72 35.3726 72 42V52C72 58.6274 66.6274 64 60 64H51.5L41 74V64H40C33.3726 64 28 58.6274 28 52V42Z" fill="white" />
-            <path d="M42 47H58M42 53H52" stroke="#052E16" strokeWidth="4" strokeLinecap="round" />
-            <defs>
-                <linearGradient id="paint0_linear" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#22C55E" />
-                    <stop offset="1" stopColor="#052E16" />
-                </linearGradient>
-            </defs>
-        </svg>
+        <div style={{ display: 'flex', alignItems: 'center', gap: `${height * 0.15}px`, justifyContent: 'center' }}>
+            <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Geométric Leaf Concept */}
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" fill="url(#leafGradient)" />
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+                <defs>
+                    <linearGradient id="leafGradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#22C55E" />
+                        <stop offset="1" stopColor="#0BA561" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            {showText && (
+                <span style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: `${height * 0.55}px`,
+                    fontWeight: 700,
+                    color: '#F0F2F5',
+                    letterSpacing: '-1px',
+                    lineHeight: 1
+                }}>
+                    Green<span style={{ color: '#0BA561' }}>Slack</span>
+                </span>
+            )}
+        </div>
     );
 };
 

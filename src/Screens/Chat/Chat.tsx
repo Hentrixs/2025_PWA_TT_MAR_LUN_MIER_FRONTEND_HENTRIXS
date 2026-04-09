@@ -19,23 +19,23 @@ const Chat = () => {
     };
 
     const {
-        refreshMessages, 
-        messagelist, 
-        response: responseMessageList, 
-        loading: loadingMessageList, 
+        refreshMessages,
+        messagelist,
+        response: responseMessageList,
+        loading: loadingMessageList,
         error: errorMessageList
     } = useChatMain(channel_id);
 
     const {
-        sendMessageSubmit, 
-        response: 
-        responseSendMessage, 
-        loading: loadingSendMessage, 
+        sendMessageSubmit,
+        response:
+        responseSendMessage,
+        loading: loadingSendMessage,
         error: errorSendMessage,
     } = useSendMessage();
 
 
-    const {formState, handleChangeInput, onSubmit } = useForm({
+    const { formState, handleChangeInput, onSubmit } = useForm({
         initialFormState,
         submitFn: async (formState: any) => {
             await sendMessageSubmit({
@@ -56,8 +56,14 @@ const Chat = () => {
             <div className='chat-history'>
                 <div className='message-dummy'>
                     {messagelist && responseMessageList && !loadingMessageList && !errorMessageList && messagelist.map((m: any) => {
-                        return(
-                            <p key={m._id}>{m.content}</p>
+                        return (
+                            <div key={m.id} className="message-div">
+                                <div className="message-header">
+                                    <span>{new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                    <p>{m.sender_name}</p>
+                                </div>
+                                <p>{m.content}</p>
+                            </div>
                         )
                     })}
                 </div>
@@ -65,11 +71,11 @@ const Chat = () => {
 
             <div className='chat-input-container'>
                 <form onSubmit={onSubmit}>
-                    <input 
+                    <input
                         type="text"
                         name="content"
-                        placeholder='Enviar mensage...' 
-                        value={formState.content} 
+                        placeholder='Enviar mensage...'
+                        value={formState.content}
                         onChange={handleChangeInput}
                     />
                 </form>
