@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 import useForm from '../../hooks/useForm/useForm';
 import useLogin from '../../hooks/useLogin/useLogin';
 import Logo from '../../Components/Logo/Logo';
+import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 
 const Login = () => {
 
@@ -42,7 +43,7 @@ const Login = () => {
     return (
         <div className='login-container'>
             <div className='split-left'>
-                <Logo width={200} height={200} />
+                <Logo className='logo-responsive' />
             </div>
             <div className='split-right'>
                 <h1>Iniciar Sesion</h1>
@@ -59,6 +60,7 @@ const Login = () => {
                     <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>
                     <span>Olvidaste tu contraseña? <Link to={'/reset-password-request'}>Restablecer Contrasena</Link></span>
                 </form>
+                {response && !loading && <InfoComponent response={response} />}
             </div>
         </div>
     );

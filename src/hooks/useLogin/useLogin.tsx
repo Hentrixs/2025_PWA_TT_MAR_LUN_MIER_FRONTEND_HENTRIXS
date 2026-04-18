@@ -9,6 +9,7 @@ const useLogin = () => {
         sendRequest({ requestCb: () => login({ email, password }) });
     };
 
+    console.log(response);
     return { hacerLogin, response, loading, error };
 };
 

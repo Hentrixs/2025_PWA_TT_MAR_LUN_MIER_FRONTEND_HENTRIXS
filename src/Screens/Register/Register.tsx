@@ -2,10 +2,11 @@ import { Link, useNavigate } from 'react-router';
 import './Register.css';
 import useForm from '../../hooks/useForm/useForm';
 import useRegister from '../../hooks/useRegister/useRegister';
-import { useEffect } from 'react'; 
+import { useEffect } from 'react';
 import Logo from '../../Components/Logo/Logo';
+import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 
-const REGISTER_FORM_FIELDS = { // Diccionario para evitar errores de tipeo en los nombres
+const REGISTER_FORM_FIELDS = {
     EMAIL: 'email',
     PASSWORD: 'password',
     NAME: 'name'
@@ -35,21 +36,18 @@ const Register = () => {
         };
     }, [response]);
 
-    // 3. Pequeño espía en consola para que veas qué hace React tras bastidores
     console.log(`ESPIA DE ESTADOS (REGISTER): Response: ${response}, Error: ${error}, Loading: ${loading}`);
 
     return (
         <div className='register-container'>
-            {/* 4. Corrijo los textos porque habías dejado "Iniciar Sesion" copiado por accidente :) */}
             <div className='split-left'>
-                <Logo width={200} height={200} />
+                <Logo className={'logo-responsive'} />
             </div>
             <div className='split-right'>
-                <h1>Crear una Cuenta Nueva</h1>
+                <h1>Registrarse</h1>
                 <form onSubmit={onSubmit} className='register-form'>
                     <div>
                         <label htmlFor="name">Name</label>
-                        {/* Corregimos type="name" (que no existe en HTML válido) a type="text" */}
                         <input type="text" id='name' name={REGISTER_FORM_FIELDS.NAME} value={formState[REGISTER_FORM_FIELDS.NAME]} onChange={handleChangeInput} />
                     </div>
                     <div>
@@ -62,6 +60,7 @@ const Register = () => {
                     </div>
                     <button type='submit'>Registrarse</button>
                     <span>¿Ya tienes una cuenta? <Link to={'/login'}>Iniciar Sesion</Link></span>
+                    {response && !loading && <InfoComponent response={response} />}
                 </form>
             </div>
         </div>

@@ -13,7 +13,9 @@ function WorkspaceSelector() {
         navigate('/');
     };
 
-    const {workspaces, response, error, loading} = useWorkspaces();
+    const { workspaces, response, error, loading } = useWorkspaces();
+
+    console.log(workspaces);
 
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
     const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
@@ -22,7 +24,7 @@ function WorkspaceSelector() {
     return (
         <div className="workspace-selector">
             <nav className="workspace-nav">
-                <Logo height={50} width={50} />
+                <Logo className='logo-responsive' showText={true} />
                 <button className="workspace-logout-btn" onClick={handleLogout}>Cerrar sesión</button>
             </nav>
             <div className="workspace-hero">
@@ -39,24 +41,32 @@ function WorkspaceSelector() {
                             <hr className='workspace-content-divider' />
                             <p className='workspace-content-section-label'>Listo para iniciar</p>
 
-                            {/* acá irá el .map() con los workspaces reales */}
-                            {workspaces && !loading && !error && response && workspaces.map((wk: any,index: number) => {
-                                return(
-                            <div className='workspace-content-workspace-item' key={index}>
-                                <div className='workspace-content-workspace-info'>
-                                    <div className='workspace-content-logo-placeholder' />
-                                    <Link to={`/workspace/${wk._id}`}>
-                                    <div>
-                                        <p className='workspace-content-workspace-name'>{wk.name}</p>
-                                        <p className='workspace-content-workspace-meta'>1 miembro • Última actividad</p>
-                                    </div>                                    
-                                    </Link>
-                                </div>
-                                <span className='workspace-content-arrow'>→</span>
-                            </div>
+                            {workspaces && !loading && !error && response && workspaces.map((wk: any, index: number) => {
+                                return (
+                                    <div className='workspace-content-workspace-item' key={index}>
+                                        <div className='workspace-content-workspace-info'>
+                                            <div className='workspace-content-logo-placeholder' />
+                                            <Link to={`/workspace/${wk.workspace_id}`}>
+                                                <div>
+                                                    <p className='workspace-content-workspace-name'>{wk.workspace_name}</p>
+                                                    <p className='workspace-content-workspace-meta'>1 miembro • Última actividad</p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <span className='workspace-content-arrow'>→</span>
+                                    </div>
 
                                 )
                             })}
+
+                            {workspaces && workspaces.length === 0 && !loading && !error && response && (
+                                <div className='workspace-empty-state'>
+                                    <div className='workspace-empty-icon'>📂</div>
+                                    <p className='empty-state-title'>No tienes espacios de trabajo</p>
+                                    <p className='empty-state-text'>Parece que aún no eres miembro de ningún espacio. Crea uno nuevo para empezar a colaborar.</p>
+                                    <Link to="/create-workspace" className='empty-state-btn'>Crear mi primer espacio</Link>
+                                </div>
+                            )}
                         </div>
 
                         <div>

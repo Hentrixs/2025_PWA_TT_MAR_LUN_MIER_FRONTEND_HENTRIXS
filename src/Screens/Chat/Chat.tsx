@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useChatMain from "../../hooks/useChatMain/useChatMain";
-import { useOutletContext } from "react-router-dom";
 import useSendMessage from "../../hooks/useSendMessage/useSendMessage";
 import useForm from "../../hooks/useForm/useForm";
+import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
+import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
 
 const SUBMIT_MESSAGE_FORM_FIELDS = {
     CONTENT: 'content'
@@ -10,9 +11,14 @@ const SUBMIT_MESSAGE_FORM_FIELDS = {
 
 const Chat = () => {
 
-    const { channel_id } = useParams();
-    const { member_id, channel_list } = useOutletContext<{ member_id: string, channel_list: any[] }>();
-    const activeChannel = channel_list?.find((ch: any) => ch._id === channel_id);
+    const { activeMember, channel_list } = useWorkspaceContext();
+    const member_id = activeMember?.member_id;
+
+    const navigate = useNavigate();
+    const { isMobile } = useIsMobile();
+    const { workspace_id, channel_id } = useParams();
+
+    const activeChannel = channel_list?.find((ch: any) => ch.channel_id === channel_id);
 
     const initialFormState = {
         [SUBMIT_MESSAGE_FORM_FIELDS.CONTENT]: ''
@@ -28,10 +34,6 @@ const Chat = () => {
 
     const {
         sendMessageSubmit,
-        response:
-        responseSendMessage,
-        loading: loadingSendMessage,
-        error: errorSendMessage,
     } = useSendMessage();
 
 
@@ -40,6 +42,7 @@ const Chat = () => {
         submitFn: async (formState: any) => {
             await sendMessageSubmit({
                 fk_id_channel: channel_id,
+                fk_id_workspace: workspace_id,
                 fk_id_member: member_id,
                 content: formState.content
             });
@@ -50,16 +53,21 @@ const Chat = () => {
     return (
         <div className='chat-main'>
             <div className='chat-header'>
+                {isMobile && (
+                    <button onClick={() => navigate(`/workspace/${workspace_id}`)}>
+                        Volver
+                    </button>
+                )}
                 <h2># {activeChannel?.name ?? 'Cargando...'}</h2>
             </div>
 
             <div className='chat-history'>
                 <div className='message-dummy'>
-                    {messagelist && responseMessageList && !loadingMessageList && !errorMessageList && messagelist.map((m: any) => {
+                    {messagelist && responseMessageList && !loadingMessageList && !errorMessageList && messagelist.map((m: any, index: number) => {
                         return (
-                            <div key={m.id} className="message-div">
+                            <div key={m.message_id ?? index} className="message-div">
                                 <div className="message-header">
-                                    <span>{new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                    <span>{m.created_at}</span>
                                     <p>{m.sender_name}</p>
                                 </div>
                                 <p>{m.content}</p>

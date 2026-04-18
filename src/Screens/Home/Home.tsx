@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <div className="home">
             <nav className="home-nav">
-                <Logo height={50} width={50} />
+                <Logo className='logo-responsive' />
                 <div className="home-nav-links">
                     <Link to="/login" className="home-nav-link">Iniciar sesión</Link>
                     <Link to="/register" className="home-nav-link home-nav-link--cta">Registrarse</Link>

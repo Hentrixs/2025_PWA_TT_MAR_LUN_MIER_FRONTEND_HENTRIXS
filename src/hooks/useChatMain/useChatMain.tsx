@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import useRequest from "../useRequest/useRequest";
 import { channelMessageHistory } from "../../services/channelMessageService";
+import { useParams } from "react-router";
 
 function useChatMain(channel_id: string | any) {
-    
-    const {response, loading, error, sendRequest} = useRequest();
-    
+
+    const { response, loading, error, sendRequest } = useRequest();
+    const { workspace_id } = useParams();
+
     // Aver: esto ha de traer el historial de mensajes
     // Ademas ha de tener la funcion para enviar un mensaje
     // el historial de mensajes ha de re-renderizarse por cada vez que subo o borro un mensaje
@@ -20,12 +22,12 @@ function useChatMain(channel_id: string | any) {
 
     // Por ahora intentare Solamente hacer ambas partes por separado y luego me preocupare por la conexion.
     // Con lo cual el paso logico seria crear el historial de msg.
-    
-    
+
+
     useEffect(() => {
-        sendRequest({requestCb: () => {return channelMessageHistory(channel_id)}})
-    },[channel_id])
-    
+        sendRequest({ requestCb: () => { return channelMessageHistory(workspace_id || '', channel_id || '') } })
+    }, [channel_id])
+
     let messagelist = null
     if (response) {
         messagelist = response.data.channelMessagesHistory;
@@ -36,7 +38,7 @@ function useChatMain(channel_id: string | any) {
         response,
         loading,
         error,
-        refreshMessages: () => sendRequest({requestCb: () => channelMessageHistory(channel_id)})
+        refreshMessages: () => sendRequest({ requestCb: () => channelMessageHistory(workspace_id || '', channel_id) })
     }
 };
 

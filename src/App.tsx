@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './Screens/Register/Register';
 import Login from './Screens/Login/Login';
 import ResetPasswordRequest from './Screens/ResetPasswordRequest/ResetPasswordRequest';
@@ -19,13 +19,13 @@ function App() {
       <Route path={'/login'} element={<Login />} />
       <Route path={'/register'} element={<Register />} />
       <Route path={'/reset-password-request'} element={<ResetPasswordRequest />} />
-      <Route path={'/verify-email'} element={<VerifyEmail />}/>
+      <Route path={'/verify-email'} element={<VerifyEmail />} />
       <Route element={<AuthMiddleware />}>
         <Route path={'/workspace-selector'} element={<WorkspaceSelector />} />
-        <Route path={'/create-workspace'} element={<CreateWorkspace />} />
-        <Route path={'/workspace'} element={<Workspace />}/>
+        <Route path={'/create-workspace'} element={<CreateWorkspace />} /> {/* con exepcion del logo el responsive anda bien */}
+        <Route path={'/workspace'} element={<Workspace />} />
         <Route path={'/workspace/:workspace_id'} element={<Workspace />}>
-          <Route path={'channel/:channel_id'} element={<Chat />} />
+          <Route path={'channel/:channel_id?'} element={<Chat />} />
         </Route>
       </Route>
     </Routes>

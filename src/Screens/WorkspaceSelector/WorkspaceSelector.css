@@ -244,3 +244,69 @@
 .workspace-logout-btn:hover {
     background: var(--border-color-light);
 }
+
+.workspace-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    background: var(--bg-light-mid);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+    border: 1px dashed var(--border-color-light);
+}
+
+.workspace-empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    filter: grayscale(0.5);
+}
+
+.empty-state-title {
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: var(--text-on-light);
+    margin-bottom: var(--space-xs);
+}
+
+.empty-state-text {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    max-width: 300px;
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+}
+
+.empty-state-btn {
+    background: var(--brand-primary);
+    color: white;
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.empty-state-btn:hover {
+    background: var(--brand-primary-hover);
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+.logo-responsive {
+    font-size: clamp(3px, 0.6vw, 6px);
+}
+
+@media (max-width: 589px) {
+    .workspace-selector .workspace-main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .workspace-main .workspace-card-wrapper--full {
+        grid-column: span 1;
+    }
+}

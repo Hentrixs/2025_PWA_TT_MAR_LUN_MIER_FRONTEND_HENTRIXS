@@ -1,0 +1,38 @@
+.green-slack-logo {
+    /* BASE SIZE ESCALAR: Cambiá esto en tu css (.logo-responsive) para escalar todo el componente */
+    font-size: 10px;
+
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8em;
+    /* Proporcional a los 18px originales */
+}
+
+.green-slack-logo .logo-text {
+    font-size: 6.6em;
+    /* Proporcional a los 66px originales */
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #0BA561;
+    /* Green es Verde */
+    letter-spacing: -0.015em;
+    line-height: 1;
+}
+
+.green-slack-logo .logo-text span {
+    color: #F0F2F5;
+    /* Slack es Blanco */
+}
+
+.green-slack-logo .logo-icon-wrapper {
+    width: 12em;
+    /* Proporcional a los 120px originales */
+    flex-shrink: 0;
+}
+
+.green-slack-logo .logo-icon-wrapper svg {
+    width: 100%;
+    display: block;
+}

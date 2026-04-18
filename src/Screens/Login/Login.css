@@ -60,12 +60,46 @@
     padding: var(--space-sm);
     border-radius: var(--radius-md);
     border: 1.5px solid var(--brand-primary);
-    color: var(--text-on-light);
+    color: var(--text-on-white);
     background: #FFFFFF;
+    font-family: var(--font-main);
 }
 
 .login-form span {
     font-size: var(--text-md);
 }
 
-.login-form a {}
+@media (max-width: 1133px) {
+    .login-container {
+        flex-direction: column;
+        height: 100vh !important;
+    }
+
+    .login-container .split-left {
+        width: 100%;
+    }
+
+    .login-container .split-right {
+        width: 100%;
+        height: 100%;
+    }
+
+    .logo-responsive {
+        font-size: 6px;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .split-right .login-form input {
+        width: 100%;
+    }
+
+    .login-container .split-right h1 {
+        font-size: var(--text-xl);
+    }
+
+    .logo-responsive {
+        font-size: 4.5px;
+    }
+}

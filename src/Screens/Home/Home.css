@@ -146,3 +146,10 @@
   color: var(--text-muted);
   letter-spacing: 0.05em;
 }
+
+/* TODO hacer responsive aca*/
+/* Parece que en celulares tendre que*/
+/* usar un desplegable o algo para el */
+/* login o iniciar sesion */
+/* sin embargo me esta costando ajustar el tamanio del logo */
+/* lo mejor qeu puedo hacer para no estancarme es irme a otro componente y dejar este para despues */

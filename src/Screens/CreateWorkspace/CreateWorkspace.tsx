@@ -18,13 +18,13 @@ const CreateWorkspace = () => {
     });
 
     useEffect(() => {
-        if (response) navigate('/workspace');
+        if (response) navigate(`/workspace/${response.workspace_id}`);
     }, [response]);
 
     return (
         <div className="create-workspace">
             <nav className="create-workspace-nav">
-                <Logo height={50} width={50} />
+                <Logo />
             </nav>
 
             <main className="create-workspace-main">
