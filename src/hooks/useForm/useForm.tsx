@@ -19,7 +19,7 @@ const useForm = <T,>({ initialFormState, submitFn }: useFormProps<T>) => { // se
 
     const [formState, setFormState] = useState<T>(initialFormState);
 
-    const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => { // React.ChangeEvent (evento de react), <HTMLInputElement> // el elemento que cambio fue un input
+    const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { // React.ChangeEvent (evento de react), <HTMLInputElement> // el elemento que cambio fue un input
         const field_name = event.target.name;
         const field_value = event.target.value;
 

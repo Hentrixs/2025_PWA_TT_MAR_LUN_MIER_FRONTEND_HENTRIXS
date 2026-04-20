@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import useForm from '../../hooks/useForm/useForm';
-import './CreateChannel.css';
+import './CreateChannelModal.css';
 import useCreateChannel from '../../hooks/useCreateChannel/useCreateChannel';
-import { useParams } from 'react-router';
+import { useWorkspaceContext } from '../../context/WorkspaceContext/WorkspaceContext';
 import Modal from '../Modal/Modal';
 
-const CreateChannel = ({ onSuccess, onClose }: { onSuccess: () => void, onClose: () => void }) => {
+const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onClose: () => void }) => {
 
-    const { workspace_id } = useParams();
-    const { createChannelSubmit, response } = useCreateChannel(workspace_id);
+    const { workspace_id } = useWorkspaceContext();
+    const { createChannelSubmit, response, loading } = useCreateChannel(workspace_id);
 
     const [step, setStep] = useState(1);
 
@@ -66,7 +66,7 @@ const CreateChannel = ({ onSuccess, onClose }: { onSuccess: () => void, onClose:
                         <span className='step'>Paso 2 de 2</span>
                         <div className='create-channel-btn-container'>
                             <button onClick={handleStep}>Volver</button>
-                            <button type="submit">Crear</button>
+                            <button type="submit" disabled={loading}>{loading && 'Creando...' || 'Crear'}</button>
                         </div>
                     </div>
                 </form>
@@ -75,4 +75,4 @@ const CreateChannel = ({ onSuccess, onClose }: { onSuccess: () => void, onClose:
     );
 };
 
-export default CreateChannel;
+export default CreateChannelModal;

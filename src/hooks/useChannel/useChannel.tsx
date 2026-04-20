@@ -2,27 +2,19 @@ import { useEffect } from "react";
 import { getChannels } from "../../services/channelService";
 import useRequest from "../useRequest/useRequest";
 
-const useChannel = (fk_id_workspace: string) => {
+const useChannel = (fk_id_workspace: string | undefined) => {
     const { response, loading, error, sendRequest } = useRequest();
 
     const refetchChannels = () => {
-        if (fk_id_workspace) {
-            sendRequest({ requestCb: () => getChannels(fk_id_workspace) });
-        };
+        if (!fk_id_workspace || fk_id_workspace === '') return;
+        sendRequest({ requestCb: () => getChannels(fk_id_workspace) });
     };
 
     useEffect(() => {
         refetchChannels();
     }, [fk_id_workspace]);
 
-    let channel_list = null;
-
-    if (response) {
-        channel_list = response.data.channel_list;
-    };
-
-    console.log(channel_list);
-    console.log(response);
+    const channel_list = response?.data?.channel_list || [];
 
     return {
         response,

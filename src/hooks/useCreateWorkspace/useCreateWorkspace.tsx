@@ -5,6 +5,7 @@ const useCreateWorkspace = () => {
     const { sendRequest, response, loading, error } = useRequest();
 
     const submitCreateWorkspace = async (title: string, description: string) => {
+        if (!title || title.trim() === '') return;
         await sendRequest({ requestCb: () => createWorkspace(title, description, 'admin') });
     };
 

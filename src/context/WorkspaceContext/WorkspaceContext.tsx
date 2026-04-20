@@ -3,7 +3,6 @@ import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
 import useWorkspace from "../../hooks/useWorkspace/useWorkspace";
 import useWorkspaces from "../../hooks/useWorkspaces/useWorkspaces";
 import { useParams } from "react-router";
-import useChannel from "../../hooks/useChannel/useChannel";
 import { LOCAL_STORAGE_TOKEN_KEY } from "../AuthContext/AuthContext";
 
 const WorkspaceContext = createContext<any>(null);
@@ -20,15 +19,9 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
         response: responseWorkspaces
     } = useWorkspaces();
 
-    const { workspace, members } = useWorkspace(workspace_id ?? '');
+    const { workspace, members, loading: loadingWorkspace, error: errorWorkspace } = useWorkspace(workspace_id ?? '');
 
-    const {
-        channel_list,
-        refetchChannels,
-        loading: loadingChannels,
-        error: errorChannel,
-        response: responseChannel
-    } = useChannel(workspace_id ?? '');
+
 
     // Se Extrae Token -> Se Extrae el Payload -> se Busca el miembro activo con ese Payload
 
@@ -37,6 +30,7 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
     const activeMember = members?.find((m: any) => m.user_id === tokenPayload?.id) ?? null;
 
     const providerValues = {
+        workspace_id,
         workspace,
         members,
         activeMember,
@@ -44,12 +38,9 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
         loadingWorkspaces,
         errorWorkspaces,
         responseWorkspaces,
-        isMobile,
-        channel_list,
-        refetchChannels,
-        loadingChannels,
-        errorChannel,
-        responseChannel
+        loadingWorkspace,
+        errorWorkspace,
+        isMobile
     };
 
     return (

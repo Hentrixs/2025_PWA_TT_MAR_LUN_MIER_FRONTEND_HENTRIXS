@@ -1,0 +1,55 @@
+.manage-members-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-md);
+}
+
+.manage-members-table th {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color-subtle);
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+}
+
+.manage-members-table td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--border-color-subtle);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+}
+
+.btn-delete-member {
+    background-color: transparent;
+    color: var(--error-primary);
+    border: 1px solid var(--error-primary);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--text-xs);
+    transition: all 0.2s ease;
+}
+
+.btn-delete-member:hover {
+    background-color: var(--error-primary);
+    color: var(--text-on-dark);
+}
+
+.btn-delete-member:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.role-change-link {
+    color: var(--brand-primary);
+    font-size: var(--text-xs);
+    margin-left: var(--space-sm);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.role-change-link:hover {
+    color: var(--brand-primary-hover);
+}

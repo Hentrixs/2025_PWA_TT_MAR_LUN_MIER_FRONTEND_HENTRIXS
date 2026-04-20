@@ -24,7 +24,6 @@ export default function ResetPasswordRequest() {
 
     // Ojo aquí: Le quitamos las llaves de desestructuración que tenías ({initialFormState})
     const submitRequest = async (formStateVieneDelHook: any) => {
-        console.log('los datos estan cargados:', formStateVieneDelHook)
         await sendRequest({
             requestCb: () => {
                 return resetPassword({
@@ -61,7 +60,7 @@ export default function ResetPasswordRequest() {
                                     onChange={handleChangeInput}
                                 />
                             </div>
-                            <button disabled={loading}>{loading ? 'Cargando' : 'Enviar Solicitud'}</button>
+                            <button type='submit' disabled={loading}>{loading && 'Enviando Solicitud...' || 'Enviar Solicitud'}</button>
                         </form>
                         <span>Recuerdas tu contraseña? <Link to={'/login'}>Iniciar Sesion</Link></span>
                     </>

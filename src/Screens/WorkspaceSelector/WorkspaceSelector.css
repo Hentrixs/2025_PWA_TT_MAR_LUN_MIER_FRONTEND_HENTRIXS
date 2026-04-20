@@ -1,3 +1,19 @@
+.workspace-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.workspace-settings-btn {
+    text-decoration: none;
+    color: #4a154b;
+    font-weight: 500;
+}
+
+.workspace-settings-btn:hover {
+    text-decoration: underline;
+}
+
 .workspace-selector {
     min-height: 100vh;
     background: var(--bg-dark-gradient);

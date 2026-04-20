@@ -1,21 +1,18 @@
 import './WorkspaceSelector.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../../Components/Logo/Logo';
-import { LOCAL_STORAGE_TOKEN_KEY } from '../../context/AuthContext/AuthContext';
+import { useContext } from 'react';
+import { AuthContext, LOCAL_STORAGE_TOKEN_KEY } from '../../context/AuthContext/AuthContext';
 import useWorkspaces from '../../hooks/useWorkspaces/useWorkspaces';
 
 function WorkspaceSelector() {
-
-    const navigate = useNavigate();
+    const { manageLogout } = useContext(AuthContext);
 
     const handleLogout = () => {
-        localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
-        navigate('/');
+        manageLogout();
     };
 
     const { workspaces, response, error, loading } = useWorkspaces();
-
-    console.log(workspaces);
 
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
     const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;

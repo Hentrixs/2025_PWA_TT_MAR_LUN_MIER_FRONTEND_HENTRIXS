@@ -1,9 +1,9 @@
-import { useParams, useNavigate } from "react-router-dom";
-import useChatMain from "../../hooks/useChatMain/useChatMain";
-import useSendMessage from "../../hooks/useSendMessage/useSendMessage";
+import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm/useForm";
 import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
+import { useChannelContext } from "../../context/ChannelContext/ChannelContext";
+import ChatContextProvider, { useChatContext } from "../../context/ChatContext/ChatContext";
 
 const SUBMIT_MESSAGE_FORM_FIELDS = {
     CONTENT: 'content'
@@ -11,12 +11,12 @@ const SUBMIT_MESSAGE_FORM_FIELDS = {
 
 const Chat = () => {
 
-    const { activeMember, channel_list } = useWorkspaceContext();
+    const { activeMember, workspace_id } = useWorkspaceContext();
+    const { channel_list, channel_id } = useChannelContext();
     const member_id = activeMember?.member_id;
 
     const navigate = useNavigate();
     const { isMobile } = useIsMobile();
-    const { workspace_id, channel_id } = useParams();
 
     const activeChannel = channel_list?.find((ch: any) => ch.channel_id === channel_id);
 
@@ -27,14 +27,12 @@ const Chat = () => {
     const {
         refreshMessages,
         messagelist,
-        response: responseMessageList,
-        loading: loadingMessageList,
-        error: errorMessageList
-    } = useChatMain(channel_id);
-
-    const {
+        responseMessages: responseMessageList,
+        loadingMessages: loadingMessageList,
+        errorMessages: errorMessageList,
         sendMessageSubmit,
-    } = useSendMessage();
+        loadingSend
+    } = useChatContext();
 
 
     const { formState, handleChangeInput, onSubmit } = useForm({
@@ -82,9 +80,10 @@ const Chat = () => {
                     <input
                         type="text"
                         name="content"
-                        placeholder='Enviar mensage...'
+                        placeholder={loadingSend && 'Enviando...' || 'Enviar mensage...'}
                         value={formState.content}
                         onChange={handleChangeInput}
+                        disabled={loadingSend}
                     />
                 </form>
             </div>
@@ -93,4 +92,10 @@ const Chat = () => {
     );
 };
 
-export default Chat;
+const ChatWithContext = () => (
+    <ChatContextProvider>
+        <Chat />
+    </ChatContextProvider>
+);
+
+export default ChatWithContext;

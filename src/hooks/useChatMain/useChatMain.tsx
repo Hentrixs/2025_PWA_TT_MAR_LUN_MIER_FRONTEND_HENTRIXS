@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import useRequest from "../useRequest/useRequest";
 import { channelMessageHistory } from "../../services/channelMessageService";
-import { useParams } from "react-router";
+import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
+import { useChannelContext } from "../../context/ChannelContext/ChannelContext";
 
-function useChatMain(channel_id: string | any) {
+function useChatMain() {
 
     const { response, loading, error, sendRequest } = useRequest();
-    const { workspace_id } = useParams();
+    const { workspace_id } = useWorkspaceContext();
+    const { channel_id } = useChannelContext();
 
     // Aver: esto ha de traer el historial de mensajes
     // Ademas ha de tener la funcion para enviar un mensaje
@@ -25,20 +27,21 @@ function useChatMain(channel_id: string | any) {
 
 
     useEffect(() => {
-        sendRequest({ requestCb: () => { return channelMessageHistory(workspace_id || '', channel_id || '') } })
-    }, [channel_id])
+        if (!workspace_id || !channel_id) return;
+        sendRequest({ requestCb: () => channelMessageHistory(workspace_id, channel_id) })
+    }, [workspace_id, channel_id])
 
-    let messagelist = null
-    if (response) {
-        messagelist = response.data.channelMessagesHistory;
-    }
+    const messagelist = response?.data?.channelMessagesHistory || [];
 
     return {
         messagelist,
         response,
         loading,
         error,
-        refreshMessages: () => sendRequest({ requestCb: () => channelMessageHistory(workspace_id || '', channel_id) })
+        refreshMessages: () => {
+            if (!workspace_id || !channel_id) return;
+            sendRequest({ requestCb: () => channelMessageHistory(workspace_id, channel_id) });
+        }
     }
 };
 

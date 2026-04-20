@@ -56,7 +56,7 @@ const CreateWorkspace = () => {
                     </div>
                     {error && <p className="create-workspace-error">Algo salió mal, intentá de nuevo.</p>}
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Creando...' : 'Crear espacio de trabajo'}
+                        {loading && 'Creando espacio...' || 'Crear espacio de trabajo'}
                     </button>
                 </form>
             </main>

@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import { getMemberList } from "../../services/workspaceMemberService";
 import useRequest from "../useRequest/useRequest";
 
-const useMemberList = (workspace_id: string) => {
+const useMemberList = (workspace_id: string | undefined) => {
     const { response, loading, error, sendRequest } = useRequest();
 
     const refetchMemberList = () => {
-        if (workspace_id) {
-            sendRequest({ requestCb: () => getMemberList(workspace_id) });
-        }
+        if (!workspace_id || workspace_id === '') return;
+        sendRequest({ requestCb: () => getMemberList(workspace_id) });
     };
 
     useEffect(() => {

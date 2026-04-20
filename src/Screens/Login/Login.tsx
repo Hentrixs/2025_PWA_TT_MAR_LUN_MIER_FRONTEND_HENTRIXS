@@ -31,8 +31,6 @@ const Login = () => {
         submitFn: hacerLogin // aca es donde le pasamos como callback la funcion onLogin al submitFn
     });
 
-    console.log(`ESPIA DE ESTADOS: Response: ${response}, Error: ${error}, Loading: ${loading}`);
-
     // la funcion se carga cada vez que carga response, si response.ok es true, se guarda el token en el contexto.
     useEffect(() => {
         if (response && response.ok && manageLogin) {
@@ -56,7 +54,7 @@ const Login = () => {
                         <label htmlFor="">Password</label>
                         <input type="password" id='password' name={LOGIN_FORM_FIELDS.PASSWORD} onChange={handleChangeInput} />
                     </div>
-                    <button type='submit'>Iniciar Sesion</button>
+                    <button type='submit' disabled={loading} >{loading && 'Iniciando Sesion...' || 'Iniciar Sesion'}</button>
                     <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>
                     <span>Olvidaste tu contraseña? <Link to={'/reset-password-request'}>Restablecer Contrasena</Link></span>
                 </form>

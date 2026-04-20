@@ -10,11 +10,7 @@ const useWorkspaces = () => {
         sendRequest({ requestCb: () => getWorkspaces() });
     }, []);
 
-    let workspaces = null;
-
-    if (response) {
-        workspaces = response;
-    }
+    const workspaces = response || [];
 
     return { response, loading, error, workspaces };
 };

@@ -36,8 +36,6 @@ const Register = () => {
         };
     }, [response]);
 
-    console.log(`ESPIA DE ESTADOS (REGISTER): Response: ${response}, Error: ${error}, Loading: ${loading}`);
-
     return (
         <div className='register-container'>
             <div className='split-left'>
@@ -58,7 +56,7 @@ const Register = () => {
                         <label htmlFor="password">Password</label>
                         <input type="password" id='password' name={REGISTER_FORM_FIELDS.PASSWORD} value={formState[REGISTER_FORM_FIELDS.PASSWORD]} onChange={handleChangeInput} />
                     </div>
-                    <button type='submit'>Registrarse</button>
+                    <button type='submit' disabled={loading}>{loading && 'Registrando...' || 'Registrarse'}</button>
                     <span>¿Ya tienes una cuenta? <Link to={'/login'}>Iniciar Sesion</Link></span>
                     {response && !loading && <InfoComponent response={response} />}
                 </form>
