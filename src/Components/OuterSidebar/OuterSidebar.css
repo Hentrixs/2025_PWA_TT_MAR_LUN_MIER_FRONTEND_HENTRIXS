@@ -1,0 +1,40 @@
+.outer-sidebar {
+    width: 70px;
+    height: 100vh;
+    background-color: var(--bg-dark-mid);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--space-md);
+    gap: var(--space-sm);
+    border-right: 1px solid var(--border-color-subtle);
+}
+
+.workspace-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--bg-light);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-md);
+}
+
+.workspace-icon:hover {
+    border-radius: var(--radius-md);
+    background-color: var(--brand-primary);
+    color: white;
+}
+
+.workspace-icon.active {
+    border-radius: var(--radius-md);
+    background-color: var(--brand-primary);
+    color: white;
+    box-shadow: 0 0 0 2px var(--bg-dark-mid), 0 0 0 4px var(--brand-primary);
+}

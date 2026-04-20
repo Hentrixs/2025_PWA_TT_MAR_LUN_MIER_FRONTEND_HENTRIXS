@@ -7,12 +7,13 @@ const ChatContext = createContext<any>(null);
 export function ChatContextProvider({ children }: { children: React.ReactNode }) {
 
     // El useChatMain internamente se encarga de fetchear basándose en los contextos superiores
-    const { messagelist, loading: loadingMessages, error: errorMessages, refreshMessages } = useChatMain();
+    const { messagelist, response: responseMessages, loading: loadingMessages, error: errorMessages, refreshMessages } = useChatMain();
 
     const { sendMessageSubmit, loading: loadingSend, error: errorSend } = useSendMessage();
 
     const providerValues = {
         messagelist,
+        responseMessages,
         loadingMessages,
         errorMessages,
         refreshMessages,

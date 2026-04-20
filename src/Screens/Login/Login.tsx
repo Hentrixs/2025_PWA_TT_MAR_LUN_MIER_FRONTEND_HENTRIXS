@@ -48,11 +48,11 @@ const Login = () => {
                 <form onSubmit={onSubmit} className='login-form'>
                     <div>
                         <label htmlFor="email">Email Address</label>
-                        <input type="email" id='email' name={LOGIN_FORM_FIELDS.EMAIL} onChange={handleChangeInput} />
+                        <input type="email" id='email' autoComplete='email' name={LOGIN_FORM_FIELDS.EMAIL} onChange={handleChangeInput} />
                     </div>
                     <div>
-                        <label htmlFor="">Password</label>
-                        <input type="password" id='password' name={LOGIN_FORM_FIELDS.PASSWORD} onChange={handleChangeInput} />
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id='password' autoComplete='current-password' name={LOGIN_FORM_FIELDS.PASSWORD} onChange={handleChangeInput} />
                     </div>
                     <button type='submit' disabled={loading} >{loading && 'Iniciando Sesion...' || 'Iniciar Sesion'}</button>
                     <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>

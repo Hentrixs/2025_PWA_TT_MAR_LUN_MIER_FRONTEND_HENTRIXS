@@ -59,7 +59,7 @@ const InnerSidebar = () => {
                 />}
             </div>
             <div>
-                <button onClick={() => setIsManageMembersModalOpen(true)}>Administrar Miembros</button>
+                <button className='manage-members-btn' onClick={() => setIsManageMembersModalOpen(true)}>Administrar Miembros</button>
                 {isManageMembersModalOpen &&
                     <ManageMembersModal onClose={() => setIsManageMembersModalOpen(false)} />
                 }

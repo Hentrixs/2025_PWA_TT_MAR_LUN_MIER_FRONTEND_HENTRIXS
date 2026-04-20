@@ -1,5 +1,114 @@
 .inner-sidebar {
-    background-color: var(--slack-background-dark);
+    width: 260px;
+    height: 100vh;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-right: 1px solid var(--border-color-subtle);
+    overflow-y: auto;
+}
+
+.inner-sidebar h2 {
+    font-size: var(--text-md);
+    font-weight: var(--weight-lg);
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.channels-title {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-md);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-sm);
+    margin-top: var(--space-sm);
+    padding-left: var(--space-sm);
+}
+
+.channel-item {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    transition: all 0.15s ease;
+    display: block;
+}
+
+.channel-item:hover {
+    background-color: var(--bg-light-mid);
+    color: var(--text-primary);
+}
+
+.channel-item.active {
+    background-color: var(--brand-primary);
+    color: white !important;
+    font-weight: var(--weight-md);
+}
+
+.create-channel-btn,
+.manage-members-btn {
+    background-color: rgba(11, 165, 97, 0.04);
+    border: 1px solid rgba(11, 165, 97, 0.2);
+    color: var(--brand-primary);
+    padding: 10px var(--space-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-md);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: var(--space-sm);
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.create-channel-btn:hover,
+.manage-members-btn:hover {
+    background-color: var(--brand-primary);
     color: white;
-    padding: 20px;
+    border-color: var(--brand-primary);
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 10px rgba(11, 165, 97, 0.15);
+}
+
+.create-channel-btn:active,
+.manage-members-btn:active {
+    transform: translateY(0);
+}
+
+
+.inner-sidebar>div:last-child {
+    margin-top: auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-color-subtle);
+}
+
+/* Custom Scrollbar for InnerSidebar */
+.inner-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.inner-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.inner-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-color-subtle);
+    border-radius: 10px;
 }

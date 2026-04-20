@@ -46,15 +46,15 @@ const Register = () => {
                 <form onSubmit={onSubmit} className='register-form'>
                     <div>
                         <label htmlFor="name">Name</label>
-                        <input type="text" id='name' name={REGISTER_FORM_FIELDS.NAME} value={formState[REGISTER_FORM_FIELDS.NAME]} onChange={handleChangeInput} />
+                        <input type="text" id='name' autoComplete='name' name={REGISTER_FORM_FIELDS.NAME} value={formState[REGISTER_FORM_FIELDS.NAME]} onChange={handleChangeInput} />
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input type="email" id='email' name={REGISTER_FORM_FIELDS.EMAIL} value={formState[REGISTER_FORM_FIELDS.EMAIL]} onChange={handleChangeInput} />
+                        <input type="email" id='email' autoComplete='email' name={REGISTER_FORM_FIELDS.EMAIL} value={formState[REGISTER_FORM_FIELDS.EMAIL]} onChange={handleChangeInput} />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input type="password" id='password' name={REGISTER_FORM_FIELDS.PASSWORD} value={formState[REGISTER_FORM_FIELDS.PASSWORD]} onChange={handleChangeInput} />
+                        <input type="password" id='password' autoComplete='password' name={REGISTER_FORM_FIELDS.PASSWORD} value={formState[REGISTER_FORM_FIELDS.PASSWORD]} onChange={handleChangeInput} />
                     </div>
                     <button type='submit' disabled={loading}>{loading && 'Registrando...' || 'Registrarse'}</button>
                     <span>¿Ya tienes una cuenta? <Link to={'/login'}>Iniciar Sesion</Link></span>
