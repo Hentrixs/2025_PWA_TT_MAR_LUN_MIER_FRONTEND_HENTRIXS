@@ -11,6 +11,8 @@ import InviteRespond from './Screens/InviteRespond/InviteRespond';
 import Home from './Screens/Home/Home';
 import WorkspaceSelector from './Screens/WorkspaceSelector/WorkspaceSelector';
 import CreateWorkspace from './Screens/CreateWorkspace/CreateWorkspace';
+import Settings from './Screens/Settings/Settings';
+import EmailConfirmationResult from './Screens/EmailConfirmationResult/EmailConfirmationResult';
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
       <Route path={'/verify-email'} element={<VerifyEmail />} />
       <Route path={'/invite/respond'} element={<InviteRespond />} />
       <Route element={<AuthMiddleware />}>
+        <Route path={'/settings'} element={<Settings />} />
+        <Route path={'/settings/email-confirmation-result'} element={<EmailConfirmationResult />} />
         <Route path={'/workspace-selector'} element={<WorkspaceSelector />} />
         <Route path={'/create-workspace'} element={<CreateWorkspace />} /> {/* con exepcion del logo el responsive anda bien */}
         <Route path={'/workspace'} element={<Workspace />} />

@@ -1,31 +1,37 @@
 import './InviteRespond.css';
 import { Link, useSearchParams } from 'react-router-dom';
-import useInviteRespond from '../../hooks/useInviteRespond/useInviteRespond';
 
 function InviteRespond() {
     const [searchParams] = useSearchParams();
-    const token = searchParams.get('token');
-    const workspace_id = searchParams.get('workspace_id');
+    const status = searchParams.get('status');
+    const message = searchParams.get('message');
 
-    const { response, loading, error } = useInviteRespond(workspace_id, token);
+    const isAccepted = status === 'accepted';
+    const isRejected = status === 'rejected';
 
     return (
-        <div className='invite-respond-container'>
+        <div className='invite-respond-container fade-in'>
             <div className='invite-respond-card'>
-                {loading && <p className="loading-text">Procesando tu respuesta...</p>}
-
-                {!loading && response && response.ok && (
+                {isAccepted && (
                     <div className="success-content">
-                        <h2>¡Carga Completa!</h2>
-                        <p>{response.message}</p>
+                        <h2>¡Verificación Exitosa!</h2>
+                        <p>Has aceptado la invitación correctamente. Ya eres parte del espacio de trabajo.</p>
                         <Link to={'/login'} className="btn-primary">Ir al inicio a loggearme</Link>
                     </div>
                 )}
 
-                {!loading && (error || (response && !response.ok)) && (
+                {isRejected && (
+                    <div className="warning-content">
+                        <h2>Invitación Rechazada</h2>
+                        <p>Has declinado la invitación al espacio de trabajo. Si fue un error, solicita que te envíen una nueva.</p>
+                        <Link to={'/login'} className="btn-secondary">Volver al inicio</Link>
+                    </div>
+                )}
+
+                {!isAccepted && !isRejected && (
                     <div className="error-content">
                         <h2>Vaya, algo salió mal</h2>
-                        <p>{error || response?.message}</p>
+                        <p>{message || 'La invitación ha expirado, ya fue procesada o hubo un error en el servidor.'}</p>
                         <Link to={'/login'} className="btn-secondary">Volver al inicio</Link>
                     </div>
                 )}

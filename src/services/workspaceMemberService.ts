@@ -51,9 +51,3 @@ export const updateMemberRole = async (workspace_id: string, member_id: string, 
     return response.json();
 };
 
-export const respondToInvitation = async (workspace_id: string, token: string) => {
-    const response = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/member/invite/respond?token=${token}`, {
-        method: 'GET',
-    });
-    return response.json();
-};

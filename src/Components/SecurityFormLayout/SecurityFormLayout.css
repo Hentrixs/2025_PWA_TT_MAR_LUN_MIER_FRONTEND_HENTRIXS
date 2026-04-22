@@ -1,0 +1,137 @@
+/* Base styles for SecurityFormLayout component */
+.security-form-container {
+    padding: var(--space-md);
+    background-color: var(--bg-dark-mid);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color-subtle);
+    margin-top: var(--space-md);
+    width: 100%;
+}
+
+.danger-container {
+    background-color: rgba(231, 76, 60, 0.05);
+    border-color: var(--error-primary);
+}
+
+.security-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-md);
+}
+
+.danger-container .form-group label {
+    color: var(--error-primary);
+}
+
+.form-input {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 2px rgba(11, 165, 97, 0.2);
+}
+
+.danger-container .form-input {
+    border-color: var(--error-primary);
+}
+
+.danger-container .form-input:focus {
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    color: white;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: var(--weight-md);
+    transition: background-color 0.2s;
+    flex: 1;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--brand-primary-hover);
+}
+
+.btn-danger {
+    background-color: var(--error-primary);
+    color: white;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: var(--weight-md);
+    transition: background-color 0.2s;
+    flex: 1;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: var(--error-secondary);
+}
+
+.btn-primary:disabled,
+.btn-danger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color-subtle);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-cancel:hover:not(:disabled) {
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+}
+
+.btn-cancel:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.success-message {
+    color: var(--brand-primary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-md);
+}
+
+.error-message {
+    color: var(--error-primary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-md);
+}

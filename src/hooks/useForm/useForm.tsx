@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type TextareaHTMLAttributes } from "react";
 
 /*
 la interfaz obliga a que siempre se manden ÚNICAMENTE las 2 piezas del motor principales 
