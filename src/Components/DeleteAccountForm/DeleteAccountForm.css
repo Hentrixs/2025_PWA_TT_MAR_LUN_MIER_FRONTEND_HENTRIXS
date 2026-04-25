@@ -1,6 +1,6 @@
 .delete-account-container {
     padding: var(--space-md);
-    background-color: rgba(231, 76, 60, 0.05);
+    background-color: var(--error-subtle);
     border-radius: var(--radius-md);
     border: 1px solid var(--error-primary);
     margin-top: var(--space-md);
@@ -23,7 +23,7 @@
 }
 
 .danger-group input:focus {
-    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+    box-shadow: var(--error-glow);
 }
 
 .btn-confirm-delete {

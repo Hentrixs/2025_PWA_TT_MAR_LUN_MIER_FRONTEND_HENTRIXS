@@ -13,16 +13,16 @@
 .green-slack-logo .logo-text {
     font-size: 6.6em;
     /* Proporcional a los 66px originales */
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    color: #0BA561;
+    font-family: var(--font-main);
+    font-weight: var(--weight-lg);
+    color: var(--brand-primary);
     /* Green es Verde */
     letter-spacing: -0.015em;
     line-height: 1;
 }
 
 .green-slack-logo .logo-text span {
-    color: #F0F2F5;
+    color: var(--text-primary);
     /* Slack es Blanco */
 }
 

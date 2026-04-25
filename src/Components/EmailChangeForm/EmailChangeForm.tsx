@@ -15,10 +15,14 @@ interface EmailChangeFormProps {
 const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
     const { handleRequestEmailChange, loading, response, error } = useRequestEmailChange();
 
-    const { onSubmit, handleChangeInput, formState } = useForm({
+    const { onSubmit, handleChangeInput, formState, errors } = useForm({
         initialFormState: {
             [EMAIL_CHANGE_FIELDS.PASSWORD]: '',
             [EMAIL_CHANGE_FIELDS.NEW_EMAIL]: ''
+        },
+        validationRules: {
+            [EMAIL_CHANGE_FIELDS.PASSWORD]: ['required'],
+            [EMAIL_CHANGE_FIELDS.NEW_EMAIL]: ['required', 'email']
         },
         submitFn: handleRequestEmailChange
     });
@@ -41,8 +45,8 @@ const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
                     type='email'
                     onChange={handleChangeInput}
                     placeholder='nuevo@email.com'
-                    required
                 />
+                {errors[EMAIL_CHANGE_FIELDS.NEW_EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[EMAIL_CHANGE_FIELDS.NEW_EMAIL]}</span>}
             </div>
             <div className='form-group'>
                 <label>Contraseña Actual</label>
@@ -53,9 +57,10 @@ const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
                     type='password'
                     onChange={handleChangeInput}
                     placeholder='Tu contraseña'
-                    required
                 />
+                {errors[EMAIL_CHANGE_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[EMAIL_CHANGE_FIELDS.PASSWORD]}</span>}
             </div>
+            {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', display: 'block', marginBottom: '10px' }}>Por favor, revisa los errores.</span>}
         </SecurityFormLayout>
     );
 };

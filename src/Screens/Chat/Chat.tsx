@@ -1,94 +1,41 @@
 import { useNavigate } from "react-router-dom";
-import useForm from "../../hooks/useForm/useForm";
 import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
 import { useChannelContext } from "../../context/ChannelContext/ChannelContext";
+import type { IChannel } from "../../types";
 import ChatContextProvider, { useChatContext } from "../../context/ChatContext/ChatContext";
-
-const SUBMIT_MESSAGE_FORM_FIELDS = {
-    CONTENT: 'content'
-};
+import ChatView from "../../Components/ChatView/ChatView";
+import { updateChannelMessage } from "../../services/channelMessageService";
 
 const Chat = () => {
-
     const { activeMember, workspace_id } = useWorkspaceContext();
     const { channel_list, channel_id } = useChannelContext();
-    const member_id = activeMember?.member_id;
-
-    const navigate = useNavigate();
+    const { messagelist, loadingMessages, errorMessages, refreshMessages, sendMessageSubmit, loadingSend } = useChatContext();
     const { isMobile } = useIsMobile();
+    const navigate = useNavigate();
 
-    const activeChannel = channel_list?.find((ch: any) => ch.channel_id === channel_id);
+    const activeChannel = channel_list?.find((ch: IChannel) => ch.channel_id === channel_id);
 
-    const initialFormState = {
-        [SUBMIT_MESSAGE_FORM_FIELDS.CONTENT]: ''
+    const handleEditSubmit = async (message_id: string, content: string) => {
+        await updateChannelMessage(channel_id!, workspace_id!, message_id, content);
+        refreshMessages();
     };
 
-    const {
-        refreshMessages,
-        messagelist,
-        responseMessages: responseMessageList,
-        loadingMessages: loadingMessageList,
-        errorMessages: errorMessageList,
-        sendMessageSubmit,
-        loadingSend
-    } = useChatContext();
-
-
-    const { formState, handleChangeInput, onSubmit } = useForm({
-        initialFormState,
-        submitFn: async (formState: any) => {
-            await sendMessageSubmit({
-                fk_id_channel: channel_id,
-                fk_id_workspace: workspace_id,
-                fk_id_member: member_id,
-                content: formState.content
-            });
-            refreshMessages();
-        }
-    });
-
     return (
-        <div className='chat-main'>
-            <div className='chat-header'>
-                {isMobile && (
-                    <button onClick={() => navigate(`/workspace/${workspace_id}`)}>
-                        Volver
-                    </button>
-                )}
-                <h2># {activeChannel?.name ?? 'Cargando...'}</h2>
-            </div>
-
-            <div className='chat-history'>
-                <div className='message-dummy'>
-                    {messagelist && responseMessageList && !loadingMessageList && !errorMessageList && messagelist.map((m: any, index: number) => {
-                        return (
-                            <div key={m.message_id ?? index} className="message-div">
-                                <div className="message-header">
-                                    <span>{m.created_at}</span>
-                                    <p>{m.sender_name}</p>
-                                </div>
-                                <p>{m.content}</p>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-
-            <div className='chat-input-container'>
-                <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        name="content"
-                        placeholder={loadingSend && 'Enviando...' || 'Enviar mensage...'}
-                        value={formState.content}
-                        onChange={handleChangeInput}
-                        disabled={loadingSend}
-                    />
-                </form>
-            </div>
-        </div>
-
+        <ChatView
+            title={activeChannel?.name ?? 'Cargando...'}
+            messagelist={messagelist ?? []}
+            loadingMessages={loadingMessages}
+            errorMessages={errorMessages}
+            refreshMessages={refreshMessages}
+            sendMessageSubmit={async (content) => {
+                await sendMessageSubmit({ fk_id_channel: channel_id!, fk_id_workspace: workspace_id!, fk_id_member: activeMember?.member_id ?? '', content });
+            }}
+            loadingSend={loadingSend}
+            activeMemberId={activeMember?.member_id}
+            onEditSubmit={handleEditSubmit}
+            onBack={isMobile ? () => navigate(`/workspace/${workspace_id}`) : undefined}
+        />
     );
 };
 

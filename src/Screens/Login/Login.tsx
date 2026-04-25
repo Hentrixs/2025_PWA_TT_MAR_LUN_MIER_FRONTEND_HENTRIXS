@@ -21,14 +21,18 @@ const Login = () => {
         [LOGIN_FORM_FIELDS.PASSWORD]: ''
     };
 
-    const { hacerLogin, error, response, loading } = useLogin();
+    const { hacerLogin, response, loading } = useLogin();
 
     const { manageLogin } = useContext(AuthContext);
 
 
-    const { handleChangeInput, onSubmit } = useForm({ // aca se desetructura 3 funciones del useForm y ademas se le pasa el initialFormState y el submitFn.
+    const { handleChangeInput, onSubmit, errors } = useForm({
         initialFormState: initialFormState,
-        submitFn: hacerLogin // aca es donde le pasamos como callback la funcion onLogin al submitFn
+        validationRules: {
+            [LOGIN_FORM_FIELDS.EMAIL]: ['required', 'email'],
+            [LOGIN_FORM_FIELDS.PASSWORD]: ['required']
+        },
+        submitFn: hacerLogin
     });
 
     // la funcion se carga cada vez que carga response, si response.ok es true, se guarda el token en el contexto.
@@ -49,11 +53,14 @@ const Login = () => {
                     <div>
                         <label htmlFor="email">Email Address</label>
                         <input type="email" id='email' autoComplete='email' name={LOGIN_FORM_FIELDS.EMAIL} onChange={handleChangeInput} />
+                        {errors[LOGIN_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[LOGIN_FORM_FIELDS.EMAIL]}</span>}
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
                         <input type="password" id='password' autoComplete='current-password' name={LOGIN_FORM_FIELDS.PASSWORD} onChange={handleChangeInput} />
+                        {errors[LOGIN_FORM_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[LOGIN_FORM_FIELDS.PASSWORD]}</span>}
                     </div>
+                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
                     <button type='submit' disabled={loading} >{loading && 'Iniciando Sesion...' || 'Iniciar Sesion'}</button>
                     <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>
                     <span>Olvidaste tu contraseña? <Link to={'/reset-password-request'}>Restablecer Contrasena</Link></span>

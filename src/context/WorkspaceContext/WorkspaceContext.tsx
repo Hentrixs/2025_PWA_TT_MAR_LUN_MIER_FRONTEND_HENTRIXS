@@ -1,11 +1,12 @@
 import { createContext, useContext } from "react";
 import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
-import useWorkspace from "../../hooks/useWorkspace/useWorkspace";
+import useWorkspaceDetail from "../../hooks/useWorkspace/useWorkspaceDetail";
 import useWorkspaces from "../../hooks/useWorkspaces/useWorkspaces";
 import { useParams } from "react-router";
 import { LOCAL_STORAGE_TOKEN_KEY } from "../AuthContext/AuthContext";
+import type { WorkspaceContextType, IMember, ITokenPayload } from "../../types";
 
-const WorkspaceContext = createContext<any>(null);
+const WorkspaceContext = createContext<WorkspaceContextType | null>(null);
 
 export function WorkspaceContextProvider({ children }: { children: React.ReactNode }) {
 
@@ -19,19 +20,19 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
         response: responseWorkspaces
     } = useWorkspaces();
 
-    const { workspace, members, loading: loadingWorkspace, error: errorWorkspace } = useWorkspace(workspace_id ?? '');
+    const { workspaceDetail, members, loading: loadingWorkspace, error: errorWorkspace } = useWorkspaceDetail(workspace_id ?? '');
 
 
 
     // Se Extrae Token -> Se Extrae el Payload -> se Busca el miembro activo con ese Payload
 
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
-    const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
-    const activeMember = members?.find((m: any) => m.user_id === tokenPayload?.id) ?? null;
+    const tokenPayload: ITokenPayload | null = token ? JSON.parse(atob(token.split('.')[1])) : null;
+    const activeMember = members?.find((m: IMember) => m.user_id === tokenPayload?.id) ?? null;
 
     const providerValues = {
         workspace_id,
-        workspace,
+        workspaceDetail,
         members,
         activeMember,
         workspaces,
@@ -50,5 +51,5 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
     );
 };
 
-export const useWorkspaceContext = () => useContext(WorkspaceContext);
+export const useWorkspaceContext = () => useContext(WorkspaceContext) as WorkspaceContextType;
 export default WorkspaceContextProvider;

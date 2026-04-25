@@ -1,5 +1,6 @@
 import useMemberList from "../../hooks/useMemberList/useMemberList";
 import Modal from "../Modal/Modal";
+import type { IMember } from "../../types";
 import './ManageMembersModal.css';
 import useDeleteMember from "../../hooks/useDeleteMember/useDeleteMember";
 import { useEffect, useState } from "react";
@@ -44,7 +45,7 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
                     </tr>
                 </thead>
                 <tbody className="manage-members-table-body">
-                    {member_list.map((member: any) => {
+                    {member_list.map((member: IMember) => {
                         const isSelf = activeMember?.member_id === member.member_id;
 
                         return (

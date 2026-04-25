@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router";
 
@@ -20,7 +20,7 @@ export const AuthContext = createContext<AuthContextType>({
 export const LOCAL_STORAGE_TOKEN_KEY = 'auth_token_slack'
 
 
-const AuthContextProvider = ({ children }: any) => {
+const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     const navigate = useNavigate(); // este hook nos trae navigate que sirve para hacer navegaciones
 
     const [isLogged, setIsLoggued] = useState<boolean | undefined>(

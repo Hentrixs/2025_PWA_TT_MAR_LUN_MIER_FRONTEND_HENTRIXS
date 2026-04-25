@@ -1,7 +1,6 @@
 import useInviteMember from "../../hooks/useInviteMember/useInviteMember";
 import Modal from "../Modal/Modal";
 import './InviteMemberModal.css';
-import { useState } from "react";
 import useForm from "../../hooks/useForm/useForm";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
 
@@ -27,7 +26,6 @@ const InviteMemberModal = ({ onClose }: InviteMemberModalProps) => {
 
     const {
         handleInviteMember,
-        response,
         loading
     } = useInviteMember(workspace_id);
 

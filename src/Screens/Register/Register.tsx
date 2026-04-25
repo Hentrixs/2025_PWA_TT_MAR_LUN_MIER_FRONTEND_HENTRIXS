@@ -14,7 +14,7 @@ const REGISTER_FORM_FIELDS = {
 
 const Register = () => {
 
-    const { registerSubmit, response, error, loading } = useRegister();
+    const { registerSubmit, response, loading } = useRegister();
 
     const initialFormState = {
         [REGISTER_FORM_FIELDS.NAME]: '',
@@ -22,8 +22,13 @@ const Register = () => {
         [REGISTER_FORM_FIELDS.PASSWORD]: ''
     };
 
-    const { handleChangeInput, onSubmit, formState } = useForm({
+    const { handleChangeInput, onSubmit, formState, errors } = useForm({
         initialFormState,
+        validationRules: {
+            [REGISTER_FORM_FIELDS.NAME]: ['required', 'min:3'],
+            [REGISTER_FORM_FIELDS.EMAIL]: ['required', 'email'],
+            [REGISTER_FORM_FIELDS.PASSWORD]: ['required', 'min:6']
+        },
         submitFn: registerSubmit
     });
 
@@ -47,15 +52,19 @@ const Register = () => {
                     <div>
                         <label htmlFor="name">Name</label>
                         <input type="text" id='name' autoComplete='name' name={REGISTER_FORM_FIELDS.NAME} value={formState[REGISTER_FORM_FIELDS.NAME]} onChange={handleChangeInput} />
+                        {errors[REGISTER_FORM_FIELDS.NAME] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.NAME]}</span>}
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
                         <input type="email" id='email' autoComplete='email' name={REGISTER_FORM_FIELDS.EMAIL} value={formState[REGISTER_FORM_FIELDS.EMAIL]} onChange={handleChangeInput} />
+                        {errors[REGISTER_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.EMAIL]}</span>}
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
                         <input type="password" id='password' autoComplete='password' name={REGISTER_FORM_FIELDS.PASSWORD} value={formState[REGISTER_FORM_FIELDS.PASSWORD]} onChange={handleChangeInput} />
+                        {errors[REGISTER_FORM_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.PASSWORD]}</span>}
                     </div>
+                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
                     <button type='submit' disabled={loading}>{loading && 'Registrando...' || 'Registrarse'}</button>
                     <span>¿Ya tienes una cuenta? <Link to={'/login'}>Iniciar Sesion</Link></span>
                     {response && !loading && <InfoComponent response={response} />}

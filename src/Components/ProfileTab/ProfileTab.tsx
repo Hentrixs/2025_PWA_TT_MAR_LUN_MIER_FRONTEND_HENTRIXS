@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import useUpdateProfile from '../../hooks/useUpdateProfile/useUpdateProfile';
 import useForm from '../../hooks/useForm/useForm';
+import type { IUser } from '../../types';
 
 interface ProfileTabProps {
-    profile: any;
+    profile: IUser;
     userProfile: {
         url_image: string;
     };
@@ -33,8 +34,11 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, userProfile, onProfile
         // de todas formas esto es de muy baja prioridad asi que lo vere al final de todo no ahora.
     };
 
-    const { onSubmit, handleChangeInput, formState } = useForm({
+    const { onSubmit, handleChangeInput, formState, errors } = useForm({
         initialFormState,
+        validationRules: {
+            [PROFILE_TAB_FIELDS.NAME]: ['required', 'min:3']
+        },
         submitFn: () => handleUpdateProfile(formState)
     });
 
@@ -80,6 +84,7 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, userProfile, onProfile
                             disabled={loading}
                             placeholder={profile.user_name || 'Nombre de Usuario'}>
                         </input>
+                        {errors[PROFILE_TAB_FIELDS.NAME] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[PROFILE_TAB_FIELDS.NAME]}</span>}
                     </div>
 
                     <button className='btn-apply-changes' type='submit'>

@@ -4,11 +4,10 @@ import useRequest from "../useRequest/useRequest";
 const useCreateChannel = (workspace_id: string | undefined) => {
     const { sendRequest, response, error, loading } = useRequest();
 
-    const createChannelSubmit = (formstate: any) => {
+    const createChannelSubmit = (formstate: Record<string, string>) => {
         const { channel_name, channel_description } = formstate;
 
         if (!workspace_id || !channel_name.trim() || !channel_description.trim()) {
-            console.error('Faltan datos');
             return;
         };
 

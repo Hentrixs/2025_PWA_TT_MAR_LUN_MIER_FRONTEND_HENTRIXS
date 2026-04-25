@@ -123,8 +123,8 @@
 }
 
 .danger-zone {
-    background: rgba(231, 76, 60, 0.05);
-    border: 1px solid rgba(231, 76, 60, 0.2);
+    background: var(--error-subtle);
+    border: 1px solid var(--error-subtle-border);
     border-radius: var(--radius-lg);
     padding: var(--space-xl);
     display: flex;
@@ -158,7 +158,7 @@
     background: var(--brand-primary);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(11, 165, 97, 0.2);
+    box-shadow: var(--brand-glow-md);
 }
 
 .profile-section {
@@ -208,14 +208,14 @@
     font-weight: var(--weight-md);
     color: var(--brand-primary);
     cursor: pointer;
-    background: rgba(11, 165, 97, 0.1);
+    background: var(--brand-subtle);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
     transition: background 0.2s;
 }
 
 .change-photo-text:hover {
-    background: rgba(11, 165, 97, 0.15);
+    background: var(--brand-subtle-hover);
     text-decoration: none;
 }
 
@@ -270,7 +270,7 @@
 
 .change-password-div {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-md);
     width: 100%;
 }
 
@@ -304,7 +304,7 @@
     background: var(--brand-primary);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(11, 165, 97, 0.2);
+    box-shadow: var(--brand-glow-md);
 }
 
 .btn-delete-account {
@@ -323,7 +323,7 @@
     background: var(--error-primary);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.2);
+    box-shadow: var(--error-glow-md);
 }
 
 

@@ -4,7 +4,7 @@ import { login } from "../../services/authService";
 const useLogin = () => {
     const { sendRequest, response, loading, error } = useRequest();
 
-    const hacerLogin = (formState: any) => {
+    const hacerLogin = (formState: Record<string, string>) => {
         const { email, password } = formState;
         sendRequest({ requestCb: () => login({ email, password }) });
     };

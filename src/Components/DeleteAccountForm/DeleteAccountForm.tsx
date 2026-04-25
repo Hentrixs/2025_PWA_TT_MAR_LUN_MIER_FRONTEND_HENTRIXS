@@ -17,8 +17,11 @@ interface onCloseI {
 
 function DeleteAccountForm({ onClose }: onCloseI) {
     const { handleAccountDeletion, response, loading, error } = useDeleteAccount();
-    const { handleChangeInput, onSubmit, formState } = useForm({
+    const { handleChangeInput, onSubmit, formState, errors } = useForm({
         initialFormState,
+        validationRules: {
+            [DELETE_ACCOUNT_FORM_NAMES.PASSWORD]: ['required']
+        },
         submitFn: () => handleAccountDeletion(formState[DELETE_ACCOUNT_FORM_NAMES.PASSWORD])
     });
 
@@ -48,8 +51,8 @@ function DeleteAccountForm({ onClose }: onCloseI) {
                     value={formState[DELETE_ACCOUNT_FORM_NAMES.PASSWORD]}
                     autoComplete='current-password'
                     onChange={handleChangeInput}
-                    required
                 />
+                {errors[DELETE_ACCOUNT_FORM_NAMES.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[DELETE_ACCOUNT_FORM_NAMES.PASSWORD]}</span>}
             </div>
         </SecurityFormLayout>
     );

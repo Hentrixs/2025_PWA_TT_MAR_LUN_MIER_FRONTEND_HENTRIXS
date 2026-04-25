@@ -37,7 +37,7 @@
 
 .home-nav-link--cta {
   background: var(--brand-primary);
-  font-weight: 600;
+  font-weight: var(--weight-md);
 }
 
 .home-nav-link--cta:hover {
@@ -92,7 +92,7 @@
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-md);
   font-size: var(--text-base);
-  font-weight: 600;
+  font-weight: var(--weight-md);
   transition: background 0.2s, transform 0.1s;
 }
 
@@ -142,14 +142,219 @@
 
 .home-brands-list span {
   font-size: var(--text-md);
-  font-weight: 700;
+  font-weight: var(--weight-lg);
   color: var(--text-muted);
   letter-spacing: 0.05em;
 }
 
-/* TODO hacer responsive aca*/
-/* Parece que en celulares tendre que*/
-/* usar un desplegable o algo para el */
-/* login o iniciar sesion */
-/* sin embargo me esta costando ajustar el tamanio del logo */
-/* lo mejor qeu puedo hacer para no estancarme es irme a otro componente y dejar este para despues */
+/* --- AI Sections --- */
+
+.home-ai-reimagine {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--brand-secondary) 100%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-2xl);
+  border-radius: var(--radius-xl);
+
+}
+
+.ai-reimagine-content {
+  max-width: var(--max-width-page);
+  padding: var(--space-xl);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.01);
+  /* Subtle transparency */
+  backdrop-filter: blur(5px);
+  border: none !important;
+  /* Force no border */
+  border-radius: var(--radius-xl);
+
+}
+
+.ai-reimagine-content h2 {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+}
+
+.ai-reimagine-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto var(--space-2xl);
+  line-height: 1.6;
+}
+
+.ai-reimagine-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+  margin-top: var(--space-xl);
+}
+
+.ai-feature-list-card {
+  background: rgba(11, 165, 97, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(11, 165, 97, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: left;
+}
+
+.ai-feature-list-card ul {
+  list-style: none;
+}
+
+.ai-feature-list-card li {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  transition: color 0.3s;
+}
+
+.ai-feature-list-card li.active {
+  color: var(--brand-primary);
+  font-weight: var(--weight-md);
+}
+
+.ai-feature-image img {
+  width: 100%;
+  max-width: 400px;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
+  animation: float 6s ease-in-out infinite;
+}
+
+/* AI Context Section */
+.home-ai-context {
+  background-color: var(--bg-dark);
+  /* Full Dark */
+  color: var(--text-on-dark);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--border-color-subtle);
+  border-bottom: 1px solid var(--border-color-subtle);
+}
+
+.ai-context-content {
+  max-width: var(--max-width-page);
+  padding: 0 var(--space-xl);
+}
+
+.ai-context-content h2 {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-md);
+}
+
+.ai-context-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+}
+
+.ai-context-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.context-item {
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--border-color-subtle);
+}
+
+.context-item h3 {
+  font-size: var(--text-md);
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.context-item p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.context-item a {
+  color: var(--brand-primary);
+  text-decoration: none;
+  font-weight: var(--weight-md);
+  font-size: var(--text-sm);
+  margin-top: var(--space-sm);
+  display: inline-block;
+}
+
+.context-item.highlight {
+  background: var(--bg-dark-mid);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-subtle);
+}
+
+.stat {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--brand-primary);
+  display: block;
+}
+
+.ai-context-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-color-subtle);
+}
+
+/* Final CTA */
+.home-cta-final {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.home-cta-final h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.home-cta-final p {
+  margin-bottom: var(--space-xl);
+  color: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@media (max-width: 900px) {
+
+  .ai-reimagine-grid,
+  .ai-context-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .home-title h1 {
+    font-size: var(--text-xl);
+  }
+}

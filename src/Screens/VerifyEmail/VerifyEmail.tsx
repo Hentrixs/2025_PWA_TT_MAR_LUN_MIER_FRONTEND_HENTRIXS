@@ -6,7 +6,7 @@ function VerifyEmail() {
 
     const [ searchParams ] = useSearchParams();
     const verify_email_token = searchParams.get('verify_email_token');
-    const {response, loading, error} = useVerifyEmail(verify_email_token);
+    const {response, loading} = useVerifyEmail(verify_email_token);
 
     return (
         <div className='verify-email'>

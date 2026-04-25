@@ -1,4 +1,5 @@
-import { useState, type TextareaHTMLAttributes } from "react";
+import { useState } from "react";
+import { validateField } from "../../helpers/validationHelper";
 
 /*
 la interfaz obliga a que siempre se manden ÚNICAMENTE las 2 piezas del motor principales 
@@ -11,16 +12,17 @@ y sin errores de tipeo.
 
 interface useFormProps<T> {
     initialFormState: T;
+    submitFn: (formState: T) => void;
+    validationRules?: Partial<Record<keyof T, string[]>> // Diccionario opcional que mapea las llaves de T a Reglas
+};  // como se lee la parte de arriba que dice Partial<...>
 
-    submitFn: (formState: T) => void; // se pasa una callback a esto
-}; 
-
-const useForm = <T,>({ initialFormState, submitFn }: useFormProps<T>) => { // segun tengo entendido la , obliga a React a entender que es un generico de TS.
+const useForm = <T,>({ initialFormState, submitFn, validationRules }: useFormProps<T>) => { // segun tengo entendido la , obliga a React a entender que es un generico de TS.
 
     const [formState, setFormState] = useState<T>(initialFormState);
+    const [errors, setErrors] = useState<Partial<Record<keyof T,string>>>({}); // como se lee esto del Partial<...>
 
     const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { // React.ChangeEvent (evento de react), <HTMLInputElement> // el elemento que cambio fue un input
-        const field_name = event.target.name;
+        const field_name = event.target.name as keyof T; // que es eso de as keyof T
         const field_value = event.target.value;
 
         setFormState((prevFormState) => {
@@ -28,18 +30,53 @@ const useForm = <T,>({ initialFormState, submitFn }: useFormProps<T>) => { // se
                 ...prevFormState,
                 [field_name]: field_value // sigo sin entender el tema de los corchetes. no se supone que por default JS accede al valor dentro de field name?
             }
-        })
+        });
+
+        if (errors[field_name]) {
+            setErrors(prev => ({...prev, [field_name]: undefined}))
+        }
     };
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        submitFn(formState); // esto no lo entiendo.
+        
+        if (validationRules) {
+            const tempErrors: Partial<Record<keyof T, string>> = {};
+            let isFormValid = true;
+
+            for (const field of Object.keys(validationRules) as Array<keyof T>) {
+               const rulesArray = validationRules[field];
+               if (rulesArray) {
+                    const errorMessage = validateField(formState[field] as unknown as string, rulesArray, formState);
+                    if (errorMessage) {
+                        tempErrors[field] = errorMessage;
+                        isFormValid = false;
+                    };
+               }; 
+            };
+
+            setErrors(tempErrors);
+            
+            if (!isFormValid) {
+                return;
+            };
+    
+        };
+    
+        submitFn(formState);
+    };
+
+    const resetForm = () => {
+        setFormState(initialFormState);
+        setErrors({});
     };
 
     return {
         handleChangeInput,
         onSubmit,
-        formState
+        formState,
+        errors,
+        resetForm
     };
 };
 

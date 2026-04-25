@@ -10,9 +10,12 @@ const CreateWorkspace = () => {
     const navigate = useNavigate();
     const { submitCreateWorkspace, response, loading, error } = useCreateWorkspace();
 
-    const { formState, handleChangeInput, onSubmit } = useForm({
+    const { formState, handleChangeInput, onSubmit, errors } = useForm({
         initialFormState: { title: '', description: '' },
-        submitFn: async (formState: any) => {
+        validationRules: {
+            title: ['required', 'min:3']
+        },
+        submitFn: async (formState: { title: string; description: string }) => {
             await submitCreateWorkspace(formState.title, formState.description);
         }
     });
@@ -42,6 +45,7 @@ const CreateWorkspace = () => {
                             value={formState.title}
                             onChange={handleChangeInput}
                         />
+                        {errors.title && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors.title}</span>}
                     </div>
                     <div className="create-workspace-field">
                         <label htmlFor="description">Descripción <span>(opcional)</span></label>
@@ -53,7 +57,9 @@ const CreateWorkspace = () => {
                             value={formState.description}
                             onChange={handleChangeInput}
                         />
+                        {errors.description && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors.description}</span>}
                     </div>
+                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center', marginBottom: '8px', display: 'block' }}>Corrige los errores antes de continuar.</span>}
                     {error && <p className="create-workspace-error">Algo salió mal, intentá de nuevo.</p>}
                     <button type="submit" disabled={loading}>
                         {loading && 'Creando espacio...' || 'Crear espacio de trabajo'}

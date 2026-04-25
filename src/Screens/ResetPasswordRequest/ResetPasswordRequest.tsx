@@ -23,7 +23,7 @@ export default function ResetPasswordRequest() {
     };
 
     // Ojo aquí: Le quitamos las llaves de desestructuración que tenías ({initialFormState})
-    const submitRequest = async (formStateVieneDelHook: any) => {
+    const submitRequest = async (formStateVieneDelHook: Record<string, string>) => {
         await sendRequest({
             requestCb: () => {
                 return resetPassword({
@@ -37,8 +37,15 @@ export default function ResetPasswordRequest() {
     const {
         handleChangeInput,
         onSubmit,
-        formState
-    } = useForm({ initialFormState: initialFormState, submitFn: submitRequest })
+        formState,
+        errors
+    } = useForm({
+        initialFormState: initialFormState,
+        validationRules: {
+            [REQUEST_FORM_FIELDS.EMAIL]: ['required', 'email']
+        },
+        submitFn: submitRequest
+    })
 
     return (
         <>
@@ -59,6 +66,7 @@ export default function ResetPasswordRequest() {
                                     value={formState[REQUEST_FORM_FIELDS.EMAIL]}
                                     onChange={handleChangeInput}
                                 />
+                                {errors[REQUEST_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[REQUEST_FORM_FIELDS.EMAIL]}</span>}
                             </div>
                             <button type='submit' disabled={loading}>{loading && 'Enviando Solicitud...' || 'Enviar Solicitud'}</button>
                         </form>

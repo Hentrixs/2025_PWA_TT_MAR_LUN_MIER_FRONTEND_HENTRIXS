@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useRequest from "../useRequest/useRequest";
 import { getWorkspaceDetail } from "../../services/workspaceService";
 
-const useWorkspace = (workspace_id: string | undefined) => {
+const useWorkspaceDetail = (workspace_id: string | undefined) => {
     const { sendRequest, response, loading, error } = useRequest();
 
     useEffect(() => {
@@ -10,10 +10,10 @@ const useWorkspace = (workspace_id: string | undefined) => {
         sendRequest({ requestCb: () => getWorkspaceDetail(workspace_id) });
     }, [workspace_id]);
 
-    const workspace = response?.workspace || null;
+    const workspaceDetail = response?.workspace || null;
     const members = response?.members || [];
 
-    return { workspace, members, response, loading, error };
+    return { workspaceDetail, members, response, loading, error };
 };
 
-export default useWorkspace;
+export default useWorkspaceDetail;

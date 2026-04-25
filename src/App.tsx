@@ -6,6 +6,7 @@ import ResetPasswordRequest from './Screens/ResetPasswordRequest/ResetPasswordRe
 import AuthMiddleware from './Middlewares/AuthMiddleware';
 import Workspace from './Screens/Workspace/Workspace';
 import Chat from './Screens/Chat/Chat';
+import DirectChat from './Screens/DirectChat/DirectChat';
 import VerifyEmail from './Screens/VerifyEmail/VerifyEmail';
 import InviteRespond from './Screens/InviteRespond/InviteRespond';
 import Home from './Screens/Home/Home';
@@ -13,6 +14,7 @@ import WorkspaceSelector from './Screens/WorkspaceSelector/WorkspaceSelector';
 import CreateWorkspace from './Screens/CreateWorkspace/CreateWorkspace';
 import Settings from './Screens/Settings/Settings';
 import EmailConfirmationResult from './Screens/EmailConfirmationResult/EmailConfirmationResult';
+import NotFoundScreen from './Screens/NotFoundScreen/NotFoundScreen';
 
 function App() {
 
@@ -32,8 +34,10 @@ function App() {
         <Route path={'/workspace'} element={<Workspace />} />
         <Route path={'/workspace/:workspace_id'} element={<Workspace />}>
           <Route path={'channel/:channel_id?'} element={<Chat />} />
+          <Route path={'dm/:member_id'} element={<DirectChat />} />
         </Route>
       </Route>
+      <Route path="*" element={<NotFoundScreen />} />
     </Routes>
   );
 };

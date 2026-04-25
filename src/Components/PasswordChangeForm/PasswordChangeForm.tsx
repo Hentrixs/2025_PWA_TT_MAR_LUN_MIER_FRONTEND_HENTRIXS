@@ -20,8 +20,12 @@ interface onCloseI {
 function PasswordChangeForm({ onClose }: onCloseI) {
 
     const { handleUpdatePassword, response, loading, error } = useUpdatePassword();
-    const { handleChangeInput, onSubmit, formState } = useForm({
+    const { handleChangeInput, onSubmit, formState, errors } = useForm({
         initialFormState,
+        validationRules: {
+            [PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]: ['required'],
+            [PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD]: ['required', 'min:6']
+        },
         submitFn: () => handleUpdatePassword({ formState })
     });
 
@@ -50,6 +54,7 @@ function PasswordChangeForm({ onClose }: onCloseI) {
                     autoComplete='old_password'
                     onChange={handleChangeInput}
                 />
+                {errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]}</span>}
             </div>
             <div className="form-group">
                 <label>Nueva Contraseña</label>
@@ -62,7 +67,9 @@ function PasswordChangeForm({ onClose }: onCloseI) {
                     autoComplete='new_password'
                     onChange={handleChangeInput}
                 />
+                {errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD]}</span>}
             </div>
+            {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', display: 'block', marginBottom: '10px' }}>Por favor, revisa los errores.</span>}
         </SecurityFormLayout>
     );
 };

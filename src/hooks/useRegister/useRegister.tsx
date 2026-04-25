@@ -1,10 +1,10 @@
 import { register } from "../../services/authService";
-import useRequest from "../useRequest/useRequest"
+import useRequest from "../useRequest/useRequest";
 
 const useRegister = () => {
     const { sendRequest, response, error, loading } = useRequest();
 
-    const registerSubmit = (formstate: any) => {
+    const registerSubmit = (formstate: Record<string, string>) => {
 
         const { name, email, password } = formstate;
         sendRequest({ requestCb: () => register({ name, email, password }) })

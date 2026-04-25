@@ -4,7 +4,7 @@ import { requestEmailChange } from "../../services/authService";
 const useRequestEmailChange = () => {
     const { loading, response, error, sendRequest } = useRequest();
 
-    const handleRequestEmailChange = async (formState: any) => {
+    const handleRequestEmailChange = async (formState: Record<string, string>) => {
         const { password, new_email } = formState;
         sendRequest({
             requestCb: () => requestEmailChange({ password, new_email })

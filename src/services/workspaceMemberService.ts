@@ -37,6 +37,16 @@ export const deleteMember = async (workspace_id: string, member_id: string) => {
     return response.json();
 };
 
+export const respondToInvitation = async (_workspace_id: string | null, token: string | null) => {
+    const response = await fetch(`${ENVIRONMENT.API_URL}/api/invitation/respond?token=${token}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`
+        }
+    });
+    return response.json();
+};
+
 export const updateMemberRole = async (workspace_id: string, member_id: string, role: string) => {
     const response = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/member/${member_id}`, {
         method: 'PUT',

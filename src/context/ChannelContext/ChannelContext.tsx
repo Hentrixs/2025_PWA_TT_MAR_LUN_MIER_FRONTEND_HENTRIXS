@@ -2,8 +2,9 @@ import { createContext, useContext } from "react";
 import useChannel from "../../hooks/useChannel/useChannel";
 import { useParams } from "react-router-dom";
 import { useWorkspaceContext } from "../WorkspaceContext/WorkspaceContext";
+import type { ChannelContextType } from "../../types";
 
-const ChannelContext = createContext<any>(null);
+const ChannelContext = createContext<ChannelContextType | null>(null);
 
 export function ChannelContextProvider({ children }: { children: React.ReactNode }) {
     const { channel_id } = useParams();
@@ -33,5 +34,5 @@ export function ChannelContextProvider({ children }: { children: React.ReactNode
     );
 };
 
-export const useChannelContext = () => useContext(ChannelContext);
+export const useChannelContext = () => useContext(ChannelContext) as ChannelContextType;
 export default ChannelContextProvider;

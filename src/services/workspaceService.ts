@@ -12,12 +12,12 @@ export const getWorkspaces = async () => {
     });
 
     const response = await response_http.json();
-    
+
     return response.data.workspaces;
 };
 
 export const getWorkspaceDetail = async (workspace_id: string) => {
-    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}`, {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/workspaceDetail`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
@@ -45,4 +45,31 @@ export const createWorkspace = async (title: string, description: string, role: 
 
     const response = await response_http.json();
     return response.data;
+};
+
+export const updateWorkspace = async (workspace_id: string, title: string, description: string) => {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            description: description
+        })
+    });
+
+    return await response_http.json();
+};
+
+export const deleteWorkspace = async (workspace_id: string) => {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`
+        }
+    });
+
+    return await response_http.json();
 };

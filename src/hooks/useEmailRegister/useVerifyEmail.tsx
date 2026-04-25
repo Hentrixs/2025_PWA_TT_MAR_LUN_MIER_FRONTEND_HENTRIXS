@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { verifyEmail } from "../../services/verifyEmailService";
 import useRequest from "../useRequest/useRequest";
 
-const useVerifyEmail = (verify_email_token: any) => {
+const useVerifyEmail = (verify_email_token: string | null) => {
     const { sendRequest, response, error, loading } = useRequest();
 
     useEffect(() => {
