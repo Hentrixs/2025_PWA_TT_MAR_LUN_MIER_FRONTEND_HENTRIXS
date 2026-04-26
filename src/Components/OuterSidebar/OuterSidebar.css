@@ -1,6 +1,6 @@
 .outer-sidebar {
     width: 70px;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-dark-mid);
     display: flex;
     flex-direction: column;

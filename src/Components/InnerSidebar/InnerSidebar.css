@@ -1,6 +1,6 @@
 .inner-sidebar {
     width: 260px;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-light);
     color: var(--text-primary);
     padding: var(--space-md);
