@@ -40,7 +40,7 @@ function useChatMain() {
         error,
         refreshMessages: () => {
             if (!workspace_id || !channel_id) return;
-            sendRequest({ requestCb: () => channelMessageHistory(workspace_id, channel_id) });
+            sendRequest({ requestCb: () => channelMessageHistory(workspace_id, channel_id), silent: true });
         }
     }
 };

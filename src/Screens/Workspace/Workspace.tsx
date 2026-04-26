@@ -1,5 +1,5 @@
 import './Workspace.css';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useMatch } from 'react-router-dom';
 import WorkspaceContextProvider from '../../context/WorkspaceContext/WorkspaceContext';
 import ChannelContextProvider, { useChannelContext } from '../../context/ChannelContext/ChannelContext';
 import OuterSidebar from '../../Components/OuterSidebar/OuterSidebar';
@@ -7,9 +7,10 @@ import InnerSidebar from '../../Components/InnerSidebar/InnerSidebar';
 
 function WorkspaceLayout() {
     const { channel_id } = useChannelContext();
+    const isDmRoute = useMatch('/workspace/:workspace_id/dm/:member_id');
 
     return (
-        <div className={`workspace-layout ${channel_id ? 'has-channel' : ''}`}>
+        <div className={`workspace-layout ${channel_id || isDmRoute ? 'has-channel' : ''}`}>
             <OuterSidebar />
             <InnerSidebar />
             <Outlet />

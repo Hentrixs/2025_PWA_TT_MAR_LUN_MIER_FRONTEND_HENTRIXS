@@ -1,0 +1,404 @@
+diff --git a/src/Components/CreateChannelModal/CreateChannelModal.css b/src/Components/CreateChannelModal/CreateChannelModal.css
+index 4aa4f48..87dff58 100644
+--- a/src/Components/CreateChannelModal/CreateChannelModal.css
++++ b/src/Components/CreateChannelModal/CreateChannelModal.css
+@@ -8,11 +8,11 @@
+ 
+ .create-channel-form input {
+     width: 100%;
+-    padding: 10px;
+-    border-radius: 5px;
+-    border: 1px solid #ccc;
++    padding: var(--space-sm);
++    border-radius: var(--radius-sm);
++    border: 1px solid var(--border-color-subtle);
+     background-color: var(--bg-dark);
+-    color: white;
++    color: var(--text-primary);
+ }
+ 
+ .create-channel-form span {
+@@ -21,11 +21,11 @@
+ }
+ 
+ .create-channel-form button {
+-    padding: 10px;
+-    border-radius: 5px;
++    padding: var(--space-sm) var(--space-md);
++    border-radius: var(--radius-sm);
+     border: none;
+     background-color: var(--brand-primary);
+-    color: white;
++    color: var(--text-on-dark);
+     width: min-content;
+     cursor: pointer;
+ }
+diff --git a/src/Components/InnerSidebar/InnerSidebar.css b/src/Components/InnerSidebar/InnerSidebar.css
+index ffba579..797a921 100644
+--- a/src/Components/InnerSidebar/InnerSidebar.css
++++ b/src/Components/InnerSidebar/InnerSidebar.css
+@@ -72,27 +72,67 @@
+     padding-left: var(--space-sm);
+ }
+ 
++.channel-item-wrapper {
++    position: relative;
++    display: flex;
++    align-items: center;
++    border-radius: var(--radius-sm);
++    transition: background-color 0.15s ease;
++}
++
++.channel-item-wrapper:hover {
++    background-color: var(--bg-light-mid);
++}
++
++.channel-item-wrapper:hover .channel-item {
++    color: var(--text-primary);
++}
++
+ .channel-item {
+     padding: var(--space-sm) var(--space-md);
+     border-radius: var(--radius-sm);
+     text-decoration: none;
+     color: var(--text-secondary);
+     font-size: var(--text-sm);
+-    transition: all 0.15s ease;
+-    display: block;
+-}
+-
+-.channel-item:hover {
+-    background-color: var(--bg-light-mid);
+-    color: var(--text-primary);
++    flex: 1;
++    min-width: 0;
++    white-space: nowrap;
++    overflow: hidden;
++    text-overflow: ellipsis;
+ }
+ 
+ .channel-item.active {
+-    background-color: var(--brand-primary);
+     color: white !important;
+     font-weight: var(--weight-md);
+ }
+ 
++.channel-item-wrapper:has(.channel-item.active) {
++    background-color: var(--brand-primary);
++}
++
++.channel-gear-btn {
++    display: none;
++    background: transparent;
++    border: none;
++    color: var(--text-secondary);
++    cursor: pointer;
++    padding: var(--space-xs);
++    margin-right: var(--space-xs);
++    border-radius: var(--radius-sm);
++    flex-shrink: 0;
++    transition: color 0.15s ease;
++}
++
++.channel-item-wrapper:hover .channel-gear-btn {
++    display: flex;
++    align-items: center;
++    justify-content: center;
++}
++
++.channel-gear-btn:hover {
++    color: var(--text-primary);
++}
++
+ .create-channel-btn,
+ .manage-members-btn {
+     background-color: rgba(11, 165, 97, 0.04);
+diff --git a/src/Components/InnerSidebar/InnerSidebar.tsx b/src/Components/InnerSidebar/InnerSidebar.tsx
+index e55149c..d317562 100644
+--- a/src/Components/InnerSidebar/InnerSidebar.tsx
++++ b/src/Components/InnerSidebar/InnerSidebar.tsx
+@@ -9,6 +9,7 @@ import InviteMemberModal from '../InviteMemberModal/InviteMemberModal';
+ import ManageMembersModal from '../ManageMembersModal/ManageMembersModal';
+ import WorkspaceDropdown from '../WorkspaceDropdown/WorkspaceDropdown';
+ import WorkspaceSettingsModal from '../WorkspaceSettingsModal/WorkspaceSettingsModal';
++import ChannelSettingsModal from '../ChannelSettingsModal/ChannelSettingsModal';
+ 
+ const InnerSidebar = () => {
+ 
+@@ -16,7 +17,8 @@ const InnerSidebar = () => {
+         workspaceDetail,
+         isMobile,
+         workspace_id,
+-        members
++        members,
++        activeMember
+     } = useWorkspaceContext();
+ 
+     const {
+@@ -28,6 +30,9 @@ const InnerSidebar = () => {
+         channel_id
+     } = useChannelContext();
+ 
++    const isAdminOrOwner = activeMember?.member_role === 'owner' || activeMember?.member_role === 'admin';
++
++    const [channelSettingsTarget, setChannelSettingsTarget] = useState<IChannel | null>(null);
+     const [isCreateChannelModalOpen, setIsCreateChannelModalOpen] = useState(false);
+     const [isInviteMemberModalOpen, setIsInviteMemberModalOpen] = useState(false);
+     const [isManageMembersModalOpen, setIsManageMembersModalOpen] = useState(false);
+@@ -46,7 +51,6 @@ const InnerSidebar = () => {
+                 <div className='workspace-title'>
+                     <div>
+                         <h2>{workspaceDetail?.title ?? 'Cargando...'}</h2>
+-                        {/* Dropdown va aqui */}
+                     </div>
+                     <div className="chevron-container" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className={`bi bi-chevron-down ${isDropdownOpen ? 'open' : ''}`} viewBox="0 0 16 16">
+@@ -67,21 +71,44 @@ const InnerSidebar = () => {
+                         onClose={() => setIsSettingsModalOpen(false)}
+                     />
+                 )}
++
+                 <div className='channel-list'>
+                     <p className='channels-title'>Canales</p>
+-                    {!!responseChannel && channel_list && !loadingChannels && !errorChannel && channel_list.map((channel: IChannel, index: number) => {
+-                        return (
+-                            <NavLink to={`/workspace/${workspace_id}/channel/${channel.channel_id}`} className='channel-item' key={channel.channel_id ?? index}># {channel.channel_name}</NavLink>
+-                        )
+-                    })}
++
++                    {!!responseChannel && channel_list && !loadingChannels && !errorChannel && channel_list.map((channel: IChannel, index: number) => (
++                        <div key={channel.channel_id ?? index} className='channel-item-wrapper'>
++                            <NavLink to={`/workspace/${workspace_id}/channel/${channel.channel_id}`} className='channel-item'># {channel.channel_name}</NavLink>
++                            {isAdminOrOwner && (
++                                <button className='channel-gear-btn' onClick={() => setChannelSettingsTarget(channel)}>
++                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
++                                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
++                                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
++                                    </svg>
++                                </button>
++                            )}
++                        </div>
++                    ))}
++
+                 </div>
++
+                 <button className='create-channel-btn' onClick={() => setIsCreateChannelModalOpen(!isCreateChannelModalOpen)}>Crear Canal</button>
++
+                 {isCreateChannelModalOpen && <CreateChannelModal
+                     onSuccess={() => { refetchChannels(); setIsCreateChannelModalOpen(false); }}
+                     onClose={() => setIsCreateChannelModalOpen(false)}
+                 />}
++
++                {channelSettingsTarget && (
++                    <ChannelSettingsModal
++                        channel={channelSettingsTarget}
++                        onClose={() => setChannelSettingsTarget(null)}
++                        onSuccess={() => { refetchChannels(); setChannelSettingsTarget(null); }}
++                    />
++                )}
++
+             </div>
+             <div>
++
+                 <p className='channels-title'>Mensajes Directos</p>
+                 <div className='channel-list'>
+                     {members && members.map((member: IMember) => {
+@@ -90,17 +117,21 @@ const InnerSidebar = () => {
+                         )
+                     })}
+                 </div>
++
+                 <button className='create-channel-btn' onClick={() => setIsInviteMemberModalOpen(true)}>Invitar a Personas</button>
+                 {isInviteMemberModalOpen && <InviteMemberModal
+                     onClose={() => setIsInviteMemberModalOpen(false)}
+                 />}
++
+             </div>
++
+             <div>
+                 <button className='manage-members-btn' onClick={() => setIsManageMembersModalOpen(true)}>Administrar Miembros</button>
+                 {isManageMembersModalOpen &&
+                     <ManageMembersModal onClose={() => setIsManageMembersModalOpen(false)} />
+                 }
+             </div>
++            
+         </div>
+     );
+ };
+diff --git a/src/Components/ManageMembersModal/ManageMembersModal.tsx b/src/Components/ManageMembersModal/ManageMembersModal.tsx
+index c0124df..2e69344 100644
+--- a/src/Components/ManageMembersModal/ManageMembersModal.tsx
++++ b/src/Components/ManageMembersModal/ManageMembersModal.tsx
+@@ -34,7 +34,8 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
+     }, [responseDelete]);
+ 
+     return (
+-        <Modal title="Administrar Miembros" onClose={onClose} width="35rem">
++        <Modal title="Administrar Miembros" onClose={onClose}>
++            <div style={{ overflowX: 'auto' }}>
+             <table className="manage-members-table">
+                 <thead>
+                     <tr>
+@@ -94,6 +95,7 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
+                     })}
+                 </tbody>
+             </table>
++            </div>
+         </Modal>
+     );
+ };
+diff --git a/src/Components/Modal/Modal.css b/src/Components/Modal/Modal.css
+index 765523b..2f7bfb2 100644
+--- a/src/Components/Modal/Modal.css
++++ b/src/Components/Modal/Modal.css
+@@ -19,9 +19,7 @@
+     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+     display: flex;
+     flex-direction: column;
+-    width: var(--modal-width);
+-    max-width: 90%;
+-
++    min-width: max-content;
+ }
+ 
+ .modal-header {
+@@ -57,4 +55,15 @@
+ 
+ .modal-body {
+     width: 100%;
++}
++
++@media (max-width: 768px) {
++    .modal-container {
++        width: 100vw;
++        height: 100vh;
++        min-width: unset;
++        border-radius: 0;
++        padding: var(--space-lg);
++        overflow-y: auto;
++    }
+ }
+\ No newline at end of file
+diff --git a/src/Components/OuterSidebar/OuterSidebar.tsx b/src/Components/OuterSidebar/OuterSidebar.tsx
+index 1e6097b..5404af5 100644
+--- a/src/Components/OuterSidebar/OuterSidebar.tsx
++++ b/src/Components/OuterSidebar/OuterSidebar.tsx
+@@ -14,6 +14,7 @@ const OuterSidebar = () => {
+     return (
+         <div className='outer-sidebar'>
+             <div>
++
+                 {!!responseWorkspaces && workspaces && Array.isArray(workspaces) && !loadingWorkspaces && !errorWorkspaces && workspaces.map((wk: IWorkspace, index: number) => (
+                     <NavLink to={`/workspace/${wk.workspace_id}`} key={wk.workspace_id ?? index} className='workspace-icon'>
+                         <p>{(wk.workspace_name || 'W').charAt(0).toUpperCase()}</p>
+@@ -22,6 +23,7 @@ const OuterSidebar = () => {
+ 
+             </div>
+             <div className='user-svg-wrapper'>
++
+                 <NavLink to={'/settings'}>
+                     <div className='svg-wrapper'>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gear-fill" viewBox="0 0 16 16">
+@@ -29,9 +31,11 @@ const OuterSidebar = () => {
+                         </svg>
+                     </div>
+                 </NavLink>
++
+                 <div className='user-wrapper'>
+                     <p>U</p>
+                 </div>
++                
+             </div>
+         </div>
+     );
+diff --git a/src/Components/WorkspaceSettingsModal/WorkspaceSettingsModal.css b/src/Components/WorkspaceSettingsModal/WorkspaceSettingsModal.css
+index 2033a57..a65052a 100644
+--- a/src/Components/WorkspaceSettingsModal/WorkspaceSettingsModal.css
++++ b/src/Components/WorkspaceSettingsModal/WorkspaceSettingsModal.css
+@@ -2,7 +2,7 @@
+     display: flex;
+     flex-direction: column;
+     gap: var(--space-lg);
+-    min-width: 400px;
++    width: 100%;
+ }
+ 
+ .settings-tabs {
+diff --git a/src/Screens/Workspace/Workspace.tsx b/src/Screens/Workspace/Workspace.tsx
+index 9691fed..86e3aac 100644
+--- a/src/Screens/Workspace/Workspace.tsx
++++ b/src/Screens/Workspace/Workspace.tsx
+@@ -1,5 +1,5 @@
+ import './Workspace.css';
+-import { Outlet } from 'react-router-dom';
++import { Outlet, useMatch } from 'react-router-dom';
+ import WorkspaceContextProvider from '../../context/WorkspaceContext/WorkspaceContext';
+ import ChannelContextProvider, { useChannelContext } from '../../context/ChannelContext/ChannelContext';
+ import OuterSidebar from '../../Components/OuterSidebar/OuterSidebar';
+@@ -7,9 +7,10 @@ import InnerSidebar from '../../Components/InnerSidebar/InnerSidebar';
+ 
+ function WorkspaceLayout() {
+     const { channel_id } = useChannelContext();
++    const isDmRoute = useMatch('/workspace/:workspace_id/dm/:member_id');
+ 
+     return (
+-        <div className={`workspace-layout ${channel_id ? 'has-channel' : ''}`}>
++        <div className={`workspace-layout ${channel_id || isDmRoute ? 'has-channel' : ''}`}>
+             <OuterSidebar />
+             <InnerSidebar />
+             <Outlet />
+diff --git a/src/hooks/useIsMobile/useIsMobile.tsx b/src/hooks/useIsMobile/useIsMobile.tsx
+index 3fe60e2..d883556 100644
+--- a/src/hooks/useIsMobile/useIsMobile.tsx
++++ b/src/hooks/useIsMobile/useIsMobile.tsx
+@@ -1,16 +1,16 @@
+ import { useState, useEffect } from "react";
+ 
+ const useIsMobile = () => {
+-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 750);
++    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+ 
+-    /* 
+-        Gracias a este hook ahora puedo aislar logicas de react-router dependiendo del tamanio de la pantalla    
++    /*
++        Gracias a este hook ahora puedo aislar logicas de react-router dependiendo del tamanio de la pantalla
+     */
+ 
+     useEffect(() => {
+ 
+         const handleResise = () => {
+-            setIsMobile(window.innerWidth <= 750);
++            setIsMobile(window.innerWidth <= 768);
+         };
+ 
+         window.addEventListener('resize', handleResise);
+diff --git a/src/services/channelService.ts b/src/services/channelService.ts
+index 6c2f1a4..9acce77 100644
+--- a/src/services/channelService.ts
++++ b/src/services/channelService.ts
+@@ -30,3 +30,25 @@ export const createChannel = async (channel: { channel_name: string, channel_des
+     const response = await channel_created.json();
+     return response;
+ };
++
++export const updateChannel = async (workspace_id: string, channel_id: string, name: string, description: string) => {
++    const res = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel/${channel_id}`, {
++        method: 'PATCH',
++        headers: {
++            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
++            'Content-Type': 'application/json',
++        },
++        body: JSON.stringify({ name, description })
++    });
++    return res.json();
++};
++
++export const deleteChannel = async (workspace_id: string, channel_id: string) => {
++    const res = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel/${channel_id}`, {
++        method: 'DELETE',
++        headers: {
++            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
++        }
++    });
++    return res.json();
++};

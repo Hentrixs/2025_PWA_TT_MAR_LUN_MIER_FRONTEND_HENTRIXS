@@ -8,11 +8,11 @@
 
 .create-channel-form input {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color-subtle);
     background-color: var(--bg-dark);
-    color: white;
+    color: var(--text-primary);
 }
 
 .create-channel-form span {
@@ -21,11 +21,11 @@
 }
 
 .create-channel-form button {
-    padding: 10px;
-    border-radius: 5px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
     border: none;
     background-color: var(--brand-primary);
-    color: white;
+    color: var(--text-on-dark);
     width: min-content;
     cursor: pointer;
 }

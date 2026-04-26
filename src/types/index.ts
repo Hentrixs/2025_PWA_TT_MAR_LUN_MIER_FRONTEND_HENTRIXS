@@ -136,3 +136,11 @@ export interface DirectChatContextType {
     errorSend: AppError | null;
     otherMemberName: string;
 }
+
+export type Theme = 'light' | 'dark';
+
+export interface ThemeContextType {
+    theme: Theme;
+    toggleTheme: () => void;
+    isDark: boolean;
+}

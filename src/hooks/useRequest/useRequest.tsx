@@ -3,6 +3,7 @@ import { type AppError, parseError } from "../../helpers/errorHelper";
 
 interface useRequestProps {
     requestCb: () => Promise<any>;
+    silent?: boolean;
 };
 
 const useRequest = () => {
@@ -10,11 +11,13 @@ const useRequest = () => {
     const [error, setError] = useState<AppError | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const sendRequest = async ({ requestCb }: useRequestProps) => {
+    const sendRequest = async ({ requestCb, silent = false }: useRequestProps) => {
         try {
-            setResponse(null);
+            if (!silent) {
+                setResponse(null);
+                setLoading(true);
+            }
             setError(null);
-            setLoading(true);
 
             const res = await requestCb();
 

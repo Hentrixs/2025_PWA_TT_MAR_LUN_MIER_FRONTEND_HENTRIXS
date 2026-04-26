@@ -53,3 +53,57 @@
 .role-change-link:hover {
     color: var(--brand-primary-hover);
 }
+
+/* Responsive Stacking Table */
+@media (max-width: 768px) {
+    .manage-members-table {
+        border: 0;
+        margin-top: var(--space-sm);
+    }
+
+    .manage-members-table thead {
+        display: none;
+        /* Hide standard headers */
+    }
+
+    .manage-members-table tr {
+        display: block;
+        background-color: var(--bg-light-mid);
+        border: 1px solid var(--border-color-subtle);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm);
+    }
+
+    .manage-members-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: var(--space-sm) var(--space-md);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: var(--text-sm);
+        width: 100%;
+    }
+
+    .manage-members-table td:last-child {
+        border-bottom: 0;
+        justify-content: center;
+        gap: var(--space-md);
+        padding-top: var(--space-md);
+    }
+
+    .manage-members-table td::before {
+        content: attr(data-label);
+        font-weight: var(--weight-bold);
+        text-transform: uppercase;
+        font-size: 10px;
+        color: var(--text-muted);
+        text-align: left;
+    }
+
+    .btn-delete-member {
+        width: 100%;
+        padding: var(--space-sm);
+    }
+}

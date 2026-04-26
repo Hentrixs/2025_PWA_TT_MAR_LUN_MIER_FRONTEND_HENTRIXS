@@ -1,10 +1,11 @@
 .home {
   min-height: 100vh;
   background: var(--bg-dark-gradient);
-  color: var(--text-on-dark);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .home-nav {
@@ -23,7 +24,7 @@
 }
 
 .home-nav-link {
-  color: var(--text-on-dark);
+  color: var(--text-primary);
   text-decoration: none;
   font-size: var(--text-base);
   padding: var(--space-sm) var(--space-md);
@@ -42,6 +43,78 @@
 
 .home-nav-link--cta:hover {
   background: var(--brand-primary-hover);
+}
+
+/* Mobile Nav Overlay */
+.home-nav-svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.home-nav-svg-wrapper svg {
+  height: var(--space-lg);
+  width: var(--space-lg);
+}
+
+.mobile-nav-overlay {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-dark);
+  border-bottom: 1px solid var(--border-color-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav-item {
+  padding: var(--space-lg) var(--space-xl);
+  font-size: var(--text-md);
+  font-weight: var(--weight-md);
+  color: var(--text-primary);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: left;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mobile-nav-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-login-btn {
+  color: var(--text-primary);
+}
+
+.mobile-register-btn {
+  color: var(--brand-primary);
+}
+
+.mobile-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .home-center {
@@ -102,7 +175,8 @@
 
 .home-btn--primary {
   background: var(--brand-primary);
-  color: var(--text-on-dark);
+  color: #FFFFFF;
+  /* High contrast text for primary action button */
 }
 
 .home-btn--primary:hover {
@@ -111,7 +185,7 @@
 
 .home-btn--secondary {
   background: transparent;
-  color: var(--text-on-dark);
+  color: var(--text-primary);
   border: 1px solid var(--border-color-light);
 }
 
@@ -231,7 +305,7 @@
 .home-ai-context {
   background-color: var(--bg-dark);
   /* Full Dark */
-  color: var(--text-on-dark);
+  color: var(--text-primary);
   width: 100%;
   display: flex;
   justify-content: center;

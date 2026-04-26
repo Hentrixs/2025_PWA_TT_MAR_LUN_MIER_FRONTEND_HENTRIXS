@@ -1,0 +1,39 @@
+.theme-toggle-btn {
+    background: transparent;
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-md);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--bg-dark-mid);
+    border-color: var(--brand-primary);
+    transform: translateY(-1px);
+}
+
+.theme-toggle-btn:active {
+    transform: translateY(0);
+}
+
+.sun-icon {
+    color: #f59e0b;
+    /* Amber/Gold for sun */
+}
+
+.moon-icon {
+    color: #6366f1;
+    /* Indigo for moon */
+}
+
+/* Specific adjustment when in dark theme overlay (Navbar) */
+[data-theme='dark'] .theme-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}

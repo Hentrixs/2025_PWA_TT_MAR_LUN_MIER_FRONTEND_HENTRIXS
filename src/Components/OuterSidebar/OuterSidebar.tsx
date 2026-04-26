@@ -14,6 +14,7 @@ const OuterSidebar = () => {
     return (
         <div className='outer-sidebar'>
             <div>
+
                 {!!responseWorkspaces && workspaces && Array.isArray(workspaces) && !loadingWorkspaces && !errorWorkspaces && workspaces.map((wk: IWorkspace, index: number) => (
                     <NavLink to={`/workspace/${wk.workspace_id}`} key={wk.workspace_id ?? index} className='workspace-icon'>
                         <p>{(wk.workspace_name || 'W').charAt(0).toUpperCase()}</p>
@@ -22,6 +23,7 @@ const OuterSidebar = () => {
 
             </div>
             <div className='user-svg-wrapper'>
+
                 <NavLink to={'/settings'}>
                     <div className='svg-wrapper'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gear-fill" viewBox="0 0 16 16">
@@ -29,9 +31,11 @@ const OuterSidebar = () => {
                         </svg>
                     </div>
                 </NavLink>
+
                 <div className='user-wrapper'>
                     <p>U</p>
                 </div>
+                
             </div>
         </div>
     );

@@ -30,3 +30,25 @@ export const createChannel = async (channel: { channel_name: string, channel_des
     const response = await channel_created.json();
     return response;
 };
+
+export const updateChannel = async (workspace_id: string, channel_id: string, name: string, description: string) => {
+    const res = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel/${channel_id}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, description })
+    });
+    return res.json();
+};
+
+export const deleteChannel = async (workspace_id: string, channel_id: string) => {
+    const res = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel/${channel_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
+        }
+    });
+    return res.json();
+};

@@ -1,4 +1,4 @@
-.workspace-settings-container {
+.channel-settings-container {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
@@ -111,8 +111,8 @@
 }
 
 .danger-zone {
-    background: rgba(255, 69, 58, 0.05);
-    border: 1px solid rgba(255, 69, 58, 0.2);
+    background: var(--error-subtle);
+    border: 1px solid var(--error-subtle-border);
     padding: var(--space-lg);
     border-radius: var(--radius-md);
     display: flex;
@@ -145,4 +145,9 @@
 .delete-btn:hover {
     opacity: 0.9;
     transform: scale(0.98);
+}
+
+.error-message {
+    color: var(--error-primary);
+    font-size: var(--text-sm);
 }

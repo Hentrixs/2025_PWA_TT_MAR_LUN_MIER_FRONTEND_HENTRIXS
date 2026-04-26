@@ -4,6 +4,11 @@
     gap: var(--space-xl);
 }
 
+.workspace-nav-svg-wrapper svg {
+    height: var(--space-lg);
+    width: var(--space-lg);
+}
+
 .workspace-nav-create-btn {
     background-color: var(--brand-primary);
     color: white;
@@ -44,11 +49,72 @@
 .workspace-selector {
     min-height: 100vh;
     background-color: var(--bg-dark);
-    color: var(--text-on-dark);
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: var(--space-2xl);
+    position: relative;
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav-overlay {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-dark-mid);
+    border-bottom: 1px solid var(--border-color-subtle);
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-nav-item {
+    padding: var(--space-lg) var(--space-xl);
+    font-size: var(--text-md);
+    font-weight: var(--weight-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.mobile-nav-item:last-child {
+    border-bottom: none;
+}
+
+.mobile-create-btn {
+    color: var(--brand-primary);
+}
+
+.mobile-logout-btn {
+    color: #e57373;
+    /* Red color for logout is common / helpful */
+}
+
+.mobile-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .workspace-nav {
@@ -115,7 +181,7 @@
     background-color: var(--bg-dark-mid);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color-subtle);
-    color: var(--text-on-dark);
+    color: var(--text-primary);
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
@@ -164,11 +230,13 @@
     display: flex;
     align-items: center;
     gap: var(--space-md);
+    min-width: 0;
 }
 
 .workspace-content-workspace-info a {
     text-decoration: none;
     color: inherit;
+    min-width: 0;
 }
 
 .workspace-content-logo-placeholder {
@@ -176,16 +244,23 @@
     height: 48px;
     border-radius: var(--radius-sm);
     background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    flex-shrink: 0;
 }
 
 .workspace-content-workspace-name {
     font-size: var(--text-base);
     font-weight: var(--weight-lg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .workspace-content-workspace-meta {
     font-size: var(--text-xs);
     color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .workspace-content-arrow {
@@ -236,7 +311,7 @@
     background-color: var(--bg-dark-mid);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color-subtle);
-    color: var(--text-on-dark);
+    color: var(--text-primary);
     padding: var(--space-lg);
 }
 
@@ -328,7 +403,7 @@
     min-height: 200px;
     position: relative;
     overflow: hidden;
-    color: var(--text-on-dark);
+    color: var(--text-primary);
 }
 
 .discover-card-info h4 {
@@ -357,20 +432,33 @@
 
 .discover-card-img {
     position: absolute;
-    bottom: -10px;
-    right: -10px;
-    opacity: 0.2;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discover-card-img svg {
+    width: 32px;
+    height: 32px;
 }
 
 .discover-card-img.blue {
+    background-color: rgba(18, 100, 163, 0.1);
     color: #1264a3;
 }
 
 .discover-card-img.green {
+    background-color: rgba(43, 172, 118, 0.1);
     color: #2bac76;
 }
 
 .discover-card-img.orange {
+    background-color: rgba(232, 145, 45, 0.1);
     color: #e8912d;
 }
 
@@ -399,7 +487,7 @@
 
 .workspace-logout-btn {
     background: transparent;
-    color: var(--text-on-dark);
+    color: var(--text-primary);
     border: 1px solid var(--border-color-subtle);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
@@ -415,12 +503,42 @@
     font-size: clamp(3px, 0.6vw, 6px);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .workspace-main-top {
         grid-template-columns: 1fr;
     }
 
     .discover-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* FIX OVERFLOW: Reduce paddings considerably to fit in small 320px screens */
+    .workspace-nav,
+    .workspace-main {
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+    }
+
+    .workspace-hero {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .workspace-card,
+    .sidebar-card,
+    .discover-card {
+        padding: var(--space-md);
+    }
+
+    .workspace-content-workspace-item {
+        padding: var(--space-xs);
+        margin: 0;
+    }
+
+    .workspace-nav-actions {
+        padding: 0 var(--space-sm);
+    }
+
+    .workspace-nav-actions a {
+        font-size: clamp(1px, var(--text-xs), 5rem);
     }
 }

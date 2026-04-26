@@ -34,7 +34,7 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
     }, [responseDelete]);
 
     return (
-        <Modal title="Administrar Miembros" onClose={onClose} width="35rem">
+        <Modal title="Administrar Miembros" onClose={onClose}>
             <table className="manage-members-table">
                 <thead>
                     <tr>
@@ -50,9 +50,9 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
 
                         return (
                             <tr key={member.member_id}>
-                                <td>{member.user_name}</td>
-                                <td>{member.user_email}</td>
-                                <td>
+                                <td data-label="Nombre">{member.user_name}</td>
+                                <td data-label="Email">{member.user_email}</td>
+                                <td data-label="Rol">
                                     {isSelf ? (
                                         <span>{member.member_role} <strong>(Tú)</strong></span>
                                     ) : (
@@ -78,7 +78,7 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
                                         )
                                     )}
                                 </td>
-                                <td>
+                                <td data-label="Acciones">
                                     {!isSelf && (
                                         <button
                                             disabled={loadingDelete}

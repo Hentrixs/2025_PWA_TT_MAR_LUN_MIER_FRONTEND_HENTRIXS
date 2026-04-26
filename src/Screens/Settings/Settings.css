@@ -333,17 +333,6 @@
     font-style: italic;
 }
 
-@media (max-width: 900px) {
-    .settings-form {
-        grid-template-columns: 1fr;
-    }
-
-    .avatar-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
 /* Security Inline Form Styles */
 .security-inline-form {
     width: 100%;
@@ -388,4 +377,20 @@
 .btn-cancel:hover {
     border-color: var(--text-secondary);
     color: var(--text-primary);
+}
+
+@media (max-width: 900px) {
+
+    .settings-header h1 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    .settings-form {
+        grid-template-columns: 1fr;
+    }
+
+    .avatar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
