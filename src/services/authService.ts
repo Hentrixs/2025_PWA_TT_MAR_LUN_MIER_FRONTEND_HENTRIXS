@@ -3,22 +3,20 @@ import { LOCAL_STORAGE_TOKEN_KEY } from "../context/AuthContext/AuthContext";
 import type { LoginParams, RegisterParams, ResetPasswordParams, UpdateProfileParams, DeleteAccountParams, UpdatePasswordParams, RequestEmailChangeParams } from "../types";
 
 export const login = async ({ email, password }: LoginParams) => {
-    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/login`, { // se hace fetch
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            email, // pense que esto era algo asi como email: email y abajo password: password
+            email,
             password
         })
     });
 
-    const response = await response_http.json(); // se pasa el response a json.
-    return response; // se lo retorna.
+    const response = await response_http.json();
+    return response;
 };
 
 export const register = async ({ name, email, password }: RegisterParams) => {
-
-    // TODO= meter la URL en el .env y importarla aca.
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -33,7 +31,7 @@ export const register = async ({ name, email, password }: RegisterParams) => {
     return response;
 };
 
-export const resetPassword = async ({ email }: ResetPasswordParams) => { // tengo qeu checkar despues que la URL este bien
+export const resetPassword = async ({ email }: ResetPasswordParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/reset-password-request`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,9 +42,6 @@ export const resetPassword = async ({ email }: ResetPasswordParams) => { // teng
     const response = await response_http.json();
     return response;
 };
-
-// Nota: decidi no crear un endpoint aparte y fusionar el auth con lo que antes era un enpoint aparte para 
-// el user ya que son similares
 
 export const getProfile = async () => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/profile`, {

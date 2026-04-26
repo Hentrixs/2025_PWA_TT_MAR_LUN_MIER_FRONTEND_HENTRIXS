@@ -30,7 +30,7 @@ function App() {
         <Route path={'/settings'} element={<Settings />} />
         <Route path={'/settings/email-confirmation-result'} element={<EmailConfirmationResult />} />
         <Route path={'/workspace-selector'} element={<WorkspaceSelector />} />
-        <Route path={'/create-workspace'} element={<CreateWorkspace />} /> {/* con exepcion del logo el responsive anda bien */}
+        <Route path={'/create-workspace'} element={<CreateWorkspace />} />
         <Route path={'/workspace'} element={<Workspace />} />
         <Route path={'/workspace/:workspace_id'} element={<Workspace />}>
           <Route path={'channel/:channel_id?'} element={<Chat />} />

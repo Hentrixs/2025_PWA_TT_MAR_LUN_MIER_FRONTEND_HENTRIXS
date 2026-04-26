@@ -9,15 +9,13 @@ import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 
 const Login = () => {
 
-    // es decir, hacer redirecciones a otra pagina
-
-    const LOGIN_FORM_FIELDS = { // Esto es lo que se conoce como un diccionario
-        EMAIL: 'email', // sirve para que en caso de que querer modificar el nombre solamente cambiemos 'email' por otra cosa una sola vez y facil
+    const LOGIN_FORM_FIELDS = {
+        EMAIL: 'email',
         PASSWORD: 'password'
     };
 
     const initialFormState = {
-        [LOGIN_FORM_FIELDS.EMAIL]: '', // se asigna un valor default a ambos campos
+        [LOGIN_FORM_FIELDS.EMAIL]: '',
         [LOGIN_FORM_FIELDS.PASSWORD]: ''
     };
 
@@ -35,7 +33,6 @@ const Login = () => {
         submitFn: hacerLogin
     });
 
-    // la funcion se carga cada vez que carga response, si response.ok es true, se guarda el token en el contexto.
     useEffect(() => {
         if (response && response.ok && manageLogin) {
             manageLogin(response.data.auth_token);

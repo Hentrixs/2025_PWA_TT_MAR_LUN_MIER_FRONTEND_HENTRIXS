@@ -18,16 +18,14 @@ export default function ResetPasswordRequest() {
         EMAIL: 'email',
     };
 
-    const initialFormState = { // hacer esto del REQUEST_FORM_FIELDS y ponerlo aca entre corchetes sirve para asegurarse de que coincidan los strings
+    const initialFormState = {
         [REQUEST_FORM_FIELDS.EMAIL]: ''
     };
 
-    // Ojo aquí: Le quitamos las llaves de desestructuración que tenías ({initialFormState})
     const submitRequest = async (formStateVieneDelHook: Record<string, string>) => {
         await sendRequest({
             requestCb: () => {
                 return resetPassword({
-                    // Sacamos el valor específicamente del formState que nos llega como parámetro
                     email: formStateVieneDelHook[REQUEST_FORM_FIELDS.EMAIL]
                 })
             }
@@ -59,7 +57,7 @@ export default function ResetPasswordRequest() {
                     <>
                         <form onSubmit={onSubmit}>
                             <div>
-                                <label htmlFor="email">email</label>        {/* EL formState[nombre_de_valor], el estado representa el form y el form representa lo que vale el estado*/}
+                                <label htmlFor="email">email</label>
                                 <input
                                     type="email"
                                     name={REQUEST_FORM_FIELDS.EMAIL}
