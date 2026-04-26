@@ -504,6 +504,12 @@
 }
 
 @media (max-width: 768px) {
+
+    .workspace-selector {
+        height: 100dvh;
+        /* Temporal para ver si anda */
+    }
+
     .workspace-main-top {
         grid-template-columns: 1fr;
     }
