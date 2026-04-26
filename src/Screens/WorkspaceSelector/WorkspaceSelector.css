@@ -47,10 +47,9 @@
 }
 
 .workspace-selector {
-    min-height: 100dvh;
-    /* temporal */
     min-height: 100vh;
-    /* Fallback for older browsers */
+    min-height: 100dvh;
+    /* Temp */
     background-color: var(--bg-dark);
     color: var(--text-primary);
     display: flex;
