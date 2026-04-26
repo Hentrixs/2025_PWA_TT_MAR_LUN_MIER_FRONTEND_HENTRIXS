@@ -11,11 +11,11 @@ const initialFormState = {
     [DELETE_ACCOUNT_FORM_NAMES.PASSWORD]: ''
 };
 
-interface onCloseI {
+interface DeleteAccountFormProps {
     onClose: () => void
 };
 
-function DeleteAccountForm({ onClose }: onCloseI) {
+function DeleteAccountForm({ onClose }: DeleteAccountFormProps) {
     const { handleAccountDeletion, response, loading, error } = useDeleteAccount();
     const { handleChangeInput, onSubmit, formState, errors } = useForm({
         initialFormState,
@@ -52,7 +52,7 @@ function DeleteAccountForm({ onClose }: onCloseI) {
                     autoComplete='current-password'
                     onChange={handleChangeInput}
                 />
-                {errors[DELETE_ACCOUNT_FORM_NAMES.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[DELETE_ACCOUNT_FORM_NAMES.PASSWORD]}</span>}
+                {errors[DELETE_ACCOUNT_FORM_NAMES.PASSWORD] && <span className="field-error">{errors[DELETE_ACCOUNT_FORM_NAMES.PASSWORD]}</span>}
             </div>
         </SecurityFormLayout>
     );

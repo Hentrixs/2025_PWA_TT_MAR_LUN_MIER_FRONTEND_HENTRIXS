@@ -84,7 +84,7 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, userProfile, onProfile
                             disabled={loading}
                             placeholder={profile.user_name || 'Nombre de Usuario'}>
                         </input>
-                        {errors[PROFILE_TAB_FIELDS.NAME] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[PROFILE_TAB_FIELDS.NAME]}</span>}
+                        {errors[PROFILE_TAB_FIELDS.NAME] && <span className="field-error">{errors[PROFILE_TAB_FIELDS.NAME]}</span>}
                     </div>
 
                     <button className='btn-apply-changes' type='submit'>

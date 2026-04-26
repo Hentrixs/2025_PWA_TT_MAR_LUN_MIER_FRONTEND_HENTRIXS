@@ -19,7 +19,7 @@
     --bg-light: #F1F3F5;
     /* Inner Sidebars */
     --bg-light-mid: #E9ECEF;
-    --bg-chatmain: #FFFFFF;
+    --bg-surface: #FFFFFF;
     --bg-dark-gradient: var(--bg-dark);
 
     /* brand */
@@ -30,9 +30,6 @@
     /* error */
     --error-primary: #E74C3C;
     --error-secondary: #C0392B;
-
-    /* cancel */
-    --cancel-primary: #E74C3C;
 
     /* text */
     --text-primary: #1C1E21;
@@ -57,7 +54,7 @@
     --bg-dark-mid: #1F2428;
     --bg-light: #24292E;
     --bg-light-mid: #2B3137;
-    --bg-chatmain: #24292E;
+    --bg-surface: #24292E;
 
     /* text */
     --text-primary: #F0F2F5;
@@ -114,6 +111,7 @@
     /* brand / error transparent fills — subtle highlights y glow rings */
     --brand-subtle: rgba(11, 165, 97, 0.1);
     --brand-subtle-hover: rgba(11, 165, 97, 0.15);
+    --brand-subtle-border: rgba(11, 165, 97, 0.2);
     --brand-glow: 0 0 0 2px rgba(11, 165, 97, 0.2);
     --brand-glow-md: 0 4px 15px rgba(11, 165, 97, 0.2);
     --error-subtle: rgba(231, 76, 60, 0.05);
@@ -144,4 +142,11 @@
     width: 1rem;
     height: 1rem;
     border-width: 0.15em;
+}
+
+.field-error {
+    color: var(--error-primary);
+    font-size: var(--text-xs);
+    margin-top: var(--space-xs);
+    display: block;
 }

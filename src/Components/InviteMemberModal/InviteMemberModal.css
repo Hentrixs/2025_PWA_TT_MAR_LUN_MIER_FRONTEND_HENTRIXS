@@ -9,12 +9,12 @@
 .invite-member-form input,
 .invite-member-form select {
     width: 100%;
-    padding: 10px;
+    padding: var(--space-sm);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color-subtle);
     background-color: var(--bg-dark);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: var(--text-base);
 }
 
 .invite-member-form p {
@@ -24,14 +24,14 @@
 }
 
 .invite-member-form button {
-    padding: 10px 20px;
+    padding: var(--space-sm) var(--space-xl);
     border-radius: var(--radius-md);
     border: none;
     background-color: var(--brand-primary);
-    color: white;
+    color: var(--text-on-dark);
     width: min-content;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: var(--weight-md);
     align-self: flex-end;
     margin-top: var(--space-md);
     white-space: nowrap;

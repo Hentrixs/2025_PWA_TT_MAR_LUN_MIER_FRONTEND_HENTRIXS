@@ -168,8 +168,8 @@
 
 .create-channel-btn,
 .manage-members-btn {
-    background-color: rgba(11, 165, 97, 0.04);
-    border: 1px solid rgba(11, 165, 97, 0.2);
+    background-color: var(--brand-subtle);
+    border: 1px solid var(--brand-subtle-border);
     color: var(--brand-primary);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
@@ -191,7 +191,7 @@
     color: white;
     border-color: var(--brand-primary);
     transform: translateY(-1.5px);
-    box-shadow: 0 4px 10px rgba(11, 165, 97, 0.15);
+    box-shadow: var(--brand-glow-md);
 }
 
 .create-channel-btn:active,

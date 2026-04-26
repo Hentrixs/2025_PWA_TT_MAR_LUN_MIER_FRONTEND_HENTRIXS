@@ -6,11 +6,11 @@ import useDeleteMember from "../../hooks/useDeleteMember/useDeleteMember";
 import { useEffect, useState } from "react";
 import useUpdateMemberRole from "../../hooks/useUpdateMemberRole/useUpdateMemberRole";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
-interface ManageMembersModalInterface {
+interface ManageMembersModalProps {
     onClose: () => void
 };
 
-const ManageMembersModal = ({ onClose }: ManageMembersModalInterface) => {
+const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
     const { workspace_id, activeMember } = useWorkspaceContext();
 
     const { member_list, refetchMemberList } = useMemberList(workspace_id);

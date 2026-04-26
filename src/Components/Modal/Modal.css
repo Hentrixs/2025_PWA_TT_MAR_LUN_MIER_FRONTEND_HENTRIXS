@@ -16,7 +16,7 @@
     background-color: var(--bg-dark);
     padding: var(--space-md);
     border-radius: var(--radius-lg);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
     min-width: max-content;
@@ -57,7 +57,7 @@
 }
 
 .modal-header .close-btn:hover {
-    background-color: var(--cancel-primary);
+    background-color: var(--error-primary);
     border-radius: var(--radius-md);
 }
 

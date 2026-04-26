@@ -111,7 +111,7 @@
 }
 
 .create-channel-btn:hover {
-    background-color: var(--bg-chatmain);
+    background-color: var(--bg-surface);
 }
 
 .create-channel-btn:active {

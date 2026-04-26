@@ -46,7 +46,7 @@ const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
                     onChange={handleChangeInput}
                     placeholder='nuevo@email.com'
                 />
-                {errors[EMAIL_CHANGE_FIELDS.NEW_EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[EMAIL_CHANGE_FIELDS.NEW_EMAIL]}</span>}
+                {errors[EMAIL_CHANGE_FIELDS.NEW_EMAIL] && <span className="field-error">{errors[EMAIL_CHANGE_FIELDS.NEW_EMAIL]}</span>}
             </div>
             <div className='form-group'>
                 <label>Contraseña Actual</label>
@@ -58,9 +58,9 @@ const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
                     onChange={handleChangeInput}
                     placeholder='Tu contraseña'
                 />
-                {errors[EMAIL_CHANGE_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[EMAIL_CHANGE_FIELDS.PASSWORD]}</span>}
+                {errors[EMAIL_CHANGE_FIELDS.PASSWORD] && <span className="field-error">{errors[EMAIL_CHANGE_FIELDS.PASSWORD]}</span>}
             </div>
-            {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', display: 'block', marginBottom: '10px' }}>Por favor, revisa los errores.</span>}
+            {Object.keys(errors).length > 0 && <span className="field-error">Por favor, revisa los errores.</span>}
         </SecurityFormLayout>
     );
 };

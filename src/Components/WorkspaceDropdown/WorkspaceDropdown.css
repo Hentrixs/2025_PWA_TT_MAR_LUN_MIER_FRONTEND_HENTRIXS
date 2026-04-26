@@ -13,11 +13,11 @@
     /* Adjusted below the header */
     left: 80px;
     /* Offset from OuterSidebar */
-    background: rgba(44, 44, 46, 0.95);
+    background: var(--bg-dark-mid);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color-subtle);
     border-radius: var(--radius-md);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-xl);
     padding: var(--space-xs);
     min-width: 220px;
     z-index: 1001;
@@ -58,11 +58,11 @@
 }
 
 .dropdown-item.delete {
-    color: var(--cancel-primary);
+    color: var(--error-primary);
 }
 
 .dropdown-item.delete:hover {
-    background: rgba(255, 69, 58, 0.1);
+    background: var(--error-subtle);
 }
 
 .dropdown-divider {

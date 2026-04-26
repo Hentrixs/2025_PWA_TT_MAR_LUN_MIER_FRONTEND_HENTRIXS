@@ -43,7 +43,7 @@ const MessageInlineEdit: React.FC<MessageInlineEditProps> = ({ initialContent, o
                 autoFocus
                 onKeyDown={(e) => { if (e.key === 'Escape') onCancel(); }}
             />
-            {errors.content && <span style={{ color: 'red', fontSize: '11px', display: 'block', marginTop: '4px', marginLeft: '4px' }}>{errors.content}</span>}
+            {errors.content && <span className="field-error">{errors.content}</span>}
             <div className="inline-edit-actions">
                 <button type="button" className="inline-cancel-btn" onClick={onCancel} disabled={loading}>
                     Cancelar
@@ -52,7 +52,7 @@ const MessageInlineEdit: React.FC<MessageInlineEditProps> = ({ initialContent, o
                     {loading ? 'Guardando...' : 'Guardar'}
                 </button>
             </div>
-            {editError && <span className="inline-edit-error" style={{ color: 'red', fontSize: '0.8rem', display: 'block', marginTop: '5px' }}>{editError}</span>}
+            {editError && <span className="field-error">{editError}</span>}
         </form>
     );
 };

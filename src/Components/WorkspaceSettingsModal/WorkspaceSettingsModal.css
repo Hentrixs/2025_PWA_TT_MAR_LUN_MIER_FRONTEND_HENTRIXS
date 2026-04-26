@@ -121,7 +121,7 @@
 }
 
 .danger-info h3 {
-    color: var(--cancel-primary);
+    color: var(--error-primary);
     margin: 0 0 var(--space-xs) 0;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .delete-btn {
-    background: var(--cancel-primary);
+    background: var(--error-primary);
     border: none;
     color: var(--text-on-dark);
     padding: var(--space-sm) var(--space-lg);

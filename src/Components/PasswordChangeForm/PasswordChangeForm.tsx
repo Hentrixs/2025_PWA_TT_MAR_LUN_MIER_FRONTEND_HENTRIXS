@@ -13,11 +13,11 @@ const initialFormState = {
     [PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]: ''
 };
 
-interface onCloseI {
+interface PasswordChangeFormProps {
     onClose: () => void
 };
 
-function PasswordChangeForm({ onClose }: onCloseI) {
+function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
 
     const { handleUpdatePassword, response, loading, error } = useUpdatePassword();
     const { handleChangeInput, onSubmit, formState, errors } = useForm({
@@ -54,7 +54,7 @@ function PasswordChangeForm({ onClose }: onCloseI) {
                     autoComplete='old_password'
                     onChange={handleChangeInput}
                 />
-                {errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]}</span>}
+                {errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD] && <span className="field-error">{errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]}</span>}
             </div>
             <div className="form-group">
                 <label>Nueva Contraseña</label>
@@ -67,9 +67,9 @@ function PasswordChangeForm({ onClose }: onCloseI) {
                     autoComplete='new_password'
                     onChange={handleChangeInput}
                 />
-                {errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD]}</span>}
+                {errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD] && <span className="field-error">{errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD]}</span>}
             </div>
-            {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', display: 'block', marginBottom: '10px' }}>Por favor, revisa los errores.</span>}
+            {Object.keys(errors).length > 0 && <span className="field-error">Por favor, revisa los errores.</span>}
         </SecurityFormLayout>
     );
 };
