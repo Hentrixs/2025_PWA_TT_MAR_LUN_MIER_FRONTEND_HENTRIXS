@@ -1,0 +1,61 @@
+.inline-edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+    margin-top: 4px;
+}
+
+.inline-edit-input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    outline: none;
+    transition: border-color 0.2s ease;
+    width: 100%;
+}
+
+.inline-edit-input:focus {
+    border-color: var(--brand-primary);
+}
+
+.inline-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-xs);
+}
+
+.inline-cancel-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: var(--text-xs);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: var(--weight-md);
+}
+
+.inline-cancel-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.inline-save-btn {
+    background: var(--brand-primary);
+    border: none;
+    color: white;
+    font-size: var(--text-xs);
+    padding: 2px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: var(--weight-md);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.inline-save-btn:hover {
+    opacity: 0.9;
+}

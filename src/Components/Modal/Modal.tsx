@@ -8,6 +8,7 @@ interface ModalProps {
 }
 
 const Modal = ({ title, onClose, children, width }: ModalProps) => {
+
     return (
         <div className="modal-overlay">
             <div className="modal-container" style={width ? { width } : {}}>

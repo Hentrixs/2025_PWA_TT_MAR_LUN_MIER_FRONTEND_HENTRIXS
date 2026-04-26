@@ -151,3 +151,5 @@
     color: var(--error-primary);
     font-size: var(--text-sm);
 }
+
+@media (max-width: 720px) {}

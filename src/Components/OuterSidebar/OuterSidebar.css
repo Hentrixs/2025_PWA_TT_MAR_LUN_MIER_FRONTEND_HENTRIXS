@@ -55,7 +55,7 @@
 
 .user-svg-wrapper a {
     text-decoration: none;
-    color: inherit;
+    color: var(--text-secondary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,6 +64,7 @@
 .svg-wrapper:hover {
     /* TODO: si me sobra tiempo meter una transicion mas suave aca */
     background-color: var(--brand-primary);
+    color: white;
 }
 
 .svg-wrapper {

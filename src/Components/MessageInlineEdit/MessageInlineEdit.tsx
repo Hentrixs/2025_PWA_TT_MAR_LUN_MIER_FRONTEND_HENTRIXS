@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useForm from '../../hooks/useForm/useForm';
+import './MessageInlineEdit.css';
 
 interface MessageInlineEditProps {
     message_id: string;

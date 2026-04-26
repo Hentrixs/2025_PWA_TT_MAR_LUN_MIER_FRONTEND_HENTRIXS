@@ -65,7 +65,10 @@ const Register = () => {
                         {errors[REGISTER_FORM_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.PASSWORD]}</span>}
                     </div>
                     {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
-                    <button type='submit' disabled={loading}>{loading && 'Registrando...' || 'Registrarse'}</button>
+                    <button type='submit' disabled={loading} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+                        {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+                        {loading ? 'Registrando...' : 'Registrarse'}
+                    </button>
                     <span>¿Ya tienes una cuenta? <Link to={'/login'}>Iniciar Sesion</Link></span>
                     {response && !loading && <InfoComponent response={response} />}
                 </form>

@@ -61,7 +61,10 @@ const Login = () => {
                         {errors[LOGIN_FORM_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[LOGIN_FORM_FIELDS.PASSWORD]}</span>}
                     </div>
                     {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
-                    <button type='submit' disabled={loading} >{loading && 'Iniciando Sesion...' || 'Iniciar Sesion'}</button>
+                    <button type='submit' disabled={loading} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+                        {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+                        {loading ? 'Iniciando Sesion...' : 'Iniciar Sesion'}
+                    </button>
                     <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>
                     <span>Olvidaste tu contraseña? <Link to={'/reset-password-request'}>Restablecer Contrasena</Link></span>
                 </form>

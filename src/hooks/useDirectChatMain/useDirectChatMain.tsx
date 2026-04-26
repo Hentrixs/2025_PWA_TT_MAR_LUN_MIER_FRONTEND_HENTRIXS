@@ -11,7 +11,7 @@ function useDirectChatMain() {
 
     useEffect(() => {
         if (!workspace_id || !other_member_id) return;
-        sendRequest({ requestCb: () => getDirectMessageHistory(workspace_id, other_member_id) });
+        sendRequest({ requestCb: () => getDirectMessageHistory(workspace_id, other_member_id), silent: true });
     }, [workspace_id, other_member_id]);
 
     const messagelist = response?.data?.messages || [];
@@ -23,7 +23,7 @@ function useDirectChatMain() {
         error,
         refreshMessages: () => {
             if (!workspace_id || !other_member_id) return;
-            sendRequest({ requestCb: () => getDirectMessageHistory(workspace_id, other_member_id) });
+            sendRequest({ requestCb: () => getDirectMessageHistory(workspace_id, other_member_id), silent: true });
         }
     };
 }
