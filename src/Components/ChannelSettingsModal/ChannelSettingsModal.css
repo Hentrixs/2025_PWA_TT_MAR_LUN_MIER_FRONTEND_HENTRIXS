@@ -8,7 +8,7 @@
 .settings-tabs {
     display: flex;
     gap: var(--space-sm);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-color-subtle);
     padding-bottom: var(--space-sm);
 }
 
@@ -25,12 +25,12 @@
 
 .tab-btn:hover {
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-light-mid);
 }
 
 .tab-btn.active {
     color: var(--brand-primary);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--brand-subtle);
 }
 
 .settings-content {
@@ -57,8 +57,8 @@
 
 .form-group input,
 .form-group textarea {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-light);
+    border: 1px solid var(--border-color-light);
     border-radius: var(--radius-sm);
     padding: var(--space-sm);
     color: var(--text-primary);
@@ -97,7 +97,7 @@
 
 .secondary-btn {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color-light);
     color: var(--text-secondary);
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--radius-sm);
@@ -107,7 +107,7 @@
 }
 
 .secondary-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-light-mid);
 }
 
 .danger-zone {
