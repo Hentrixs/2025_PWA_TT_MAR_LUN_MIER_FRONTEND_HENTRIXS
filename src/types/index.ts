@@ -68,7 +68,7 @@ export interface ITokenPayload {
 
 export interface LoginParams { email: string; password: string; }
 export interface RegisterParams { name: string; email: string; password: string; }
-export interface ResetPasswordParams { email: string; }
+export interface ResetPasswordParams { email: string; new_password: string; }
 export interface UpdateProfileParams { name: string; description?: string; }
 export interface DeleteAccountParams { password: string; }
 export interface UpdatePasswordParams { old_password: string; new_password: string; }

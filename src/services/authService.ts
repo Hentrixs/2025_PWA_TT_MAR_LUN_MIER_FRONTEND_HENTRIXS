@@ -31,13 +31,11 @@ export const register = async ({ name, email, password }: RegisterParams) => {
     return response;
 };
 
-export const resetPassword = async ({ email }: ResetPasswordParams) => {
+export const resetPassword = async ({ email, new_password }: ResetPasswordParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/reset-password-request`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            email,
-        })
+        body: JSON.stringify({ email, new_password })
     });
     const response = await response_http.json();
     return response;

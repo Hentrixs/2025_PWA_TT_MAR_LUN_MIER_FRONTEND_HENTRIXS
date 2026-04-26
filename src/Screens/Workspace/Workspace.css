@@ -86,9 +86,6 @@
     color: var(--text-primary);
 }
 
-
-
-
 .channel-item.active {
     background-color: var(--brand-primary);
     color: var(--text-primary);

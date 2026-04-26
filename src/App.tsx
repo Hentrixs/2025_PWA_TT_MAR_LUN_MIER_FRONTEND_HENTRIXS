@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Register from './Screens/Register/Register';
 import Login from './Screens/Login/Login';
 import ResetPasswordRequest from './Screens/ResetPasswordRequest/ResetPasswordRequest';
+import ResetPasswordResult from './Screens/ResetPasswordResult/ResetPasswordResult';
 import AuthMiddleware from './Middlewares/AuthMiddleware';
 import Workspace from './Screens/Workspace/Workspace';
 import Chat from './Screens/Chat/Chat';
@@ -24,6 +25,7 @@ function App() {
       <Route path={'/login'} element={<Login />} />
       <Route path={'/register'} element={<Register />} />
       <Route path={'/reset-password-request'} element={<ResetPasswordRequest />} />
+      <Route path={'/reset-password-result'} element={<ResetPasswordResult />} />
       <Route path={'/verify-email'} element={<VerifyEmail />} />
       <Route path={'/invite/respond'} element={<InviteRespond />} />
       <Route element={<AuthMiddleware />}>
