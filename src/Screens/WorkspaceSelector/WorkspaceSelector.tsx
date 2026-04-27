@@ -7,13 +7,19 @@ import { AuthContext, LOCAL_STORAGE_TOKEN_KEY } from '../../context/AuthContext/
 import useWorkspaces from '../../hooks/useWorkspaces/useWorkspaces';
 import type { IWorkspace } from '../../types';
 import useIsMobile from '../../hooks/useIsMobile/useIsMobile';
+import ConfirmationModal from '../../Components/ConfirmationModal/ConfirmationModal';
 
 function WorkspaceSelector() {
     const { manageLogout } = useContext(AuthContext);
     const { isMobile } = useIsMobile();
 
     const handleLogout = () => {
+        setIsLogoutModalOpened(true);
+    };
+
+    const confirmLogout = () => {
         manageLogout();
+        setIsLogoutModalOpened(false);
     };
 
     const { workspaces, response, error, loading } = useWorkspaces();
@@ -22,6 +28,8 @@ function WorkspaceSelector() {
     const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
     const userName = tokenPayload?.name ?? 'Usuario';
     const [isWorkspaceNavOpened, setIsWorkspaceNavOpened] = useState(false);
+    const [isLogoutModalOpened, setIsLogoutModalOpened] = useState(false);
+
     const handleIsWorkspaceNavOpened = () => {
         setIsWorkspaceNavOpened(!isWorkspaceNavOpened);
     };
@@ -254,6 +262,17 @@ function WorkspaceSelector() {
                     <p>Encuentra la ayuda que necesitas en nuestro <a href="#">Centro de ayuda</a>.</p>
                 </footer>
             </div>
+
+            {isLogoutModalOpened && (
+                <ConfirmationModal
+                    title="Cerrar sesión"
+                    message="¿Estás seguro de que quieres cerrar sesión? Tendrás que volver a ingresar tus credenciales para acceder."
+                    confirmText="Cerrar sesión"
+                    onConfirm={confirmLogout}
+                    onCancel={() => setIsLogoutModalOpened(false)}
+                    isDanger={true}
+                />
+            )}
         </div>
     );
 };

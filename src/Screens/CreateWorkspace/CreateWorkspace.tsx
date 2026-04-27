@@ -27,7 +27,7 @@ const CreateWorkspace = () => {
     return (
         <div className="create-workspace">
             <nav className="create-workspace-nav">
-                <Logo />
+                <Logo className='logo-responsive' />
             </nav>
 
             <main className="create-workspace-main">

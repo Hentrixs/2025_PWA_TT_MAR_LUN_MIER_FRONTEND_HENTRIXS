@@ -156,3 +156,51 @@ body,
     margin-top: var(--space-xs);
     display: block;
 }
+
+/* Common Buttons */
+.primary-btn {
+    background: var(--brand-primary);
+    border: none;
+    color: var(--text-on-dark);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    font-weight: var(--weight-lg);
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primary-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: transparent;
+    border: 1px solid var(--border-color-light);
+    color: var(--text-secondary);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    font-weight: var(--weight-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.secondary-btn:hover {
+    background: var(--bg-light-mid);
+}
+
+.delete-btn {
+    background: var(--error-primary);
+    border: none;
+    color: var(--text-on-dark);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    font-weight: var(--weight-lg);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.delete-btn:hover {
+    opacity: 0.9;
+    transform: scale(0.98);
+}

@@ -401,11 +401,16 @@
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 200px;
+    min-height: 220px;
     position: relative;
     overflow: hidden;
     color: var(--text-primary);
+}
+
+.discover-card-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .discover-card-info h4 {
@@ -430,6 +435,10 @@
     font-weight: var(--weight-md);
     cursor: pointer;
     width: fit-content;
+    min-width: 140px;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
 }
 
 .discover-card-img {
@@ -502,7 +511,7 @@
 }
 
 .logo-responsive {
-    font-size: clamp(3px, 0.6vw, 6px);
+    font-size: clamp(4.5px, 0.2vw + 3.8px, 6px);
 }
 
 @media (max-width: 768px) {

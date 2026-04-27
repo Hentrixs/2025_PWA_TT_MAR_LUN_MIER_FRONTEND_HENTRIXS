@@ -1,0 +1,29 @@
+.confirmation-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-sm) 0;
+}
+
+.confirmation-message {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.confirmation-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+    .confirmation-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .confirmation-modal-actions button {
+        width: 100%;
+    }
+}

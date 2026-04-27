@@ -1,7 +1,7 @@
 .create-workspace {
   min-height: 100vh;
   background: var(--bg-dark-gradient);
-  color: var(--text-on-dark);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +11,10 @@
   width: 100%;
   max-width: var(--max-width-page);
   padding: var(--space-md) var(--space-xl);
+}
+
+.logo-responsive {
+  font-size: clamp(4.5px, 0.2vw + 3.8px, 6px);
 }
 
 .create-workspace-main {
@@ -25,9 +29,10 @@
 .create-workspace-main h1 {
   font-size: var(--text-xl);
   font-weight: 900;
+  color: var(--text-primary);
 }
 
-.create-workspace-main > p {
+.create-workspace-main>p {
   font-size: var(--text-md);
   color: var(--text-secondary);
 }
@@ -60,8 +65,8 @@
   padding: var(--space-md);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color-light);
-  background: var(--border-color-light);
-  color: var(--text-on-dark);
+  background: var(--bg-dark-mid);
+  color: var(--text-primary);
   font-size: var(--text-base);
 }
 
