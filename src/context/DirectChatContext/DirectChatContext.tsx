@@ -18,10 +18,11 @@ export function DirectChatContextProvider({ children }: { children: React.ReactN
     // WebSockets sería la solución ideal pero Vercel (serverless) no mantiene
     // conexiones persistentes, por lo que no es compatible con Socket.io u otras
     // implementaciones de WebSocket sin cambiar el proveedor de hosting.
+
     useEffect(() => {
         const interval = setInterval(refreshMessages, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [refreshMessages]);
 
     const otherMemberName = members?.find((m: IMember) => m.member_id === other_member_id)?.user_name ?? 'Usuario';
 

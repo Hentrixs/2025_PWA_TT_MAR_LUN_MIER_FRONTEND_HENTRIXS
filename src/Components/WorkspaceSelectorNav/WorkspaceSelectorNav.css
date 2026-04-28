@@ -1,0 +1,77 @@
+.workspace-nav {
+    width: 100%;
+    max-width: var(--max-width-page);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-xl);
+}
+
+.workspace-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.workspace-nav-svg-wrapper svg {
+    height: var(--space-lg);
+    width: var(--space-lg);
+}
+
+.workspace-nav-create-btn {
+    background-color: var(--brand-primary);
+    color: white;
+    text-decoration: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-md);
+    transition: background 0.2s;
+}
+
+.workspace-nav-create-btn:hover {
+    background-color: var(--brand-primary-hover);
+}
+
+.workspace-settings-btn {
+    text-decoration: none;
+    color: var(--brand-primary);
+    font-weight: var(--weight-md);
+}
+
+.workspace-settings-btn:hover {
+    text-decoration: underline;
+}
+
+.workspace-logout-btn {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color-subtle);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    cursor: pointer;
+}
+
+.workspace-logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.logo-responsive {
+    font-size: clamp(4.5px, 0.2vw + 3.8px, 6px);
+}
+
+@media (max-width: 768px) {
+    .workspace-nav {
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+    }
+
+    .workspace-nav-actions {
+        padding: 0 var(--space-sm);
+    }
+
+    .workspace-nav-actions a {
+        font-size: clamp(1px, var(--text-xs), 5rem);
+    }
+}

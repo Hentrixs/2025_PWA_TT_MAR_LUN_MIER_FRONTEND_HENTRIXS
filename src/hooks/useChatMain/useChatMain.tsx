@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import useRequest from "../useRequest/useRequest";
 import { channelMessageHistory } from "../../services/channelMessageService";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
@@ -10,22 +10,6 @@ function useChatMain() {
     const { workspace_id } = useWorkspaceContext();
     const { channel_id } = useChannelContext();
 
-    // Aver: esto ha de traer el historial de mensajes
-    // Ademas ha de tener la funcion para enviar un mensaje
-    // el historial de mensajes ha de re-renderizarse por cada vez que subo o borro un mensaje
-    // por ahora centramos en solamente hacerlo para cuando subo el msg porque estamos buscando el MVP
-
-    // Entonces, esto debera tener un useEffect()
-    // El useEffect traera el historial de msg y el titulo del header
-    // por otra parte, en el componente principal (ChatMain)
-    // tendre que usar el useForm para realizar la parte de enviar los mensajes
-    // Aca creo que el problema sera la parte de que el historial de msg se actualize
-    // cuando agrego un msg.
-
-    // Por ahora intentare Solamente hacer ambas partes por separado y luego me preocupare por la conexion.
-    // Con lo cual el paso logico seria crear el historial de msg.
-
-
     useEffect(() => {
         if (!workspace_id || !channel_id) return;
         sendRequest({ requestCb: () => channelMessageHistory(workspace_id, channel_id) })
@@ -33,15 +17,18 @@ function useChatMain() {
 
     const messagelist = response?.data?.channelMessagesHistory || [];
 
+
+    const refreshMessages = useCallback(() => {
+        if (!workspace_id || !channel_id) return;
+        sendRequest({requestCb: () => channelMessageHistory(workspace_id, channel_id), silent: true})
+    },[workspace_id, channel_id]);
+
     return {
         messagelist,
         response,
         loading,
         error,
-        refreshMessages: () => {
-            if (!workspace_id || !channel_id) return;
-            sendRequest({ requestCb: () => channelMessageHistory(workspace_id, channel_id), silent: true });
-        }
+        refreshMessages
     }
 };
 

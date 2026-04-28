@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
+import type { ChatContextType } from "../../types";
 import useChatMain from "../../hooks/useChatMain/useChatMain";
 import useSendMessage from "../../hooks/useSendMessage/useSendMessage";
-import type { ChatContextType } from "../../types";
 
 const ChatContext = createContext<ChatContextType | null>(null);
 
@@ -16,10 +16,11 @@ export function ChatContextProvider({ children }: { children: React.ReactNode })
     // WebSockets sería la solución ideal pero Vercel (serverless) no mantiene
     // conexiones persistentes, por lo que no es compatible con Socket.io u otras
     // implementaciones de WebSocket sin cambiar el proveedor de hosting.
+    
     useEffect(() => {
         const interval = setInterval(refreshMessages, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [refreshMessages]);
 
     const providerValues = {
         messagelist,

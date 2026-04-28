@@ -60,7 +60,6 @@ const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
                 />
                 {errors[EMAIL_CHANGE_FIELDS.PASSWORD] && <span className="field-error">{errors[EMAIL_CHANGE_FIELDS.PASSWORD]}</span>}
             </div>
-            {Object.keys(errors).length > 0 && <span className="field-error">Por favor, revisa los errores.</span>}
         </SecurityFormLayout>
     );
 };

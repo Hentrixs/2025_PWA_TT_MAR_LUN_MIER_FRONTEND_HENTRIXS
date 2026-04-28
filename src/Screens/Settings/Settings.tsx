@@ -6,12 +6,6 @@ import ProfileTab from '../../Components/ProfileTab/ProfileTab';
 import SecurityTab from '../../Components/SecurityTab/SecurityTab';
 
 const Settings = () => {
-    // Placeholder data as requested
-    const userProfile = {
-        name: 'Hentrix',
-        email: 'hentrix@example.com',
-        url_image: defaultAvatar
-    };
 
     const { profile, error, loading, refetchProfile } = useGetProfile();
     const [activeTab, setActiveTab] = useState<'profile' | 'security'>('profile');
@@ -41,7 +35,7 @@ const Settings = () => {
                             </button>
                         </div>
 
-                        {activeTab === 'profile' && <ProfileTab profile={profile} userProfile={userProfile} onProfileUpdated={refetchProfile} />}
+                        {activeTab === 'profile' && <ProfileTab profile={profile} avatarUrl={defaultAvatar} onProfileUpdated={refetchProfile} />}
 
                         {activeTab === 'security' && <SecurityTab />}
                     </>

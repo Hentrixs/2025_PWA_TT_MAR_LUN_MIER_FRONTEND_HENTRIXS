@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
 import { useChannelContext } from "../../context/ChannelContext/ChannelContext";
+import { updateChannelMessage } from "../../services/channelMessageService";
 import type { IChannel } from "../../types";
 import ChatContextProvider, { useChatContext } from "../../context/ChatContext/ChatContext";
 import ChatView from "../../Components/ChatView/ChatView";
-import { updateChannelMessage } from "../../services/channelMessageService";
+import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
 
 const Chat = () => {
     const { activeMember, workspace_id } = useWorkspaceContext();

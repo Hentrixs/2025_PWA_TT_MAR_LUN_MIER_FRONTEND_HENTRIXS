@@ -36,14 +36,14 @@ const useForm = <T,>({ initialFormState, submitFn, validationRules }: useFormPro
             let isFormValid = true;
 
             for (const field of Object.keys(validationRules) as Array<keyof T>) {
-               const rulesArray = validationRules[field];
-               if (rulesArray) {
+                const rulesArray = validationRules[field];
+                if (rulesArray) {
                     const errorMessage = validateField(formState[field] as unknown as string, rulesArray, formState);
                     if (errorMessage) {
                         tempErrors[field] = errorMessage;
                         isFormValid = false;
                     };
-               }; 
+                }; 
             };
 
             setErrors(tempErrors);

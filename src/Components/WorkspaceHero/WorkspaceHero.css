@@ -1,0 +1,22 @@
+.workspace-hero {
+    width: 100%;
+    max-width: var(--max-width-page);
+    padding: var(--space-xl);
+    text-align: left;
+}
+
+.workspace-hero h1 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+}
+
+.workspace-hero p {
+    font-size: var(--text-md);
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .workspace-hero {
+        padding: var(--space-md) var(--space-sm);
+    }
+}

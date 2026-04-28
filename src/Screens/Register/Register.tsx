@@ -33,6 +33,7 @@ const Register = () => {
     });
 
     const navigate = useNavigate();
+
     useEffect(() => {
         () => {
             if (response && response.ok) {

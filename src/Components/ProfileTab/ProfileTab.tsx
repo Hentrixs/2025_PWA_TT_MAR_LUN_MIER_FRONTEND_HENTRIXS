@@ -5,9 +5,7 @@ import type { IUser } from '../../types';
 
 interface ProfileTabProps {
     profile: IUser;
-    userProfile: {
-        url_image: string;
-    };
+    avatarUrl: string;
     onProfileUpdated: () => void;
 }
 
@@ -17,7 +15,7 @@ const PROFILE_TAB_FIELDS = {
     URL_IMAGE: 'url_image'
 }
 
-const ProfileTab: React.FC<ProfileTabProps> = ({ profile, userProfile, onProfileUpdated }) => {
+const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUpdated }) => {
 
     const { handleUpdateProfile, loading, response, error } = useUpdateProfile();
 
@@ -48,7 +46,7 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, userProfile, onProfile
                 <div className='profile-section'>
                     <div className='avatar-container'>
                         <div className='avatar-wrapper'>
-                            <img src={userProfile.url_image} alt="Profile" className='profile-avatar' />
+                            <img src={avatarUrl} alt="Profile" className='profile-avatar' />
                         </div>
 
                         <div className='img-name-wrapper'>

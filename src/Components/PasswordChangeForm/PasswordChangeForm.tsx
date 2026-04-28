@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useForm from '../../hooks/useForm/useForm';
 import useUpdatePassword from '../../hooks/useUpdatePassword/useUpdatePassword';
 import SecurityFormLayout from '../SecurityFormLayout/SecurityFormLayout';
@@ -29,18 +28,13 @@ function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
         submitFn: () => handleUpdatePassword({ formState })
     });
 
-    useEffect(() => {
-        if (response && response.ok) {
-            onClose();
-        }
-    }, [response])
-
     return (
         <SecurityFormLayout
             onSubmit={onSubmit}
             onClose={onClose}
             loading={loading}
             error={error}
+            success={response?.ok ? response : undefined}
             submitText="Cambiar Contraseña"
         >
             <div className="form-group">
@@ -69,7 +63,6 @@ function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
                 />
                 {errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD] && <span className="field-error">{errors[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD]}</span>}
             </div>
-            {Object.keys(errors).length > 0 && <span className="field-error">Por favor, revisa los errores.</span>}
         </SecurityFormLayout>
     );
 };

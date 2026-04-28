@@ -28,6 +28,7 @@ function App() {
       <Route path={'/reset-password-result'} element={<ResetPasswordResult />} />
       <Route path={'/verify-email'} element={<VerifyEmail />} />
       <Route path={'/invite/respond'} element={<InviteRespond />} />
+      
       <Route element={<AuthMiddleware />}>
         <Route path={'/settings'} element={<Settings />} />
         <Route path={'/settings/email-confirmation-result'} element={<EmailConfirmationResult />} />
@@ -39,6 +40,7 @@ function App() {
           <Route path={'dm/:member_id'} element={<DirectChat />} />
         </Route>
       </Route>
+
       <Route path="*" element={<NotFoundScreen />} />
     </Routes>
   );

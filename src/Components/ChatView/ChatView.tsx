@@ -1,7 +1,7 @@
 import { useState } from "react";
+import type { IMessage, AppError } from "../../types";
 import useForm from "../../hooks/useForm/useForm";
 import MessageInlineEdit from "../MessageInlineEdit/MessageInlineEdit";
-import type { IMessage, AppError } from "../../types";
 import "./ChatView.css";
 
 const formatTime = (dateString: string | undefined) => {
@@ -71,14 +71,18 @@ const ChatView = ({
                 <div className='message-dummy'>
                     {messagelist && !loadingMessages && !errorMessages && messagelist.map((m: IMessage, index: number) => (
                         <div key={m.message_id ?? index} className="message-div">
+
                             <div className="message-avatar">
                                 {m.sender_name?.charAt(0).toUpperCase() || 'U'}
                             </div>
+
                             <div className="message-body">
+
                                 <div className="message-header">
                                     <span className="message-sender">{m.sender_name}</span>
                                     <span className="message-time">{formatTime(m.created_at)}</span>
                                 </div>
+
                                 {editingMessageId === m.message_id && m.member_id === activeMemberId ? (
                                     <MessageInlineEdit
                                         message_id={m.message_id}
@@ -106,8 +110,10 @@ const ChatView = ({
                                         )}
                                     </div>
                                 )}
+
                             </div>
                         </div>
+
                     ))}
                 </div>
             </div>
@@ -123,6 +129,7 @@ const ChatView = ({
                         disabled={loadingSend}
                     />
                     <button type="submit" className="chat-send-btn" disabled={loadingSend || !formState.content.trim()}>
+
                         {loadingSend ? (
                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         ) : (
@@ -130,6 +137,7 @@ const ChatView = ({
                                 <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
                             </svg>
                         )}
+                        
                     </button>
                 </form>
             </div>

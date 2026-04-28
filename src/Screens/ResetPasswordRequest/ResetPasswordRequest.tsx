@@ -1,10 +1,10 @@
 import '../Login/Login.css';
 import useRequest from '../../hooks/useRequest/useRequest';
 import useForm from '../../hooks/useForm/useForm';
-import { Link } from 'react-router';
-import { resetPassword } from '../../services/authService';
 import Logo from '../../Components/Logo/Logo';
 import InfoComponent from '../../Components/InfoComponent/InfoComponent';
+import { Link } from 'react-router';
+import { resetPassword } from '../../services/authService';
 
 export default function ResetPasswordRequest() {
 
@@ -33,7 +33,7 @@ export default function ResetPasswordRequest() {
                     new_password: formStateVieneDelHook[REQUEST_FORM_FIELDS.NEW_PASSWORD],
                 })
             }
-        })
+        });
     };
 
     const {

@@ -1,0 +1,107 @@
+.workspace-discover-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.discover-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.discover-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.discover-card {
+    background-color: var(--bg-dark-mid);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color-subtle);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+.discover-card-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.discover-card-info h4 {
+    font-size: var(--text-base);
+    font-weight: var(--weight-lg);
+    margin-bottom: var(--space-xs);
+}
+
+.discover-card-info p {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+}
+
+.discover-btn {
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--border-color-subtle);
+    background: var(--bg-light);
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-md);
+    cursor: pointer;
+    width: fit-content;
+    min-width: 140px;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.discover-card-img {
+    position: absolute;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discover-card-img svg {
+    width: 32px;
+    height: 32px;
+}
+
+.discover-card-img.blue {
+    background-color: rgba(18, 100, 163, 0.1);
+    color: #1264a3;
+}
+
+.discover-card-img.green {
+    background-color: rgba(43, 172, 118, 0.1);
+    color: #2bac76;
+}
+
+.discover-card-img.orange {
+    background-color: rgba(232, 145, 45, 0.1);
+    color: #e8912d;
+}
+
+@media (max-width: 768px) {
+    .discover-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .discover-card {
+        padding: var(--space-md);
+    }
+}
