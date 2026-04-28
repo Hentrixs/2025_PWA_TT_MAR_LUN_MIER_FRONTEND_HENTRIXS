@@ -29,8 +29,11 @@ const InviteMemberModal = ({ onClose }: InviteMemberModalProps) => {
         loading
     } = useInviteMember(workspace_id);
 
-    const { formState, handleChangeInput, onSubmit } = useForm({
+    const { formState, handleChangeInput, onSubmit, errors } = useForm({
         initialFormState,
+        validationRules: {
+            [INVITE_MEMBER_MODAL_FIELDS.EMAIL]: ['required', 'email']
+        },
         submitFn: (data) => {
             handleInviteMember(data.email, data.role)
         }
@@ -47,6 +50,7 @@ const InviteMemberModal = ({ onClose }: InviteMemberModalProps) => {
                     value={formState[INVITE_MEMBER_MODAL_FIELDS.EMAIL]}
                     onChange={handleChangeInput}
                 />
+                {errors[INVITE_MEMBER_MODAL_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{errors[INVITE_MEMBER_MODAL_FIELDS.EMAIL]}</span>}
                 <select
                     name={INVITE_MEMBER_MODAL_FIELDS.ROLE}
                     value={formState[INVITE_MEMBER_MODAL_FIELDS.ROLE]}

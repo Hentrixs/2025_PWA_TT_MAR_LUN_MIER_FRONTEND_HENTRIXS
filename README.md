@@ -8,6 +8,11 @@ URL Repo Frontend = https://github.com/Hentrixs/2025_PWA_TT_MAR_LUN_MIER_FRONTEN
 URL Repo Backend = https://github.com/Hentrixs/2025_PWA_TT_MAR_LUN_MIER_BACKEND_HENTRIXS
 ---
 
+## Instrucciones para el Postman
+El archivo `GreenSlack.postman_collection.json` contiene los endpoints junto con la URL de la API predefinida. 
+Solo hay que importarlo en Postman, generar un token desde el endpoint 'Login' (en la carpeta Auth) y pegarlo en la variable `token` de la colección para autorizar las demás solicitudes.
+
+
 ## Tecnologias Usadas
 - Javascript [Backend]
 - Typescript (TSX) [Frontend]

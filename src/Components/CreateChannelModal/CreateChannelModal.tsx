@@ -11,12 +11,7 @@ const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onC
     const { createChannelSubmit, response, loading } = useCreateChannel(workspace_id);
 
     const [step, setStep] = useState(1);
-
-    const handleStep = (e: React.FormEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setStep(step === 1 ? 2 : 1);
-    };
-
+    const [channelNameError, setChannelNameError] = useState<string | null>(null);
 
     const CREATE_CHANNEL_FORM_FIELDS = {
         CHANNEL_NAME: 'channel_name',
@@ -33,6 +28,17 @@ const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onC
         submitFn: createChannelSubmit
     });
 
+    const handleStep = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        if (step === 1) {
+            const name = formState[CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME].trim();
+            if (!name) return setChannelNameError('Este campo es obligatorio');
+            if (name.length < 3) return setChannelNameError('Debe tener al menos 3 caracteres.');
+            setChannelNameError(null);
+        }
+        setStep(step === 1 ? 2 : 1);
+    };
+
     useEffect(() => {
         if (response && response.ok) {
             onSuccess();
@@ -42,16 +48,17 @@ const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onC
     return (
         <Modal title="Crear Canal" onClose={onClose}>
             {
-                step === 1 && <form className='create-channel-form'>
+                step === 1 && <form className='create-channel-form' onSubmit={handleStep}>
                     <input type="text" placeholder="# Nombre del canal"
                         name={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME}
                         value={formState[CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME]}
                         onChange={handleChangeInput}
                     />
+                    {channelNameError && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{channelNameError}</span>}
                     <span>Los canales son donde ocurren las conversaciones sobre un tema. Usa un nombre que se pueda buscar y comprender fácilmente.</span>
                     <div className='create-channel-form-footer'>
                         <span className='step'>Paso 1 de 2</span>
-                        <button onClick={handleStep}>Siguiente</button>
+                        <button type="submit">Siguiente</button>
                     </div>
                 </form>
             }
@@ -65,7 +72,7 @@ const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onC
                     <div className='create-channel-form-footer'>
                         <span className='step'>Paso 2 de 2</span>
                         <div className='create-channel-btn-container'>
-                            <button onClick={handleStep}>Volver</button>
+                            <button type="button" onClick={handleStep}>Volver</button>
                             <button type="submit" disabled={loading}>{loading && 'Creando...' || 'Crear'}</button>
                         </div>
                     </div>

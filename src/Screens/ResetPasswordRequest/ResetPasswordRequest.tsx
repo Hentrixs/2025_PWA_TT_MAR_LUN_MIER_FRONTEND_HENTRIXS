@@ -46,7 +46,7 @@ export default function ResetPasswordRequest() {
         initialFormState: initialFormState,
         validationRules: {
             [REQUEST_FORM_FIELDS.EMAIL]: ['required', 'email'],
-            [REQUEST_FORM_FIELDS.NEW_PASSWORD]: ['required'],
+            [REQUEST_FORM_FIELDS.NEW_PASSWORD]: ['required', 'min:6'],
         },
         submitFn: submitRequest
     });

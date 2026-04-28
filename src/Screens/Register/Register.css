@@ -69,6 +69,41 @@
     font-size: var(--text-md);
 }
 
+.register-form div.password-input-wrapper {
+    position: relative;
+    flex-direction: row;
+    row-gap: 0;
+    align-items: center;
+    width: 70%;
+}
+
+.register-form div.password-input-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem;
+}
+
+.register-form .toggle-password-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    margin: 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: color 0.2s ease;
+}
+
+.register-form .toggle-password-btn:hover {
+    color: var(--text-primary);
+}
+
 @media (max-width: 1133px) {
     .register-container {
         flex-direction: column;

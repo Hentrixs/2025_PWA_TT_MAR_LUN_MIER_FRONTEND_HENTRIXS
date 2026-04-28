@@ -14,7 +14,8 @@ const CreateWorkspace = () => {
     const { formState, handleChangeInput, onSubmit, errors } = useForm({
         initialFormState: { title: '', description: '' },
         validationRules: {
-            title: ['required', 'min:3']
+            title: ['required', 'min:3'],
+            description: ['min:3']
         },
         submitFn: async (formState: { title: string; description: string }) => {
             await submitCreateWorkspace(formState.title, formState.description);
