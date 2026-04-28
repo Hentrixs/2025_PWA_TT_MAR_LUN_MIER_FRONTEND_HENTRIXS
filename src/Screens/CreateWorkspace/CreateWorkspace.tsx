@@ -1,6 +1,7 @@
 import './CreateWorkspace.css';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../Components/Logo/Logo';
+import BackButton from '../../Components/BackButton/BackButton';
 import useCreateWorkspace from '../../hooks/useCreateWorkspace/useCreateWorkspace';
 import useForm from '../../hooks/useForm/useForm';
 import { useEffect } from 'react';
@@ -31,6 +32,7 @@ const CreateWorkspace = () => {
             </nav>
 
             <main className="create-workspace-main">
+                <BackButton to='/workspace-selector' />
                 <h1>Creá tu espacio de trabajo</h1>
                 <p>Un espacio de trabajo es donde tu equipo se comunica.</p>
 

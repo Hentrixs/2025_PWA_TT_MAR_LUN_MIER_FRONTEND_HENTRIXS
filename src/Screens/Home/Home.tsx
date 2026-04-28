@@ -99,7 +99,7 @@ const Home = () => {
                         <div className="ai-reimagine-grid">
                             <div className="ai-feature-list-card">
                                 <ul>
-                                    <li className="active">Actualizar negociaciones solo con pedírselo a Slackbot</li>
+                                    <li className="active">Actualizar negociaciones solo con pedírselo a GreenSlackBot</li>
                                     <li>Resumir una conversación que te perdiste</li>
                                     <li>Obtener respuestas rápidamente con Claude</li>
                                     <li>Activar la función de tomar notas de la IA en las juntas</li>
@@ -108,7 +108,7 @@ const Home = () => {
                                 </ul>
                             </div>
                             <div className="ai-feature-image">
-                                <img src={aiMobile} alt="Slack AI Mobile" />
+                                <img src={aiMobile} alt="GreenSlack AI Mobile" />
                             </div>
                         </div>
                     </div>
@@ -125,9 +125,9 @@ const Home = () => {
                         <div className="ai-context-layout">
                             <div className="ai-context-text">
                                 <div className="context-item">
-                                    <h3>Conoce Slackbot: tu agente personal para el trabajo.</h3>
-                                    <p>Slackbot no es una IA cualquiera. Es una IA que te conoce a ti y a tu equipo. Coordina el trabajo entre tus aplicaciones y agentes.</p>
-                                    <a href="#">Más información sobre Slackbot →</a>
+                                    <h3>Conoce GreenSlackBot: tu agente personal para el trabajo.</h3>
+                                    <p>GreenSlackBot no es una IA cualquiera. Es una IA que te conoce a ti y a tu equipo. Coordina el trabajo entre tus aplicaciones y agentes.</p>
+                                    <a href="#">Más información sobre GreenSlackBot →</a>
                                 </div>
                                 <div className="context-item">
                                     <h3>Una búsqueda para gobernarlas a todas.</h3>
@@ -139,7 +139,7 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="ai-context-image">
-                                <img src={aiDesktop} alt="Slack AI Desktop Search" />
+                                <img src={aiDesktop} alt="GreenSlack AI Desktop Search" />
                             </div>
                         </div>
                     </div>

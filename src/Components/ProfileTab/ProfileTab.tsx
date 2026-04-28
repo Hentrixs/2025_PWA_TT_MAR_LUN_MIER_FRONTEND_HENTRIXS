@@ -46,7 +46,7 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUp
                 <div className='profile-section'>
                     <div className='avatar-container'>
                         <div className='avatar-wrapper'>
-                            <img src={avatarUrl} alt="Profile" className='profile-avatar' />
+                            <img src={avatarUrl} alt="Perfil" className='profile-avatar' />
                         </div>
 
                         <div className='img-name-wrapper'>
@@ -66,7 +66,7 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUp
                             autoComplete='description'
                             onChange={handleChangeInput}
                             disabled={loading}
-                            placeholder={profile.user_description || 'Introdusca descripcion Aqui...'}>
+                            placeholder={profile.user_description || 'Introduce una descripción aquí...'}>
                         </textarea>
                     </div>
 

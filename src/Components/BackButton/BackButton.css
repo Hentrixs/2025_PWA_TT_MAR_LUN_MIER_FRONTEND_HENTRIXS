@@ -1,0 +1,26 @@
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-color-light);
+    background: var(--bg-light);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.back-button:hover {
+    background: var(--bg-light-mid);
+    border-color: var(--text-secondary);
+    transform: scale(1.08);
+}
+
+.back-button:active {
+    transform: scale(0.93);
+    opacity: 0.8;
+}

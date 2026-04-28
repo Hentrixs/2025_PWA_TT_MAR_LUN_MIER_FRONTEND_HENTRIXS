@@ -19,7 +19,7 @@ const Login = () => {
         [LOGIN_FORM_FIELDS.PASSWORD]: ''
     };
 
-    const { hacerLogin, response, loading } = useLogin();    
+    const { hacerLogin, response, loading } = useLogin();
     const { manageLogin } = useContext(AuthContext);
 
     const { handleChangeInput, onSubmit, errors } = useForm({
@@ -48,13 +48,13 @@ const Login = () => {
                 <h1>Iniciar Sesion</h1>
                 <form onSubmit={onSubmit} className='login-form'>
                     <div>
-                        <label htmlFor="email">Email Address</label>
+                        <label htmlFor="email">Correo Electrónico</label>
                         <input type="email" id='email' autoComplete='email' name={LOGIN_FORM_FIELDS.EMAIL} onChange={handleChangeInput} />
                         {errors[LOGIN_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[LOGIN_FORM_FIELDS.EMAIL]}</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Contraseña</label>
                         <div className="password-input-wrapper">
                             <input
                                 type={showPassword ? 'text' : 'password'}
@@ -71,12 +71,13 @@ const Login = () => {
                                 {showPassword ? 'Ocultar' : 'Mostrar'}
                             </button>
                         </div>
-                        {errors[LOGIN_FORM_FIELDS.PASSWORD] && 
-                            <span style={{ 
-                                color: 'var(--error-primary)', 
-                                fontSize: '13px', 
-                                marginTop: '4px' }}>
-                                    {errors[LOGIN_FORM_FIELDS.PASSWORD]}
+                        {errors[LOGIN_FORM_FIELDS.PASSWORD] &&
+                            <span style={{
+                                color: 'var(--error-primary)',
+                                fontSize: '13px',
+                                marginTop: '4px'
+                            }}>
+                                {errors[LOGIN_FORM_FIELDS.PASSWORD]}
                             </span>
                         }
                     </div>
@@ -86,7 +87,7 @@ const Login = () => {
                     {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
                     <button type='submit' disabled={loading} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
                         {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-                        {loading ? 'Iniciando Sesion...' : 'Iniciar Sesion'}
+                        {loading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                     </button>
                     <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>
                     <span>Olvidaste tu contraseña? <Link to={'/reset-password-request'}>Restablecer Contraseña</Link></span>

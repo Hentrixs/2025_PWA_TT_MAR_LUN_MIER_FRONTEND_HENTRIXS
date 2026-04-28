@@ -80,7 +80,7 @@ const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
                     {activeTab === 'general' ? (
                         <form className="settings-form" onSubmit={handleUpdate}>
                             <div className="form-group">
-                                <label>Nombre del Workspace</label>
+                                <label>Nombre del Espacio de Trabajo</label>
                                 <input
                                     type="text"
                                     value={title}
@@ -108,12 +108,12 @@ const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
                     ) : (
                         <div className="danger-zone">
                             <div className="danger-info">
-                                <h3>Eliminar este Workspace</h3>
+                                <h3>Eliminar este Espacio de Trabajo</h3>
                                 <p>Esta acción es permanente y no se puede deshacer. Se borrarán todos los canales y mensajes asociados.</p>
                                 {error && <span className="error-message" style={{ display: 'block', marginTop: '10px' }}>{error}</span>}
                             </div>
                             <button className="delete-btn" onClick={handleDelete} disabled={loading}>
-                                {loading ? 'Eliminando...' : 'Eliminar Workspace Definitivamente'}
+                                {loading ? 'Eliminando...' : 'Eliminar Espacio de Trabajo Definitivamente'}
                             </button>
                         </div>
                     )}

@@ -4,6 +4,7 @@ import useGetProfile from '../../hooks/useGetProfile/useGetProfile';
 import { useState } from 'react';
 import ProfileTab from '../../Components/ProfileTab/ProfileTab';
 import SecurityTab from '../../Components/SecurityTab/SecurityTab';
+import BackButton from '../../Components/BackButton/BackButton';
 
 const Settings = () => {
 
@@ -13,6 +14,7 @@ const Settings = () => {
     return (
         <div className='settings-screen'>
             <div className='settings-card'>
+                <BackButton to='/workspace-selector' />
                 <header className='settings-header'>
                     <h1>Configuración de Perfil</h1>
                     <p>Administra tu información personal y seguridad</p>

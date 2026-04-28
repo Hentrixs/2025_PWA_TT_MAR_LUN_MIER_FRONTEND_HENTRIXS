@@ -33,7 +33,7 @@ function DiscoverSection() {
 
             <div className="discover-grid">
                 <DiscoverCard
-                    title="Descargar Slack para Windows"
+                    title="Descargar GreenSlack para Windows"
                     description="Mantente al día con las notificaciones."
                     buttonText="Descargar aplicación"
                     iconColor="blue"
@@ -47,7 +47,7 @@ function DiscoverSection() {
                     icon={appsIcon}
                 />
                 <DiscoverCard
-                    title="Novedades de Slack"
+                    title="Novedades de GreenSlack"
                     description="Descubre ahora las nuevas funciones disponibles."
                     buttonText="Más información"
                     iconColor="orange"

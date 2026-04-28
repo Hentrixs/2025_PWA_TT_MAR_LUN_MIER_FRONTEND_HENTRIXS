@@ -269,7 +269,7 @@
   background: rgba(255, 255, 255, 0.01);
   /* Subtle transparency */
   backdrop-filter: blur(5px);
-  border: none !important;
+  border: none;
   /* Force no border */
   border-radius: var(--radius-xl);
 

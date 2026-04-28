@@ -36,6 +36,7 @@ function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
             error={error}
             success={response?.ok ? response : undefined}
             submitText="Cambiar Contraseña"
+            useSuccessView={true}
         >
             <div className="form-group">
                 <label>Contraseña Actual</label>

@@ -2,6 +2,7 @@ import { Navigate, NavLink } from 'react-router-dom';
 import { useWorkspaceContext } from '../../context/WorkspaceContext/WorkspaceContext';
 import './OuterSidebar.css';
 import type { IWorkspace } from '../../types';
+import BackButton from '../BackButton/BackButton';
 
 const OuterSidebar = () => {
 
@@ -13,7 +14,8 @@ const OuterSidebar = () => {
 
     return (
         <div className='outer-sidebar'>
-            <div>
+            <div className='outer-sidebar-top'>
+                <BackButton to='/workspace-selector' />
 
                 {!!responseWorkspaces && workspaces && Array.isArray(workspaces) && !loadingWorkspaces && !errorWorkspaces && workspaces.map((wk: IWorkspace, index: number) => (
                     <NavLink to={`/workspace/${wk.workspace_id}`} key={wk.workspace_id ?? index} className='workspace-icon'>
@@ -35,7 +37,7 @@ const OuterSidebar = () => {
                 <div className='user-wrapper'>
                     <p>U</p>
                 </div>
-                
+
             </div>
         </div>
     );

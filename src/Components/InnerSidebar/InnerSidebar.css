@@ -134,8 +134,8 @@
     text-overflow: ellipsis;
 }
 
-.channel-item.active {
-    color: white !important;
+.channel-item-wrapper .channel-item.active {
+    color: white;
     font-weight: var(--weight-md);
 }
 

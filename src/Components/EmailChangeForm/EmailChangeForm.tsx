@@ -35,6 +35,7 @@ const EmailChangeForm: React.FC<EmailChangeFormProps> = ({ onCancel }) => {
             error={error}
             success={response?.ok ? response : undefined}
             submitText="Solicitar Cambio"
+            useSuccessView={true}
         >
             <div className='form-group'>
                 <label>Nueva Dirección de Email</label>

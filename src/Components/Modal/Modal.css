@@ -19,7 +19,9 @@
     box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
-    min-width: max-content;
+    width: var(--modal-width, auto);
+    min-width: min-content;
+    max-width: 90vw;
 }
 
 .modal-header {
@@ -68,6 +70,7 @@
 @media (max-width: 768px) {
     .modal-container {
         width: 100vw;
+        max-width: 100vw;
         height: 100vh;
         min-width: unset;
         border-radius: 0;

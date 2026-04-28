@@ -125,13 +125,55 @@
 }
 
 .success-message {
-    color: var(--brand-primary);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-md);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    text-align: center;
+    margin-bottom: var(--space-md);
 }
 
 .error-message {
     color: var(--error-primary);
     font-size: var(--text-sm);
     font-weight: var(--weight-md);
+}
+
+/* Success View Styles */
+.security-success-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) 0;
+    animation: successPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.security-success-view h3 {
+    color: var(--text-primary);
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-xs);
+    font-weight: var(--weight-lg);
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    color: var(--brand-primary);
+    margin-bottom: var(--space-md);
+}
+
+.success-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes successPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

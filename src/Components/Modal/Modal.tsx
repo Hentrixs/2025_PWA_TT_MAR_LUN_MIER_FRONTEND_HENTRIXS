@@ -11,7 +11,10 @@ const Modal = ({ title, onClose, children, width }: ModalProps) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-container" style={width ? { width } : {}}>
+            <div 
+                className="modal-container" 
+                style={width ? { '--modal-width': width } as React.CSSProperties : {}}
+            >
                 <div className="modal-header">
                     <h2>{title}</h2>
                     <button onClick={onClose} className="close-btn">X</button>

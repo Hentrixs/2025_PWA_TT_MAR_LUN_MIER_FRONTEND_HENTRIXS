@@ -8,6 +8,8 @@
     align-items: center;
     padding-bottom: var(--space-2xl);
     position: relative;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .workspace-main {
@@ -49,12 +51,14 @@
 }
 
 @media (max-width: 768px) {
-    .workspace-main-top {
-        grid-template-columns: 1fr;
-    }
-
     .workspace-main {
         padding-left: var(--space-sm);
         padding-right: var(--space-sm);
+        width: 100%;
+    }
+
+    .workspace-main-top {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
     }
 }

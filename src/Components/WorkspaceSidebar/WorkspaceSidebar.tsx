@@ -1,5 +1,5 @@
 import { useWorkspaceSelectorContext } from '../../context/WorkspaceSelectorContext/WorkspaceSelectorContext';
-import SidebarPromoCard from './SidebarPromoCard';
+import SidebarPromoCard from '../SidebarPromoCard/SidebarPromoCard';
 import './WorkspaceSidebar.css';
 
 const inviteIcon = (
@@ -34,7 +34,7 @@ function WorkspaceSidebar() {
 
             <SidebarPromoCard
                 title="Invita a tu equipo: ¡es gratis!"
-                subtitle="Slack funciona mejor en grupo."
+                subtitle="GreenSlack funciona mejor en grupo."
                 buttonText="Invita compañeros de equipo"
                 buttonIcon={addPersonIcon}
                 iconColor="purple"

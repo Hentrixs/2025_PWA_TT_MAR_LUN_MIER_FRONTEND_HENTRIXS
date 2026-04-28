@@ -4,6 +4,7 @@ import useForm from '../../hooks/useForm/useForm';
 import Logo from '../../Components/Logo/Logo';
 import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 import { Link } from 'react-router';
+import BackButton from '../../Components/BackButton/BackButton';
 import { resetPassword } from '../../services/authService';
 
 export default function ResetPasswordRequest() {
@@ -56,6 +57,7 @@ export default function ResetPasswordRequest() {
                 <Logo className='logo-responsive' />
             </div>
             <div className='split-right'>
+                <BackButton to='/login' />
                 <h1>Restablecer Contraseña</h1>
                 <p style={{ marginTop: '-15px', color: 'var(--text-on-light)', fontSize: '15px' }}>Ingresá tu email y tu nueva contraseña. Te enviaremos un enlace para confirmar el cambio.</p>
                 <form onSubmit={onSubmit} className='login-form'>

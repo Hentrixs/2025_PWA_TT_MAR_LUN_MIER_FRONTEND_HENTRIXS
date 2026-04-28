@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import './EmailConfirmationResult.css';
+import BackButton from '../../Components/BackButton/BackButton';
 
 const EmailConfirmationResult: React.FC = () => {
     const [searchParams] = useSearchParams();
@@ -11,6 +12,7 @@ const EmailConfirmationResult: React.FC = () => {
 
     return (
         <div className="confirmation-result-container fade-in">
+            <BackButton to='/settings' />
             <div className="confirmation-result-card">
                 <div className={`status-icon ${success ? 'success' : 'error'}`}>
                     {success ? '✓' : '✕'}

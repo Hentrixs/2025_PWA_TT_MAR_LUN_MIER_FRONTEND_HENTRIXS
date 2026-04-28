@@ -54,7 +54,7 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
                                 <td data-label="Email">{member.user_email}</td>
                                 <td data-label="Rol">
                                     {isSelf ? (
-                                        <span>{member.member_role} <strong>(Tú)</strong></span>
+                                        <span>{member.member_role === 'admin' ? 'Administrador' : 'Miembro'} <strong>(Tú)</strong></span>
                                     ) : (
                                         editingMemberId === member.member_id ? (
                                             <select
@@ -62,12 +62,12 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
                                                 defaultValue={member.member_role}
                                                 onChange={(e) => onRoleChange(member.member_id, e.target.value)}
                                             >
-                                                <option value="admin">admin</option>
-                                                <option value="member">member</option>
+                                                <option value="admin">Administrador</option>
+                                                <option value="member">Miembro</option>
                                             </select>
                                         ) : (
                                             <>
-                                                <span>{member.member_role}</span>
+                                                <span>{member.member_role === 'admin' ? 'Administrador' : 'Miembro'}</span>
                                                 <span
                                                     className="role-change-link"
                                                     onClick={() => setEditingMemberId(member.member_id)}

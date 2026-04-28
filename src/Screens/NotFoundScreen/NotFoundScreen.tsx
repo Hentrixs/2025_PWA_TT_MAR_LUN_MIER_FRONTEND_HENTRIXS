@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './NotFoundScreen.css';
 import Logo from '../../Components/Logo/Logo';
+import BackButton from '../../Components/BackButton/BackButton';
 
 const NotFoundScreen = () => {
 
@@ -8,6 +9,7 @@ const NotFoundScreen = () => {
         <div className="not-found-screen fade-in">
             <div className="not-found-nav">
                 <Logo />
+                <BackButton to='/workspace-selector' />
             </div>
             <div className="not-found-content">
                 <h1 className="not-found-title">404</h1>

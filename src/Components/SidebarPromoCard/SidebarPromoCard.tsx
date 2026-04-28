@@ -1,3 +1,5 @@
+import './SidebarPromoCard.css';
+
 interface SidebarPromoCardProps {
     title: string;
     subtitle: string;
@@ -16,7 +18,7 @@ function SidebarPromoCard({ title, subtitle, buttonText, iconColor, icon, button
                     <p>{subtitle}</p>
                     <button className="sidebar-btn-outline">
                         {buttonIcon}
-                        {buttonText}
+                        <span>{buttonText}</span>
                     </button>
                 </div>
                 <div className={`sidebar-card-icon-illustration ${iconColor}`}>
