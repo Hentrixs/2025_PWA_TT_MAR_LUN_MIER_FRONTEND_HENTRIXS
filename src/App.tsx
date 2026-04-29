@@ -16,7 +16,7 @@ import CreateWorkspace from './Screens/CreateWorkspace/CreateWorkspace';
 import Settings from './Screens/Settings/Settings';
 import EmailConfirmationResult from './Screens/EmailConfirmationResult/EmailConfirmationResult';
 import NotFoundScreen from './Screens/NotFoundScreen/NotFoundScreen';
-import Egg from './Screens/Egg/egg';
+import Egg from './Screens/Egg/Egg';
 
 function App() {
 
