@@ -1,5 +1,5 @@
 .workspace-selector {
-    min-height: 100vh;
+    /* vh anteriormente */
     min-height: 100dvh;
     background-color: var(--bg-dark);
     color: var(--text-primary);
