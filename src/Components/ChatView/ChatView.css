@@ -102,4 +102,60 @@
     cursor: not-allowed;
 }
 
+.skeleton-message-item {
+    display: flex;
+    column-gap: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    margin-bottom: 8px;
+    align-items: flex-start;
+}
+
+.skeleton-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-light-mid);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.skeleton-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.skeleton-line {
+    height: 12px;
+    background: linear-gradient(90deg, var(--bg-light-mid) 25%, var(--bg-dark-mid) 50%, var(--bg-light-mid) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: 4px;
+}
+
+.skeleton-line.name {
+    width: 30%;
+    height: 14px;
+    margin-bottom: 4px;
+}
+
+.skeleton-line.text {
+    width: 90%;
+}
+
+.skeleton-line.text-short {
+    width: 60%;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
 /* Message styles extracted to MessageItem.css */

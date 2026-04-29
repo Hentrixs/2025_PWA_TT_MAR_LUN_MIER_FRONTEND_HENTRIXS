@@ -16,6 +16,7 @@ import CreateWorkspace from './Screens/CreateWorkspace/CreateWorkspace';
 import Settings from './Screens/Settings/Settings';
 import EmailConfirmationResult from './Screens/EmailConfirmationResult/EmailConfirmationResult';
 import NotFoundScreen from './Screens/NotFoundScreen/NotFoundScreen';
+import Egg from './Screens/Egg/egg';
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
       <Route path={'/reset-password-result'} element={<ResetPasswordResult />} />
       <Route path={'/verify-email'} element={<VerifyEmail />} />
       <Route path={'/invite/respond'} element={<InviteRespond />} />
-      
+      <Route path={'/egg'} element={<Egg />} />
       <Route element={<AuthMiddleware />}>
         <Route path={'/settings'} element={<Settings />} />
         <Route path={'/settings/email-confirmation-result'} element={<EmailConfirmationResult />} />

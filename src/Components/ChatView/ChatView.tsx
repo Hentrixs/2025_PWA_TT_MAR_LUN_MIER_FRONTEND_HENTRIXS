@@ -59,6 +59,20 @@ const ChatView = ({
 
             <div className='chat-history'>
                 <div className='message-dummy'>
+                    {loadingMessages && (
+                        <>
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="skeleton-message-item">
+                                    <div className="skeleton-avatar"></div>
+                                    <div className="skeleton-body">
+                                        <div className="skeleton-line name"></div>
+                                        <div className="skeleton-line text"></div>
+                                        <div className="skeleton-line text-short"></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                    )}
                     {messagelist && !loadingMessages && !errorMessages && messagelist.map((m: IMessage, index: number) => (
                         <MessageItem
                             key={m.message_id ?? index}
@@ -101,7 +115,7 @@ const ChatView = ({
                                 <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
                             </svg>
                         )}
-                        
+
                     </button>
                 </form>
             </div>

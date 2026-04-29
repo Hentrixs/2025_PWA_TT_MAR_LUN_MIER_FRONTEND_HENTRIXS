@@ -5,6 +5,7 @@ import { useWorkspaceSelectorContext } from '../../context/WorkspaceSelectorCont
 import WorkspaceItem from './WorkspaceItem';
 import type { IWorkspace } from '../../types';
 import './WorkspaceListCard.css';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 function WorkspaceListCard() {
     const { workspaces, loading, error, response } = useWorkspaceSelectorContext();
@@ -29,6 +30,8 @@ function WorkspaceListCard() {
                     <p className='workspace-content-tab'>Espacios de trabajo</p>
                     <hr className='workspace-content-divider' />
                     <p className='workspace-content-section-label'>Listo para iniciar</p>
+
+                    {loading && <LoadingScreen isFullPage={false} message="Buscando tus espacios..." />}
 
                     {workspaces && !loading && !error && !!response && workspaces.map((wk: IWorkspace, index: number) => (
                         <WorkspaceItem key={index} workspace={wk} />

@@ -1,0 +1,33 @@
+.egg-screen {
+    height: 100vh;
+    width: 100vw;
+    background-color: #003366;
+    /* Azul espacial */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.nyan-cat {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.egg-text {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 2px 2px #ff0000;
+}
+
+.back-link {
+    margin-top: 20px;
+    color: #00ff00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

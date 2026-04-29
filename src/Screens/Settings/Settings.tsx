@@ -4,6 +4,7 @@ import useGetProfile from '../../hooks/useGetProfile/useGetProfile';
 import { useState } from 'react';
 import ProfileTab from '../../Components/ProfileTab/ProfileTab';
 import SecurityTab from '../../Components/SecurityTab/SecurityTab';
+import LoadingScreen from '../../Components/LoadingScreen/LoadingScreen';
 import BackButton from '../../Components/BackButton/BackButton';
 
 const Settings = () => {
@@ -19,7 +20,7 @@ const Settings = () => {
                     <h1>Configuración de Perfil</h1>
                     <p>Administra tu información personal y seguridad</p>
                 </header>
-                {loading && <h2>Cargando...</h2>}
+                {loading && <LoadingScreen isFullPage={false} message="Cargando perfil..." />}
                 {!loading && !error && profile &&
                     <>
                         <div className="settings-tabs-container">
