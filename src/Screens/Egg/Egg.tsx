@@ -1,6 +1,6 @@
 // Frontend/src/Screens/egg/egg.tsx
 
-import './egg.css';
+import './Egg.css';
 
 function Egg() {
     return (
