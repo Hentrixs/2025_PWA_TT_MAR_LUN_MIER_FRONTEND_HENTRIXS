@@ -24,6 +24,8 @@
     padding: 2rem;
     row-gap: var(--space-xl);
     color: var(--text-on-light);
+    position: relative;
+    padding-top: 6rem;
 }
 
 .split-right h1 {
@@ -62,7 +64,7 @@
     padding: var(--space-sm);
     border-radius: var(--radius-md);
     border: 1.5px solid var(--brand-primary);
-    color: var(--text-on-white);
+    color: var(--text-primary);
     background: var(--input-bg);
     font-family: var(--font-main);
 }
@@ -104,6 +106,22 @@
 
 .login-form .toggle-password-btn:hover {
     color: var(--text-primary);
+}
+
+.split-right .back-button {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+.login-form span a {
+    color: var(--link-primary);
+    text-decoration: none;
+    font-weight: var(--weight-md);
+}
+
+.login-form span a:hover {
+    text-decoration: underline;
 }
 
 .logo-responsive {

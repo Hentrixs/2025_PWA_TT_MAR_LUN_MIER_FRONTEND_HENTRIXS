@@ -6,6 +6,7 @@ import useForm from '../../hooks/useForm/useForm';
 import useLogin from '../../hooks/useLogin/useLogin';
 import Logo from '../../Components/Logo/Logo';
 import InfoComponent from '../../Components/InfoComponent/InfoComponent';
+import BackButton from '../../Components/BackButton/BackButton';
 
 const LOGIN_FORM_FIELDS = {
     EMAIL: 'email',
@@ -42,6 +43,7 @@ const Login = () => {
     return (
         <div className='login-container'>
             <div className='split-right'>
+                <BackButton to='/' />
                 <h1>Iniciar Sesion</h1>
                 <form onSubmit={onSubmit} className='login-form'>
                     <div>

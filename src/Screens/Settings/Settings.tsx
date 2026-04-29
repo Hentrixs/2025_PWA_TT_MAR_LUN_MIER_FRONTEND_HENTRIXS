@@ -14,7 +14,7 @@ const Settings = () => {
     return (
         <div className='settings-screen'>
             <div className='settings-card'>
-                <BackButton to='/workspace-selector' />
+                <BackButton />
                 <header className='settings-header'>
                     <h1>Configuración de Perfil</h1>
                     <p>Administra tu información personal y seguridad</p>
