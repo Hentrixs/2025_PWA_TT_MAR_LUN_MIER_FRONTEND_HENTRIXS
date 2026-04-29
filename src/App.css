@@ -26,12 +26,14 @@ body,
     /* Inner Sidebars */
     --bg-light-mid: #E9ECEF;
     --bg-surface: #FFFFFF;
+    --input-bg: #FFFFFF;
     --bg-dark-gradient: var(--bg-dark);
 
     /* brand */
     --brand-primary: #0BA561;
     --brand-primary-hover: #08834D;
     --brand-secondary: #055230;
+    --link-primary: #1264a3;
 
     /* error */
     --error-primary: #E74C3C;
@@ -61,6 +63,7 @@ body,
     --bg-light: #24292E;
     --bg-light-mid: #2B3137;
     --bg-surface: #24292E;
+    --input-bg: #24292E;
 
     /* text */
     --text-primary: #F0F2F5;
@@ -113,6 +116,7 @@ body,
     --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
     --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.4);
+    --overlay-bg: rgba(0, 0, 0, 0.6);
 
     /* brand / error transparent fills — subtle highlights y glow rings */
     --brand-subtle: rgba(11, 165, 97, 0.1);

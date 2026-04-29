@@ -104,11 +104,11 @@
 
 .workspace-content-arrow {
     font-size: var(--text-lg);
-    color: #616061;
+    color: var(--text-secondary);
 }
 
 .workspace-content-footer-link {
-    color: #1264a3;
+    color: var(--link-primary);
     font-size: var(--text-sm);
     font-weight: var(--weight-md);
     text-decoration: none;
@@ -150,7 +150,7 @@
 }
 
 .empty-state-btn {
-    color: #1264a3;
+    color: var(--link-primary);
     text-decoration: none;
     font-weight: var(--weight-md);
     font-size: var(--text-sm);

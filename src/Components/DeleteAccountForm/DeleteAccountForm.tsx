@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import useForm from '../../hooks/useForm/useForm';
 import useDeleteAccount from '../../hooks/useDeleteAccount/useDeleteAccount';
 import SecurityFormLayout from '../SecurityFormLayout/SecurityFormLayout';
+import { useAuthContext } from '../../context/AuthContext/AuthContext';
 
 const DELETE_ACCOUNT_FORM_NAMES = {
     PASSWORD: 'password'
@@ -16,6 +17,7 @@ interface DeleteAccountFormProps {
 };
 
 function DeleteAccountForm({ onClose }: DeleteAccountFormProps) {
+    const { manageLogout } = useAuthContext();
     const { handleAccountDeletion, response, loading, error } = useDeleteAccount();
     const { handleChangeInput, onSubmit, formState, errors } = useForm({
         initialFormState,
@@ -27,10 +29,10 @@ function DeleteAccountForm({ onClose }: DeleteAccountFormProps) {
 
     useEffect(() => {
         if (response && response.ok) {
-            // Se cerró la cuenta, acá convendría también desloguear si es que no lo hace el hook globalmente
             onClose();
+            manageLogout();
         }
-    }, [response]);
+    }, [response, manageLogout, onClose]);
 
     return (
         <SecurityFormLayout

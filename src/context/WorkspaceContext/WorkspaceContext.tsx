@@ -23,9 +23,6 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
     const { workspaceDetail, members, loading: loadingWorkspace, error: errorWorkspace } = useWorkspaceDetail(workspace_id ?? '');
 
 
-
-    // Se Extrae Token -> Se Extrae el Payload -> se Busca el miembro activo con ese Payload
-
     const tokenPayload = useMemo<ITokenPayload | null>(() => {
         const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
         return token ? JSON.parse(atob(token.split('.')[1])) : null;

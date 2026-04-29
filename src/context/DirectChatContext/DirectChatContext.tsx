@@ -14,10 +14,7 @@ export function DirectChatContextProvider({ children }: { children: React.ReactN
     const { messagelist, response: responseMessages, loading: loadingMessages, error: errorMessages, refreshMessages } = useDirectChatMain();
     const { sendMessageSubmit, loading: loadingSend, error: errorSend } = useDirectSendMessage();
 
-    // Polling cada 3 segundos para simular mensajes en tiempo real.
-    // WebSockets sería la solución ideal pero Vercel (serverless) no mantiene
-    // conexiones persistentes, por lo que no es compatible con Socket.io u otras
-    // implementaciones de WebSocket sin cambiar el proveedor de hosting.
+    // Polling simulation for real-time messages (Serverless/Vercel limitation workaround)
 
     useEffect(() => {
         const interval = setInterval(refreshMessages, 3000);

@@ -52,7 +52,7 @@
 }
 
 .mobile-logout-btn {
-    color: #e57373;
+    color: var(--error-primary);
 }
 
 .mobile-theme-row {

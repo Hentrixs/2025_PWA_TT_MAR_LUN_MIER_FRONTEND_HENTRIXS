@@ -102,5 +102,5 @@
 
 .create-workspace-error {
   font-size: var(--text-sm);
-  color: #f87171;
+  color: var(--error-primary);
 }

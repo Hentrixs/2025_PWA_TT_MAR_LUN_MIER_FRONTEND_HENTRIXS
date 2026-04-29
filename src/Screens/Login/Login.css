@@ -63,7 +63,7 @@
     border-radius: var(--radius-md);
     border: 1.5px solid var(--brand-primary);
     color: var(--text-on-white);
-    background: #FFFFFF;
+    background: var(--input-bg);
     font-family: var(--font-main);
 }
 
@@ -124,7 +124,7 @@
 
 @media (max-width: 1133px) {
     .login-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         min-height: 100vh;
         height: auto;
     }
