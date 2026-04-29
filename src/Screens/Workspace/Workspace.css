@@ -3,6 +3,7 @@
     height: 100dvh;
     width: 100vw;
     background-color: var(--bg-dark);
+    overflow: hidden;
 }
 
 .outer-sidebar {

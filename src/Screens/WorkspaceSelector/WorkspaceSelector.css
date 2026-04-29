@@ -1,5 +1,4 @@
 .workspace-selector {
-    /* vh anteriormente */
     min-height: 100dvh;
     background-color: var(--bg-dark);
     color: var(--text-primary);
@@ -9,7 +8,8 @@
     padding-bottom: var(--space-2xl);
     position: relative;
     overflow-x: hidden;
-    width: 100%;
+    min-height: 100dvh;
+    height: auto;
 }
 
 .workspace-header-sticky {

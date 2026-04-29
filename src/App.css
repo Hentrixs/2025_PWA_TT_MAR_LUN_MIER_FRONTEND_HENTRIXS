@@ -4,7 +4,6 @@ html,
 body,
 #root {
     height: 100%;
-    overflow: hidden;
 }
 
 * {
@@ -14,9 +13,9 @@ body,
     font-family: var(--font-main);
 }
 
-button, 
-a, 
-input[type="submit"], 
+button,
+a,
+input[type="submit"],
 input[type="button"],
 .clickable {
     cursor: pointer;
