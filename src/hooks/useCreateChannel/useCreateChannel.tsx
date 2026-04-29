@@ -7,7 +7,7 @@ const useCreateChannel = (workspace_id: string | undefined) => {
     const createChannelSubmit = (formstate: Record<string, string>) => {
         const { channel_name, channel_description } = formstate;
 
-        if (!workspace_id || !channel_name.trim() || !channel_description.trim()) {
+        if (!workspace_id || !channel_name.trim()) {
             return;
         };
 

@@ -53,9 +53,6 @@ export default function ResetPasswordRequest() {
 
     return (
         <div className='login-container'>
-            <div className='split-left'>
-                <Logo className='logo-responsive' />
-            </div>
             <div className='split-right'>
                 <BackButton to='/login' />
                 <h1>Restablecer Contraseña</h1>
@@ -92,6 +89,10 @@ export default function ResetPasswordRequest() {
                     <span>¿Recordás tu contraseña? <Link to={'/login'}>Iniciar Sesión</Link></span>
                 </form>
                 {response && !loading && !error && <InfoComponent response={response} />}
+            </div>
+            <div className='split-left'>
+                <video src="/loop_grass.mp4" autoPlay loop muted playsInline className='auth-video-bg'></video>
+                <Logo className='logo-responsive' />
             </div>
         </div>
     );

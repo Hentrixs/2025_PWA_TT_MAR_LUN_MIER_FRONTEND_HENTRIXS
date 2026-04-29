@@ -1,12 +1,13 @@
 .outer-sidebar {
-    width: 70px;
+    width: 72px;
     height: 100dvh;
-    background-color: var(--bg-dark-mid);
+    background-color: var(--bg-light);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-md);
+    padding-bottom: var(--space-md);
     gap: var(--space-sm);
     border-right: 1px solid var(--border-color-subtle);
 }
@@ -25,13 +26,13 @@
 .workspace-icon {
     width: 48px;
     height: 48px;
-    background-color: var(--bg-light);
+    background-color: var(--bg-light-mid);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     font-size: var(--text-lg);
@@ -48,7 +49,28 @@
     border-radius: var(--radius-md);
     background-color: var(--brand-primary);
     color: white;
-    box-shadow: 0 0 0 2px var(--bg-dark-mid), 0 0 0 4px var(--brand-primary);
+    box-shadow: 0 4px 12px rgba(11, 165, 97, 0.25);
+}
+
+.add-workspace-btn {
+    background-color: var(--bg-light-mid);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.add-workspace-btn:hover {
+    background-color: var(--bg-light);
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+    border-radius: var(--radius-md);
+}
+
+.add-workspace-btn p {
+    line-height: 1;
+    margin-bottom: 2px;
 }
 
 .user-svg-wrapper {

@@ -1,6 +1,5 @@
 import './InviteRespond.css';
 import { Link, useSearchParams } from 'react-router-dom';
-import BackButton from '../../Components/BackButton/BackButton';
 
 function InviteRespond() {
     const [searchParams] = useSearchParams();
@@ -12,7 +11,6 @@ function InviteRespond() {
 
     return (
         <div className='invite-respond-container fade-in'>
-            <BackButton to='/workspace-selector' />
             <div className='invite-respond-card'>
                 {isAccepted && (
                     <div className="success-content">

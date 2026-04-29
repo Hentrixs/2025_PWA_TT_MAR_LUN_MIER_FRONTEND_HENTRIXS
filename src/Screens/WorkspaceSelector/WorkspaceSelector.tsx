@@ -13,8 +13,10 @@ function WorkspaceSelectorInner() {
 
     return (
         <div className="workspace-selector">
-            <WorkspaceSelectorNav />
-            <MobileNavOverlay />
+            <header className="workspace-header-sticky">
+                <WorkspaceSelectorNav />
+                <MobileNavOverlay />
+            </header>
             <WorkspaceHero />
 
             <div className="workspace-main">

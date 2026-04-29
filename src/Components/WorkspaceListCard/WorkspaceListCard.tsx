@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { useWorkspaceSelectorContext } from '../../context/WorkspaceSelectorContext/WorkspaceSelectorContext';
 import WorkspaceItem from './WorkspaceItem';
 import type { IWorkspace } from '../../types';
@@ -6,6 +8,12 @@ import './WorkspaceListCard.css';
 
 function WorkspaceListCard() {
     const { workspaces, loading, error, response } = useWorkspaceSelectorContext();
+    const { manageLogout } = useContext(AuthContext);
+
+    const handleSwitchEmail = (e: React.MouseEvent) => {
+        e.preventDefault();
+        manageLogout();
+    };
 
     return (
         <div className='workspace-card-wrapper main-card'>
@@ -39,7 +47,7 @@ function WorkspaceListCard() {
                 <div>
                     <hr className='workspace-content-divider' />
                     <Link to="/create-workspace" className='workspace-content-footer-link'>Crear un nuevo espacio de trabajo</Link>
-                    <p className='workspace-content-footer-text'>¿No encuentras tu espacio de trabajo? <a href="#" className='workspace-content-footer-link'>Prueba con otro correo electrónico</a></p>
+                    <p className='workspace-content-footer-text'>¿No encuentras tu espacio de trabajo? <a href="/login" onClick={handleSwitchEmail} className='workspace-content-footer-link'>Prueba con otro correo electrónico</a></p>
                 </div>
             </div>
         </div>

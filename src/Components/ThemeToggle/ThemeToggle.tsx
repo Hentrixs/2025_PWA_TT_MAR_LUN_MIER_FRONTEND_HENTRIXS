@@ -1,15 +1,25 @@
 import { useTheme } from "../../context/ThemeContext/ThemeContext";
 import "./ThemeToggle.css";
 
-const ThemeToggle = () => {
+interface ThemeToggleProps {
+    readonly?: boolean;
+    className?: string;
+}
+
+const ThemeToggle = ({ readonly, className = "" }: ThemeToggleProps) => {
     const { toggleTheme, isDark } = useTheme();
 
+    const Component = readonly ? 'div' : 'button';
+    const componentProps = readonly ? {} : {
+        onClick: toggleTheme,
+        'aria-label': "Toggle Theme",
+        title: isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+    };
+
     return (
-        <button
-            className="theme-toggle-btn"
-            onClick={toggleTheme}
-            aria-label="Toggle Theme"
-            title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+        <Component
+            className={`theme-toggle-btn ${readonly ? 'readonly' : ''} ${className}`}
+            {...componentProps}
         >
             {isDark ? (
                 // Sun Icon for Dark Mode (to switch to light)
@@ -30,7 +40,7 @@ const ThemeToggle = () => {
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
             )}
-        </button>
+        </Component>
     );
 };
 

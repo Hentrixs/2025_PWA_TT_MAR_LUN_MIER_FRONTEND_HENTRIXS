@@ -49,13 +49,17 @@ const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onC
         <Modal title="Crear Canal" onClose={onClose}>
             {
                 step === 1 && <form className='create-channel-form' onSubmit={handleStep}>
-                    <input type="text" placeholder="# Nombre del canal"
-                        name={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME}
-                        value={formState[CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME]}
-                        onChange={handleChangeInput}
-                    />
-                    {channelNameError && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{channelNameError}</span>}
-                    <span>Los canales son donde ocurren las conversaciones sobre un tema. Usa un nombre que se pueda buscar y comprender fácilmente.</span>
+                    <div className='input-group'>
+                        <label htmlFor={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME}>Nombre del canal</label>
+                        <input type="text" placeholder="# e.g. plan-de-marketing"
+                            id={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME}
+                            name={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME}
+                            value={formState[CREATE_CHANNEL_FORM_FIELDS.CHANNEL_NAME]}
+                            onChange={handleChangeInput}
+                        />
+                        {channelNameError && <span className='error-text'>{channelNameError}</span>}
+                    </div>
+                    <span className='hint-text'>Los canales son donde ocurren las conversaciones sobre un tema. Usa un nombre que se pueda buscar y comprender fácilmente.</span>
                     <div className='create-channel-form-footer'>
                         <span className='step'>Paso 1 de 2</span>
                         <button type="submit">Siguiente</button>
@@ -64,11 +68,17 @@ const CreateChannelModal = ({ onSuccess, onClose }: { onSuccess: () => void, onC
             }
             {
                 step === 2 && <form className='create-channel-form' onSubmit={onSubmit}>
-                    <input type="text" placeholder="# Descripcion del canal"
-                        name={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_DESCRIPTION}
-                        value={formState[CREATE_CHANNEL_FORM_FIELDS.CHANNEL_DESCRIPTION]}
-                        onChange={handleChangeInput}
-                    />
+                    <div className='input-group'>
+                        <label htmlFor={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_DESCRIPTION}>Descripción (opcional)</label>
+                        <textarea 
+                            id={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_DESCRIPTION}
+                            placeholder="# ¿De qué trata este canal?"
+                            name={CREATE_CHANNEL_FORM_FIELDS.CHANNEL_DESCRIPTION}
+                            value={formState[CREATE_CHANNEL_FORM_FIELDS.CHANNEL_DESCRIPTION]}
+                            onChange={handleChangeInput}
+                            rows={4}
+                        />
+                    </div>
                     <div className='create-channel-form-footer'>
                         <span className='step'>Paso 2 de 2</span>
                         <div className='create-channel-btn-container'>

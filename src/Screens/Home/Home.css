@@ -23,6 +23,22 @@
   align-items: center;
 }
 
+.home-header-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--bg-dark);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color-subtle);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Optional: Add shadow when header is sticky (requires JS or scroll-padding) */
+/* For now, just a subtle border is enough */
+
 .home-nav-link {
   color: var(--text-primary);
   text-decoration: none;

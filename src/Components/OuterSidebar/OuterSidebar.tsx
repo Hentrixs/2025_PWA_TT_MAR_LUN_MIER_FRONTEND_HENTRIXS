@@ -23,6 +23,10 @@ const OuterSidebar = () => {
                     </NavLink>
                 ))}
 
+                <NavLink to="/create-workspace" className='workspace-icon add-workspace-btn' title="Crear un nuevo espacio">
+                    <p>+</p>
+                </NavLink>
+
             </div>
             <div className='user-svg-wrapper'>
 

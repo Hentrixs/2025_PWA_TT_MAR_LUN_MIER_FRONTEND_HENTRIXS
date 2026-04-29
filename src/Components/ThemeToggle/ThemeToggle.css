@@ -33,7 +33,19 @@
     /* Indigo for moon */
 }
 
+.theme-toggle-btn.readonly {
+    cursor: default;
+    pointer-events: none;
+    border-color: var(--border-color-subtle);
+}
+
+.theme-toggle-btn.readonly:hover {
+    background-color: transparent;
+    border-color: var(--border-color-subtle);
+    transform: none;
+}
+
 /* Specific adjustment when in dark theme overlay (Navbar) */
-[data-theme='dark'] .theme-toggle-btn:hover {
+[data-theme='dark'] .theme-toggle-btn:not(.readonly):hover {
     background-color: rgba(255, 255, 255, 0.05);
 }

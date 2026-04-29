@@ -1,40 +1,96 @@
 .create-channel-form {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    min-height: 15rem;
+    gap: var(--space-md);
+    min-height: auto; /* Removed fixed height to avoid excessive spacing */
+    padding-top: var(--space-xs);
 }
 
-.create-channel-form input {
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary); /* Better contrast */
+}
+
+.create-channel-form input,
+.create-channel-form textarea {
     width: 100%;
     padding: var(--space-sm);
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-color-subtle);
     background-color: var(--bg-dark);
     color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
 }
 
-.create-channel-form span {
-    font-size: 0.8rem;
+.create-channel-form input:focus,
+.create-channel-form textarea:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+}
+
+.create-channel-form textarea {
+    resize: none;
+}
+
+.hint-text {
+    font-size: 0.85rem;
     color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: calc(-1 * var(--space-xs)); /* Pull up slightly */
 }
 
-.create-channel-form button {
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-sm);
-    border: none;
-    background-color: var(--brand-primary);
-    color: var(--text-on-dark);
-    width: min-content;
-    cursor: pointer;
+.error-text {
+    color: var(--error-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .create-channel-form-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--space-md);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-color-subtle);
+}
+
+.create-channel-form button {
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    border: none;
+    background-color: var(--brand-primary);
+    color: var(--text-on-dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-channel-form button:hover {
+    background-color: var(--brand-secondary);
+}
+
+.create-channel-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.create-channel-form button[type="button"] {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color-subtle);
+}
+
+.create-channel-form button[type="button"]:hover {
+    background-color: var(--bg-dark-light);
 }
 
 .create-channel-btn-container {
@@ -44,5 +100,6 @@
 
 .step {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
 }
