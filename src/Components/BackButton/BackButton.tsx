@@ -2,7 +2,7 @@ import './BackButton.css';
 import { useNavigate } from 'react-router-dom';
 
 interface BackButtonProps {
-    to: string;
+    to?: string;
     label?: string;
 }
 

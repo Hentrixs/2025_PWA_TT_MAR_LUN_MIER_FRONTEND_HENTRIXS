@@ -4,13 +4,19 @@ import WorkspaceContextProvider from '../../context/WorkspaceContext/WorkspaceCo
 import ChannelContextProvider, { useChannelContext } from '../../context/ChannelContext/ChannelContext';
 import OuterSidebar from '../../Components/OuterSidebar/OuterSidebar';
 import InnerSidebar from '../../Components/InnerSidebar/InnerSidebar';
+import useVisualViewport from '../../hooks/useVisualViewport/useVisualViewport';
+
 
 function WorkspaceLayout() {
     const { channel_id } = useChannelContext();
     const isDmRoute = useMatch('/workspace/:workspace_id/dm/:member_id');
+    const viewportHeight = useVisualViewport();
 
     return (
-        <div className={`workspace-layout ${channel_id || isDmRoute ? 'has-channel' : ''}`}>
+        <div 
+            className={`workspace-layout ${channel_id || isDmRoute ? 'has-channel' : ''}`}
+            style={{ height: `${viewportHeight}px` }}
+        >
             <OuterSidebar />
             <InnerSidebar />
             <Outlet />
