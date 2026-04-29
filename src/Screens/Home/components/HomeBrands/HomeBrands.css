@@ -1,0 +1,27 @@
+.home-brands {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.home-brands-label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.home-brands-list {
+  display: flex;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-brands-list span {
+  font-size: var(--text-md);
+  font-weight: var(--weight-lg);
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}

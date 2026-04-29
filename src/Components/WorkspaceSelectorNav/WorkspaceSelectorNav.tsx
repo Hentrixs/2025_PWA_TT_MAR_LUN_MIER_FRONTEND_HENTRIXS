@@ -26,7 +26,7 @@ function WorkspaceSelectorNav() {
                 ) : (
                     <>
                         <ThemeToggle />
-                        <Link to="/create-workspace" className='workspace-nav-create-btn'>Crear un espacio de trabajo</Link>
+                        <Link to="/create-workspace" state={{ from: '/workspace-selector' }} className='workspace-nav-create-btn'>Crear un espacio de trabajo</Link>
                         <NavLink to="/settings" className="workspace-settings-btn">Ajustes de Perfil</NavLink>
                         <button className="workspace-logout-btn" onClick={handleLogout}>Cerrar sesión</button>
                     </>

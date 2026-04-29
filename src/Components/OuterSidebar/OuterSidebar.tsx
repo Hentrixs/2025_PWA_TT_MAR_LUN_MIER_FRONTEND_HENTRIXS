@@ -23,7 +23,7 @@ const OuterSidebar = () => {
                     </NavLink>
                 ))}
 
-                <NavLink to="/create-workspace" className='workspace-icon add-workspace-btn' title="Crear un nuevo espacio">
+                <NavLink to="/create-workspace" state={{ from: `/workspace/${workspace_id}` }} className='workspace-icon add-workspace-btn' title="Crear un nuevo espacio">
                     <p>+</p>
                 </NavLink>
 

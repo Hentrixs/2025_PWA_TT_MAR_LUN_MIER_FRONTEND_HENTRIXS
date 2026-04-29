@@ -6,8 +6,11 @@ import { useTheme } from '../../context/ThemeContext/ThemeContext';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import useIsMobile from '../../hooks/useIsMobile/useIsMobile';
-import aiMobile from '../../assets/slack_ai_mobile.png';
-import aiDesktop from '../../assets/slack_ai_desktop.png';
+import HomeHero from './components/HomeHero/HomeHero';
+import HomeBrands from './components/HomeBrands/HomeBrands';
+import HomeAiReimagine from './components/HomeAiReimagine/HomeAiReimagine';
+import HomeAiContext from './components/HomeAiContext/HomeAiContext';
+import HomeFooter from './components/HomeFooter/HomeFooter';
 
 const Home = () => {
 
@@ -69,85 +72,10 @@ const Home = () => {
             </header>
 
             <main className="home-center">
-                <section className="home-hero">
-                    <div className="home-title">
-                        <h1>🧠 El cerebro colectivo<br />de tu equipo.</h1>
-                        <p>Moverse más rápido y trabajar de forma más inteligente junto a personas, aplicaciones e IA.</p>
-                    </div>
-                    <div className="home-hero-buttons">
-                        <Link to="/register" className="home-btn home-btn--primary">Comenzar gratis</Link>
-                        <Link to="/login" className="home-btn home-btn--secondary">Ya tengo cuenta →</Link>
-                    </div>
-                </section>
-
-                <section className="home-brands">
-                    <p className="home-brands-label">Usado por equipos de todo el mundo</p>
-                    <div className="home-brands-list">
-                        <span>Airbnb</span>
-                        <span>NASA</span>
-                        <span>Spotify</span>
-                        <span>Target</span>
-                        <span>Oracle</span>
-                    </div>
-                </section>
-
-                <section className="home-ai-reimagine">
-                    <div className="ai-reimagine-content">
-                        <h2>Reimagina los límites de lo posible con la IA y los agentes.</h2>
-                        <p className="ai-reimagine-desc">
-                            Con la IA en GreenSlack podrás dejar de darle vueltas a todo, ya que te ayuda a completar tareas.
-                            Resume y hace búsquedas basándose en conversaciones reales y, de este modo, consigue que cada
-                            aplicación y cada agente sean más útiles y más conscientes del contexto que nunca.
-                        </p>
-
-                        <div className="ai-reimagine-grid">
-                            <div className="ai-feature-list-card">
-                                <ul>
-                                    <li className="active">Actualizar negociaciones solo con pedírselo a GreenSlackBot</li>
-                                    <li>Resumir una conversación que te perdiste</li>
-                                    <li>Obtener respuestas rápidamente con Claude</li>
-                                    <li>Activar la función de tomar notas de la IA en las juntas</li>
-                                    <li>Revisar código con GitHub Copilot</li>
-                                    <li>Buscar datos de clientes en Agentforce</li>
-                                </ul>
-                            </div>
-                            <div className="ai-feature-image">
-                                <img src={aiMobile} alt="GreenSlack AI Mobile" />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="home-ai-context">
-                    <div className="ai-context-content">
-                        <h2>Proporciona contexto al instante a los demás.</h2>
-                        <p className="ai-context-desc">
-                            Obtén acceso a cada archivo, decisión y conversación para poder profundizar en el trabajo
-                            ya hecho en lugar de empezar de cero.
-                        </p>
-
-                        <div className="ai-context-layout">
-                            <div className="ai-context-text">
-                                <div className="context-item">
-                                    <h3>Conoce GreenSlackBot: tu agente personal para el trabajo.</h3>
-                                    <p>GreenSlackBot no es una IA cualquiera. Es una IA que te conoce a ti y a tu equipo. Coordina el trabajo entre tus aplicaciones y agentes.</p>
-                                    <a href="#">Más información sobre GreenSlackBot →</a>
-                                </div>
-                                <div className="context-item">
-                                    <h3>Una búsqueda para gobernarlas a todas.</h3>
-                                    <p>Integra los datos de tu CRM directamente en la conversación y encuentra lo que necesitas en segundos.</p>
-                                </div>
-                                <div className="context-item highlight">
-                                    <span className="stat">97 minutos</span>
-                                    <p>Ahorrados por semana en promedio por usuario.</p>
-                                </div>
-                            </div>
-                            <div className="ai-context-image">
-                                <img src={aiDesktop} alt="GreenSlack AI Desktop Search" />
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <HomeHero />
+                <HomeBrands />
+                <HomeAiReimagine />
+                <HomeAiContext />
 
                 <section className="home-cta-final">
                     <h2>¿Listo para empezar?</h2>
@@ -156,51 +84,7 @@ const Home = () => {
                 </section>
             </main>
 
-            <footer className="home-footer">
-                <div className="home-footer-content">
-                    <div className="footer-brand">
-                        <Logo className='footer-logo' showText={true} />
-                        <p>El cerebro colectivo de tu equipo.</p>
-                        <div className="footer-socials">
-                            <a href="#">X</a>
-                            <a href="#">In</a>
-                            <a href="#">Ig</a>
-                            <a href="#">Fb</a>
-                        </div>
-                    </div>
-                    <div className="footer-links-grid">
-                        <div className="footer-column">
-                            <h4>Producto</h4>
-                            <Link to="#">Funciones</Link>
-                            <Link to="#">Integraciones</Link>
-                            <Link to="#">Precios</Link>
-                            <Link to="#">Changelog</Link>
-                        </div>
-                        <div className="footer-column">
-                            <h4>Recursos</h4>
-                            <Link to="#">Centro de ayuda</Link>
-                            <Link to="#">Eventos</Link>
-                            <Link to="#">Desarrolladores</Link>
-                            <Link to="#">Blog</Link>
-                        </div>
-                        <div className="footer-column">
-                            <h4>Compañía</h4>
-                            <Link to="#">Sobre nosotros</Link>
-                            <Link to="#">Empleo</Link>
-                            <Link to="#">Noticias</Link>
-                            <Link to="#">Contacto</Link>
-                        </div>
-                    </div>
-                </div>
-                <div className="home-footer-bottom">
-                    <div className="footer-legal">
-                        <Link to="#">Privacidad</Link>
-                        <Link to="#">Términos</Link>
-                        <Link to="#">Cookies</Link>
-                    </div>
-                    <p className="footer-copyright">&copy; 2026 GreenSlack. Todos los derechos reservados.</p>
-                </div>
-            </footer>
+            <HomeFooter />
         </div>
     );
 };

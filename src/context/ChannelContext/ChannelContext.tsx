@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import useChannel from "../../hooks/useChannel/useChannel";
 import { useParams } from "react-router-dom";
 import { useWorkspaceContext } from "../WorkspaceContext/WorkspaceContext";
@@ -18,14 +18,21 @@ export function ChannelContextProvider({ children }: { children: React.ReactNode
         response: responseChannel
     } = useChannel(workspace_id ?? '');
 
-    const providerValues = {
+    const providerValues = useMemo(() => ({
         channel_id,
         channel_list,
         refetchChannels,
         loadingChannels,
         errorChannel,
         responseChannel
-    };
+    }), [
+        channel_id,
+        channel_list,
+        refetchChannels,
+        loadingChannels,
+        errorChannel,
+        responseChannel
+    ]);
 
     return (
         <ChannelContext.Provider value={providerValues}>
@@ -34,5 +41,11 @@ export function ChannelContextProvider({ children }: { children: React.ReactNode
     );
 };
 
-export const useChannelContext = () => useContext(ChannelContext) as ChannelContextType;
+export const useChannelContext = () => {
+    const context = useContext(ChannelContext);
+    if (!context) {
+        throw new Error("useChannelContext must be used within a ChannelContextProvider");
+    }
+    return context;
+};
 export default ChannelContextProvider;

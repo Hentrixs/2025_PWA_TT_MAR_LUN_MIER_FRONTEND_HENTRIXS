@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import useUpdateProfile from '../../hooks/useUpdateProfile/useUpdateProfile';
 import useForm from '../../hooks/useForm/useForm';
 import type { IUser } from '../../types';
+import './ProfileTab.css';
+
 
 interface ProfileTabProps {
     profile: IUser;

@@ -14,7 +14,7 @@ function MobileNavOverlay() {
 
     return (
         <div className="mobile-nav-overlay">
-            <Link to="/create-workspace" className='mobile-nav-item mobile-create-btn' onClick={close}>
+            <Link to="/create-workspace" state={{ from: '/workspace-selector' }} className='mobile-nav-item mobile-create-btn' onClick={close}>
                 Crear un espacio de trabajo
             </Link>
             <NavLink to="/settings" className='mobile-nav-item mobile-settings-btn' onClick={close}>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
 import type { Theme, ThemeContextType } from "../../types";
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -16,15 +16,15 @@ export const ThemeContextProvider = ({ children }: { children: React.ReactNode }
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    const toggleTheme = () => {
+    const toggleTheme = useCallback(() => {
         setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-    };
+    }, []);
 
-    const value: ThemeContextType = {
+    const value: ThemeContextType = useMemo(() => ({
         theme,
         toggleTheme,
         isDark: theme === 'dark'
-    };
+    }), [theme, toggleTheme]);
 
     return (
         <ThemeContext.Provider value={value}>

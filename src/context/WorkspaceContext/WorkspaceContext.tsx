@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useParams } from "react-router";
 import { LOCAL_STORAGE_TOKEN_KEY } from "../AuthContext/AuthContext";
 import type { WorkspaceContextType, IMember, ITokenPayload } from "../../types";
@@ -26,11 +26,16 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
 
     // Se Extrae Token -> Se Extrae el Payload -> se Busca el miembro activo con ese Payload
 
-    const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
-    const tokenPayload: ITokenPayload | null = token ? JSON.parse(atob(token.split('.')[1])) : null;
-    const activeMember = members?.find((m: IMember) => m.user_id === tokenPayload?.id) ?? null;
+    const tokenPayload = useMemo<ITokenPayload | null>(() => {
+        const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
+        return token ? JSON.parse(atob(token.split('.')[1])) : null;
+    }, []);
 
-    const providerValues = {
+    const activeMember = useMemo(() => {
+        return members?.find((m: IMember) => m.user_id === tokenPayload?.id) ?? null;
+    }, [members, tokenPayload?.id]);
+
+    const providerValues = useMemo(() => ({
         workspace_id,
         workspaceDetail,
         members,
@@ -42,7 +47,19 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
         loadingWorkspace,
         errorWorkspace,
         isMobile
-    };
+    }), [
+        workspace_id,
+        workspaceDetail,
+        members,
+        activeMember,
+        workspaces,
+        loadingWorkspaces,
+        errorWorkspaces,
+        responseWorkspaces,
+        loadingWorkspace,
+        errorWorkspace,
+        isMobile
+    ]);
 
     return (
         <WorkspaceContext.Provider value={providerValues}>
@@ -51,5 +68,11 @@ export function WorkspaceContextProvider({ children }: { children: React.ReactNo
     );
 };
 
-export const useWorkspaceContext = () => useContext(WorkspaceContext) as WorkspaceContextType;
+export const useWorkspaceContext = () => {
+    const context = useContext(WorkspaceContext);
+    if (!context) {
+        throw new Error("useWorkspaceContext must be used within a WorkspaceContextProvider");
+    }
+    return context;
+};
 export default WorkspaceContextProvider;

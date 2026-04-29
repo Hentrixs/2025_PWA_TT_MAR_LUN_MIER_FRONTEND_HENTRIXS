@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import useDirectChatMain from "../../hooks/useDirectChatMain/useDirectChatMain";
 import useDirectSendMessage from "../../hooks/useDirectSendMessage/useDirectSendMessage";
@@ -24,9 +24,11 @@ export function DirectChatContextProvider({ children }: { children: React.ReactN
         return () => clearInterval(interval);
     }, [refreshMessages]);
 
-    const otherMemberName = members?.find((m: IMember) => m.member_id === other_member_id)?.user_name ?? 'Usuario';
+    const otherMemberName = useMemo(() => {
+        return members?.find((m: IMember) => m.member_id === other_member_id)?.user_name ?? 'Usuario';
+    }, [members, other_member_id]);
 
-    const providerValues = {
+    const providerValues = useMemo(() => ({
         messagelist,
         responseMessages,
         loadingMessages,
@@ -36,7 +38,17 @@ export function DirectChatContextProvider({ children }: { children: React.ReactN
         loadingSend,
         errorSend,
         otherMemberName
-    };
+    }), [
+        messagelist,
+        responseMessages,
+        loadingMessages,
+        errorMessages,
+        refreshMessages,
+        sendMessageSubmit,
+        loadingSend,
+        errorSend,
+        otherMemberName
+    ]);
 
     return (
         <DirectChatContext.Provider value={providerValues}>
@@ -45,5 +57,11 @@ export function DirectChatContextProvider({ children }: { children: React.ReactN
     );
 }
 
-export const useDirectChatContext = () => useContext(DirectChatContext) as DirectChatContextType;
+export const useDirectChatContext = () => {
+    const context = useContext(DirectChatContext);
+    if (!context) {
+        throw new Error("useDirectChatContext must be used within a DirectChatContextProvider");
+    }
+    return context;
+};
 export default DirectChatContextProvider;

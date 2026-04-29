@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EmailChangeForm from '../EmailChangeForm/EmailChangeForm';
 import PasswordChangeForm from '../PasswordChangeForm/PasswordChangeForm';
 import DeleteAccountForm from '../DeleteAccountForm/DeleteAccountForm';
+import './SecurityTab.css';
 
 const SecurityTab: React.FC = () => {
     const [openedChangePasswordForm, setOpenedChangePasswordForm] = useState(false);

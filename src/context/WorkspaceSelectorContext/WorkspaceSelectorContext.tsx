@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useMemo, useCallback } from 'react';
 import { AuthContext, LOCAL_STORAGE_TOKEN_KEY } from '../AuthContext/AuthContext';
 import useWorkspaces from '../../hooks/useWorkspaces/useWorkspaces';
 import useIsMobile from '../../hooks/useIsMobile/useIsMobile';
@@ -26,38 +26,61 @@ export function WorkspaceSelectorProvider({ children }: { children: React.ReactN
     const { isMobile } = useIsMobile();
     const { workspaces, response, error, loading } = useWorkspaces();
 
-    const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
-    const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
-    const userName = tokenPayload?.name ?? 'Usuario';
+    const userName = useMemo(() => {
+        const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
+        const tokenPayload = token ? JSON.parse(atob(token.split('.')[1])) : null;
+        return tokenPayload?.name ?? 'Usuario';
+    }, []);
 
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
-    const handleLogout = () => setIsLogoutModalOpen(true);
+    const handleLogout = useCallback(() => setIsLogoutModalOpen(true), []);
 
-    const confirmLogout = () => {
+    const confirmLogout = useCallback(() => {
         manageLogout();
         setIsLogoutModalOpen(false);
-    };
+    }, [manageLogout]);
+
+    const providerValues = useMemo(() => ({
+        workspaces,
+        response,
+        loading,
+        error,
+        userName,
+        isMobile,
+        isNavOpen,
+        setIsNavOpen,
+        isLogoutModalOpen,
+        setIsLogoutModalOpen,
+        handleLogout,
+        confirmLogout
+    }), [
+        workspaces,
+        response,
+        loading,
+        error,
+        userName,
+        isMobile,
+        isNavOpen,
+        setIsNavOpen,
+        isLogoutModalOpen,
+        setIsLogoutModalOpen,
+        handleLogout,
+        confirmLogout
+    ]);
 
     return (
-        <WorkspaceSelectorContext.Provider value={{
-            workspaces,
-            response,
-            loading,
-            error,
-            userName,
-            isMobile,
-            isNavOpen,
-            setIsNavOpen,
-            isLogoutModalOpen,
-            setIsLogoutModalOpen,
-            handleLogout,
-            confirmLogout
-        }}>
+        <WorkspaceSelectorContext.Provider value={providerValues}>
             {children}
         </WorkspaceSelectorContext.Provider>
     );
 }
 
-export const useWorkspaceSelectorContext = () => useContext(WorkspaceSelectorContext) as WorkspaceSelectorContextType;
+export const useWorkspaceSelectorContext = () => {
+    const context = useContext(WorkspaceSelectorContext);
+    if (!context) {
+        throw new Error("useWorkspaceSelectorContext must be used within a WorkspaceSelectorProvider");
+    }
+    return context;
+};
