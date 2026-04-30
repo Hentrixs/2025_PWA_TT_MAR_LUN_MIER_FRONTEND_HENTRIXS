@@ -1,13 +1,10 @@
 import ENVIRONMENT from "../config/environment.config";
-import { LOCAL_STORAGE_TOKEN_KEY } from "../context/AuthContext/AuthContext";
+import { getApiHeaders } from "../helpers/apiHelper";
 
 export const getChannels = async (fk_id_workspace: string) => {
     const channel_list = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${fk_id_workspace}/channel`, {
         method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json',
-        }
+        headers: getApiHeaders(true)
     });
 
     const response = await channel_list.json();
@@ -17,10 +14,7 @@ export const getChannels = async (fk_id_workspace: string) => {
 export const createChannel = async (channel: { channel_name: string, channel_description: string }, workspace_id: string) => {
     const channel_created = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel`, {
         method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json',
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({
             name: channel.channel_name,
             description: channel.channel_description
@@ -34,10 +28,7 @@ export const createChannel = async (channel: { channel_name: string, channel_des
 export const updateChannel = async (workspace_id: string, channel_id: string, name: string, description: string) => {
     const res = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel/${channel_id}`, {
         method: 'PATCH',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json',
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({ name, description })
     });
     return res.json();
@@ -46,9 +37,7 @@ export const updateChannel = async (workspace_id: string, channel_id: string, na
 export const deleteChannel = async (workspace_id: string, channel_id: string) => {
     const res = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${workspace_id}/channel/${channel_id}`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-        }
+        headers: getApiHeaders(true)
     });
     return res.json();
 };

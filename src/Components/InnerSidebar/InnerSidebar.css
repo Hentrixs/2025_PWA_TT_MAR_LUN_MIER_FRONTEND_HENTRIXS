@@ -38,6 +38,9 @@
 
 .sidebar-theme-toggle-wrapper {
     margin-left: auto;
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
 }
 
 .sidebar-theme-toggle-wrapper .theme-toggle-btn {

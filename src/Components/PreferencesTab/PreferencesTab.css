@@ -1,0 +1,28 @@
+.preferences-tab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding: var(--space-lg) 0;
+    width: 100%;
+}
+
+.preference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md);
+    background-color: var(--bg-dark-mid);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color-subtle);
+}
+
+.preference-info h3 {
+    font-size: var(--text-md);
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.preference-info p {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}

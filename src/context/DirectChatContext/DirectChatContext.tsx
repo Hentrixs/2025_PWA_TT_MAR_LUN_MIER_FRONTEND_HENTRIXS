@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo } from "react";
+import { useTranslation } from "../LanguageContext/LanguageContext";
 import { useParams } from "react-router-dom";
 import useDirectChatMain from "../../hooks/useDirectChatMain/useDirectChatMain";
 import useDirectSendMessage from "../../hooks/useDirectSendMessage/useDirectSendMessage";
@@ -8,6 +9,7 @@ import type { DirectChatContextType, IMember } from "../../types";
 const DirectChatContext = createContext<DirectChatContextType | null>(null);
 
 export function DirectChatContextProvider({ children }: { children: React.ReactNode }) {
+    const { t } = useTranslation();
     const { member_id: other_member_id } = useParams();
     const { members } = useWorkspaceContext();
 
@@ -22,8 +24,8 @@ export function DirectChatContextProvider({ children }: { children: React.ReactN
     }, [refreshMessages]);
 
     const otherMemberName = useMemo(() => {
-        return members?.find((m: IMember) => m.member_id === other_member_id)?.user_name ?? 'Usuario';
-    }, [members, other_member_id]);
+        return members?.find((m: IMember) => m.member_id === other_member_id)?.user_name ?? t.common.user;
+    }, [members, other_member_id, t]);
 
     const providerValues = useMemo(() => ({
         messagelist,

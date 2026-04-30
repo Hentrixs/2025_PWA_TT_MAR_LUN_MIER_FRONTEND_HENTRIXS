@@ -1,11 +1,11 @@
 import ENVIRONMENT from "../config/environment.config";
-import { LOCAL_STORAGE_TOKEN_KEY } from "../context/AuthContext/AuthContext";
 import type { LoginParams, RegisterParams, ResetPasswordParams, UpdateProfileParams, DeleteAccountParams, UpdatePasswordParams, RequestEmailChangeParams } from "../types";
+import { getApiHeaders } from "../helpers/apiHelper";
 
 export const login = async ({ email, password }: LoginParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getApiHeaders(),
         body: JSON.stringify({
             email,
             password
@@ -19,7 +19,7 @@ export const login = async ({ email, password }: LoginParams) => {
 export const register = async ({ name, email, password }: RegisterParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/register`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getApiHeaders(),
         body: JSON.stringify({
             name,
             email,
@@ -34,7 +34,7 @@ export const register = async ({ name, email, password }: RegisterParams) => {
 export const resetPassword = async ({ email, new_password }: ResetPasswordParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/reset-password-request`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getApiHeaders(),
         body: JSON.stringify({ email, new_password })
     });
     const response = await response_http.json();
@@ -44,10 +44,7 @@ export const resetPassword = async ({ email, new_password }: ResetPasswordParams
 export const getProfile = async () => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/profile`, {
         method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json'
-        }
+        headers: getApiHeaders(true)
     });
     const response = await response_http.json();
     return response;
@@ -56,11 +53,7 @@ export const getProfile = async () => {
 export const updateProfile = async ({ name, description }: UpdateProfileParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/update-profile`, {
         method: 'PATCH',
-
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json'
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({
             name: name,
             description: description
@@ -73,10 +66,7 @@ export const updateProfile = async ({ name, description }: UpdateProfileParams) 
 export const deleteAccount = async ({ password }: DeleteAccountParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/delete-account`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json'
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({
             password
         })
@@ -88,10 +78,7 @@ export const deleteAccount = async ({ password }: DeleteAccountParams) => {
 export const updatePassword = async ({ old_password, new_password }: UpdatePasswordParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/update_password`, {
         method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json'
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({
             old_password,
             new_password
@@ -104,14 +91,21 @@ export const updatePassword = async ({ old_password, new_password }: UpdatePassw
 export const requestEmailChange = async ({ password, new_email }: RequestEmailChangeParams) => {
     const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/request-email-change`, {
         method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json'
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({
             password,
             new_email
         })
+    });
+    const response = await response_http.json();
+    return response;
+};
+
+export const updateLanguage = async (language: 'es' | 'en') => {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/update-language`, {
+        method: 'PATCH',
+        headers: getApiHeaders(true),
+        body: JSON.stringify({ language })
     });
     const response = await response_http.json();
     return response;

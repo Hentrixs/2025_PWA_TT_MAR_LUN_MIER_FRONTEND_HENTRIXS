@@ -5,6 +5,7 @@ import { useWorkspaceContext } from '../../context/WorkspaceContext/WorkspaceCon
 import type { IChannel } from '../../types';
 import './ChannelSettingsModal.css';
 import useForm from '../../hooks/useForm/useForm';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 interface ChannelSettingsModalProps {
     channel: IChannel;
@@ -13,6 +14,7 @@ interface ChannelSettingsModalProps {
 }
 
 const ChannelSettingsModal = ({ channel, onClose, onSuccess }: ChannelSettingsModalProps) => {
+    const { t } = useTranslation();
     const { workspace_id } = useWorkspaceContext();
     const [activeTab, setActiveTab] = useState<'general' | 'delete'>('general');
     const [loading, setLoading] = useState(false);
@@ -36,10 +38,10 @@ const ChannelSettingsModal = ({ channel, onClose, onSuccess }: ChannelSettingsMo
                 if (response.ok) {
                     onSuccess();
                 } else {
-                    setError(response.message || 'Error al actualizar');
+                    setError(response.message || t.sidebar.channel_settings.update_error);
                 }
             } catch {
-                setError('Error de conexión');
+                setError(t.sidebar.channel_settings.conn_error);
             } finally {
                 setLoading(false);
             }
@@ -47,7 +49,7 @@ const ChannelSettingsModal = ({ channel, onClose, onSuccess }: ChannelSettingsMo
     });
 
     const handleDelete = async () => {
-        if (!confirm(`¿Estás SEGURO de que deseas eliminar #${channel.channel_name}? Esto no se puede deshacer.`)) return;
+        if (!confirm(t.sidebar.channel_settings.delete_confirm.replace('{{name}}', channel.channel_name))) return;
         if (!workspace_id) return;
         setLoading(true);
         setError(null);
@@ -56,30 +58,30 @@ const ChannelSettingsModal = ({ channel, onClose, onSuccess }: ChannelSettingsMo
             if (response.ok) {
                 onSuccess();
             } else {
-                setError(response.message || 'Error al eliminar');
+                setError(response.message || t.sidebar.channel_settings.delete_error);
             }
         } catch {
-            setError('Error de conexión');
+            setError(t.sidebar.channel_settings.conn_error);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <Modal title={`Configuración de #${channel.channel_name}`} onClose={onClose}>
+        <Modal title={`${t.sidebar.channel_settings.title_prefix} #${channel.channel_name}`} onClose={onClose}>
             <div className="channel-settings-container">
                 <div className="settings-tabs">
                     <button
                         className={`tab-btn ${activeTab === 'general' ? 'active' : ''}`}
                         onClick={() => setActiveTab('general')}
                     >
-                        General
+                        {t.sidebar.channel_settings.general_tab}
                     </button>
                     <button
                         className={`tab-btn ${activeTab === 'delete' ? 'active' : ''}`}
                         onClick={() => setActiveTab('delete')}
                     >
-                        Zona de Peligro
+                        {t.sidebar.channel_settings.danger_tab}
                     </button>
                 </div>
 
@@ -87,44 +89,44 @@ const ChannelSettingsModal = ({ channel, onClose, onSuccess }: ChannelSettingsMo
                     {activeTab === 'general' ? (
                         <form className="settings-form" onSubmit={onSubmit}>
                             <div className="form-group">
-                                <label>Nombre del Canal</label>
+                                <label>{t.sidebar.channel_settings.name_label}</label>
                                 <input
                                     type="text"
                                     name="name"
                                     value={formState.name}
                                     onChange={handleChangeInput}
-                                    placeholder="nombre-del-canal"
+                                    placeholder={t.sidebar.create_channel.name_placeholder}
                                 />
                                 {errors.name && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{errors.name}</span>}
                             </div>
                             <div className="form-group">
-                                <label>Descripción</label>
+                                <label>{t.sidebar.channel_settings.description_label}</label>
                                 <textarea
                                     name="description"
                                     value={formState.description}
                                     onChange={handleChangeInput}
-                                    placeholder="De qué trata este canal..."
+                                    placeholder={t.sidebar.channel_settings.description_placeholder}
                                     rows={4}
                                 />
                                 {errors.description && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{errors.description}</span>}
                             </div>
                             <div className="form-actions">
                                 {error && <span className="error-message">{error}</span>}
-                                <button type="button" className="secondary-btn" onClick={onClose} disabled={loading}>Cancelar</button>
+                                <button type="button" className="secondary-btn" onClick={onClose} disabled={loading}>{t.common.cancel}</button>
                                 <button type="submit" className="primary-btn" disabled={loading}>
-                                    {loading ? 'Guardando...' : 'Guardar Cambios'}
+                                    {loading ? t.sidebar.channel_settings.saving : t.sidebar.channel_settings.save_changes}
                                 </button>
                             </div>
                         </form>
                     ) : (
                         <div className="danger-zone">
                             <div className="danger-info">
-                                <h3>Eliminar #{channel.channel_name}</h3>
-                                <p>Esta acción es permanente y no se puede deshacer. Se borrarán todos los mensajes del canal.</p>
+                                <h3>{t.sidebar.channel_settings.delete_title} #{channel.channel_name}</h3>
+                                <p>{t.sidebar.channel_settings.delete_desc}</p>
                                 {error && <span className="error-message" style={{ display: 'block', marginTop: '10px' }}>{error}</span>}
                             </div>
                             <button className="delete-btn" onClick={handleDelete} disabled={loading}>
-                                {loading ? 'Eliminando...' : 'Eliminar Canal Definitivamente'}
+                                {loading ? t.sidebar.channel_settings.deleting : t.sidebar.channel_settings.delete_btn}
                             </button>
                         </div>
                     )}

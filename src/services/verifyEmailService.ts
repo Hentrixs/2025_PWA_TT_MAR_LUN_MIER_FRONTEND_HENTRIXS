@@ -1,13 +1,12 @@
-import ENVIRONMENT from "../config/environment.config"
+import ENVIRONMENT from "../config/environment.config";
+import { getApiHeaders } from "../helpers/apiHelper";
 
 export const verifyEmail = async (verify_email_token: string) => {
-    const verifyEmail = await fetch(`${ENVIRONMENT.API_URL}/api/auth/verify-email?verify_email_token=${verify_email_token}`, {
+    const response_http = await fetch(`${ENVIRONMENT.API_URL}/api/auth/verify-email?verify_email_token=${verify_email_token}`, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: getApiHeaders()
     });
 
-    const response = await verifyEmail.json();
+    const response = await response_http.json();
     return response;
 };

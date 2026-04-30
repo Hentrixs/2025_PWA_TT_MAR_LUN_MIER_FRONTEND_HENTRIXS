@@ -2,9 +2,11 @@ import { Link, NavLink } from 'react-router-dom';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { useTheme } from '../../context/ThemeContext/ThemeContext';
 import { useWorkspaceSelectorContext } from '../../context/WorkspaceSelectorContext/WorkspaceSelectorContext';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import './MobileNavOverlay.css';
 
 function MobileNavOverlay() {
+    const { t } = useTranslation();
     const { isNavOpen, isMobile, setIsNavOpen, handleLogout } = useWorkspaceSelectorContext();
     const { toggleTheme } = useTheme();
 
@@ -15,19 +17,19 @@ function MobileNavOverlay() {
     return (
         <div className="mobile-nav-overlay">
             <Link to="/create-workspace" state={{ from: '/workspace-selector' }} className='mobile-nav-item mobile-create-btn' onClick={close}>
-                Crear un espacio de trabajo
+                {t.workspace_selector.nav_create_btn}
             </Link>
             <NavLink to="/settings" className='mobile-nav-item mobile-settings-btn' onClick={close}>
-                Ajustes de Perfil
+                {t.workspace_selector.nav_settings_btn}
             </NavLink>
             <button id="THEME_TOGGLE_ROW" className="mobile-nav-item" onClick={toggleTheme}>
                 <div className="mobile-theme-row">
-                    <span>Cambiar Tema</span>
+                    <span>{t.home.change_theme}</span>
                     <ThemeToggle readonly />
                 </div>
             </button>
             <button className="mobile-nav-item mobile-logout-btn" onClick={() => { close(); handleLogout(); }}>
-                Cerrar sesión
+                {t.workspace_selector.nav_logout_btn}
             </button>
         </div>
     );

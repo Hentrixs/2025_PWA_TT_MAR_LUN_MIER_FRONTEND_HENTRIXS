@@ -1,4 +1,5 @@
 import { useTheme } from "../../context/ThemeContext/ThemeContext";
+import { useTranslation } from "../../context/LanguageContext/LanguageContext";
 import "./ThemeToggle.css";
 
 interface ThemeToggleProps {
@@ -8,12 +9,13 @@ interface ThemeToggleProps {
 
 const ThemeToggle = ({ readonly, className = "" }: ThemeToggleProps) => {
     const { toggleTheme, isDark } = useTheme();
+    const { t } = useTranslation();
 
     const Component = readonly ? 'div' : 'button';
     const componentProps = readonly ? {} : {
         onClick: toggleTheme,
-        'aria-label': "Toggle Theme",
-        title: isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+        'aria-label': isDark ? t.common.theme_to_light : t.common.theme_to_dark,
+        title: isDark ? t.common.theme_to_light : t.common.theme_to_dark,
     };
 
     return (

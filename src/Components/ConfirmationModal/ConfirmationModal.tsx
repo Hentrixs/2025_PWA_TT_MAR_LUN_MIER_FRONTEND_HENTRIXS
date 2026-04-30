@@ -1,3 +1,4 @@
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import Modal from '../Modal/Modal';
 import './ConfirmationModal.css';
 
@@ -15,17 +16,20 @@ const ConfirmationModal = ({
     title,
     message,
     confirmText,
-    cancelText = 'Cancelar',
+    cancelText,
     onConfirm,
     onCancel,
     isDanger = false
 }: ConfirmationModalProps) => {
+    const { t } = useTranslation();
+    const finalCancelText = cancelText || t.common.cancel;
+
     return (
         <Modal title={title} onClose={onCancel} width="400px">
             <div className="confirmation-modal-content">
                 <p className='confirmation-message'>{message}</p>
                 <div className="confirmation-modal-actions">
-                    <button className="secondary-btn" onClick={onCancel}>{cancelText}</button>
+                    <button className="secondary-btn" onClick={onCancel}>{finalCancelText}</button>
                     <button className={isDanger ? 'delete-btn' : 'primary-btn'} onClick={onConfirm}>
                         {confirmText}
                     </button>

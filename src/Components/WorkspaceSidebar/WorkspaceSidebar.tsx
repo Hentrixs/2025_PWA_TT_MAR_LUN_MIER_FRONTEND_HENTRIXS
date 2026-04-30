@@ -1,5 +1,6 @@
 import { useWorkspaceSelectorContext } from '../../context/WorkspaceSelectorContext/WorkspaceSelectorContext';
 import SidebarPromoCard from '../SidebarPromoCard/SidebarPromoCard';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import './WorkspaceSidebar.css';
 
 const inviteIcon = (
@@ -22,6 +23,7 @@ const addPersonIcon = (
 );
 
 function WorkspaceSidebar() {
+    const { t } = useTranslation();
     const { workspaces } = useWorkspaceSelectorContext();
     const firstWorkspaceName = workspaces?.[0]?.workspace_name ?? 'Empresa123';
 
@@ -33,18 +35,18 @@ function WorkspaceSidebar() {
             </div>
 
             <SidebarPromoCard
-                title="Invita a tu equipo: ¡es gratis!"
-                subtitle="GreenSlack funciona mejor en grupo."
-                buttonText="Invita compañeros de equipo"
+                title={t.workspace_selector.sidebar_invite_title}
+                subtitle={t.workspace_selector.sidebar_invite_subtitle}
+                buttonText={t.workspace_selector.sidebar_invite_btn}
                 buttonIcon={addPersonIcon}
                 iconColor="purple"
                 icon={inviteIcon}
             />
 
             <SidebarPromoCard
-                title="Háblalo en tiempo real."
-                subtitle="Conéctate a través de audio o video."
-                buttonText="Iniciar una junta"
+                title={t.workspace_selector.sidebar_talk_title}
+                subtitle={t.workspace_selector.sidebar_talk_subtitle}
+                buttonText={t.workspace_selector.sidebar_talk_btn}
                 iconColor="pink"
                 icon={callIcon}
             />

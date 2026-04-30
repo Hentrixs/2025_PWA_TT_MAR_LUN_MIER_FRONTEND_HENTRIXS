@@ -1,11 +1,14 @@
 import { Link, NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import LanguageToggle from '../LanguageToggle/LanguageToggle';
 import { useWorkspaceSelectorContext } from '../../context/WorkspaceSelectorContext/WorkspaceSelectorContext';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import './WorkspaceSelectorNav.css';
 
 function WorkspaceSelectorNav() {
     const { isMobile, isNavOpen, setIsNavOpen, handleLogout } = useWorkspaceSelectorContext();
+    const { t } = useTranslation();
 
     return (
         <nav className="workspace-nav">
@@ -25,10 +28,11 @@ function WorkspaceSelectorNav() {
                     </div>
                 ) : (
                     <>
+                        <LanguageToggle />
                         <ThemeToggle />
-                        <Link to="/create-workspace" state={{ from: '/workspace-selector' }} className='workspace-nav-create-btn'>Crear un espacio de trabajo</Link>
-                        <NavLink to="/settings" className="workspace-settings-btn">Ajustes de Perfil</NavLink>
-                        <button className="workspace-logout-btn" onClick={handleLogout}>Cerrar sesión</button>
+                        <Link to="/create-workspace" state={{ from: '/workspace-selector' }} className='workspace-nav-create-btn'>{t.workspace_selector.nav_create_btn}</Link>
+                        <NavLink to="/settings" className="workspace-settings-btn">{t.workspace_selector.nav_settings_btn}</NavLink>
+                        <button className="workspace-logout-btn" onClick={handleLogout}>{t.workspace_selector.nav_logout_btn}</button>
                     </>
                 )}
             </div>

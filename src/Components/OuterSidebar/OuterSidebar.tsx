@@ -3,10 +3,12 @@ import { useWorkspaceContext } from '../../context/WorkspaceContext/WorkspaceCon
 import './OuterSidebar.css';
 import type { IWorkspace } from '../../types';
 import BackButton from '../BackButton/BackButton';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const OuterSidebar = () => {
 
     const { responseWorkspaces, workspaces, loadingWorkspaces, errorWorkspaces, workspace_id } = useWorkspaceContext();
+    const { t } = useTranslation();
 
     if (!workspace_id && workspaces && workspaces.length > 0) {
         return <Navigate to={`/workspace/${workspaces[0].workspace_id}`} replace />
@@ -23,7 +25,7 @@ const OuterSidebar = () => {
                     </NavLink>
                 ))}
 
-                <NavLink to="/create-workspace" state={{ from: `/workspace/${workspace_id}` }} className='workspace-icon add-workspace-btn' title="Crear un nuevo espacio">
+                <NavLink to="/create-workspace" state={{ from: `/workspace/${workspace_id}` }} className='workspace-icon add-workspace-btn' title={t.common.add_workspace}>
                     <p>+</p>
                 </NavLink>
 

@@ -6,8 +6,10 @@ import type { IChannel } from "../../types";
 import ChatContextProvider, { useChatContext } from "../../context/ChatContext/ChatContext";
 import ChatView from "../../Components/ChatView/ChatView";
 import useIsMobile from "../../hooks/useIsMobile/useIsMobile";
+import { useTranslation } from "../../context/LanguageContext/LanguageContext";
 
 const Chat = () => {
+    const { t } = useTranslation();
     const { activeMember, workspace_id } = useWorkspaceContext();
     const { channel_list, channel_id } = useChannelContext();
     const { messagelist, loadingMessages, errorMessages, refreshMessages, sendMessageSubmit, loadingSend } = useChatContext();
@@ -23,7 +25,7 @@ const Chat = () => {
 
     return (
         <ChatView
-            title={activeChannel?.name ?? 'Cargando...'}
+            title={activeChannel?.name ?? t.common.loading}
             messagelist={messagelist ?? []}
             loadingMessages={loadingMessages}
             errorMessages={errorMessages}

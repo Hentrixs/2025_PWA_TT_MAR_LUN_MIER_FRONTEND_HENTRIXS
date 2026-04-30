@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useForm from '../../hooks/useForm/useForm';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import './MessageInlineEdit.css';
 
 interface MessageInlineEditProps {
@@ -13,6 +14,7 @@ interface MessageInlineEditProps {
 const MessageInlineEdit: React.FC<MessageInlineEditProps> = ({ initialContent, onCancel, onSuccess, onEditSubmit }) => {
     const [loading, setLoading] = useState(false);
     const [editError, setEditError] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     const { formState, handleChangeInput, onSubmit, errors } = useForm({
         initialFormState: { content: initialContent },
@@ -24,7 +26,7 @@ const MessageInlineEdit: React.FC<MessageInlineEditProps> = ({ initialContent, o
                 await onEditSubmit(state.content);
                 onSuccess();
             } catch (e: unknown) {
-                setEditError((e as Error).message || 'Error al guardar');
+                setEditError((e as Error).message || t.chat.edit_error);
             } finally {
                 setLoading(false);
             }
@@ -46,10 +48,10 @@ const MessageInlineEdit: React.FC<MessageInlineEditProps> = ({ initialContent, o
             {errors.content && <span className="field-error">{errors.content}</span>}
             <div className="inline-edit-actions">
                 <button type="button" className="inline-cancel-btn" onClick={onCancel} disabled={loading}>
-                    Cancelar
+                    {t.common.cancel}
                 </button>
                 <button type="submit" className="inline-save-btn" disabled={loading}>
-                    {loading ? 'Guardando...' : 'Guardar'}
+                    {loading ? t.chat.edit_saving : t.common.save}
                 </button>
             </div>
             {editError && <span className="field-error">{editError}</span>}

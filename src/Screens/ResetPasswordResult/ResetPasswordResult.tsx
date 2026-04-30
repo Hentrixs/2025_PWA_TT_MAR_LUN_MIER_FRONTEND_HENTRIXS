@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import '../EmailConfirmationResult/EmailConfirmationResult.css';
 
 const ResetPasswordResult: React.FC = () => {
+    const { t } = useTranslation();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -17,13 +19,13 @@ const ResetPasswordResult: React.FC = () => {
                 </div>
 
                 <h1 className="result-title">
-                    {success ? '¡Contraseña actualizada!' : 'Hubo un problema'}
+                    {success ? t.reset_password.result_success_title : t.reset_password.result_error_title}
                 </h1>
 
                 <p className="result-message">
                     {success
-                        ? 'Tu contraseña ha sido restablecida con éxito. Ya podés iniciar sesión con tu nueva contraseña.'
-                        : (message || 'No pudimos restablecer tu contraseña. Es posible que el enlace haya expirado o sea inválido.')
+                        ? t.reset_password.result_success_desc
+                        : (message || t.reset_password.result_error_desc)
                     }
                 </p>
 
@@ -31,7 +33,7 @@ const ResetPasswordResult: React.FC = () => {
                     className="btn-back-to-settings"
                     onClick={() => navigate('/login')}
                 >
-                    Ir al inicio de sesión
+                    {t.reset_password.result_btn}
                 </button>
             </div>
         </div>

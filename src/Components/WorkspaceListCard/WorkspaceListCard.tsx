@@ -6,8 +6,10 @@ import WorkspaceItem from './WorkspaceItem';
 import type { IWorkspace } from '../../types';
 import './WorkspaceListCard.css';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 function WorkspaceListCard() {
+    const { t } = useTranslation();
     const { workspaces, loading, error, response } = useWorkspaceSelectorContext();
     const { manageLogout } = useContext(AuthContext);
 
@@ -22,16 +24,16 @@ function WorkspaceListCard() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5z" />
                 </svg>
-                <p className='workspace-card-label'>Mis espacios de trabajo</p>
+                <p className='workspace-card-label'>{t.workspace_selector.card_label}</p>
             </div>
 
             <div className='workspace-card'>
                 <div>
-                    <p className='workspace-content-tab'>Espacios de trabajo</p>
+                    <p className='workspace-content-tab'>{t.workspace_selector.card_tab}</p>
                     <hr className='workspace-content-divider' />
-                    <p className='workspace-content-section-label'>Listo para iniciar</p>
+                    <p className='workspace-content-section-label'>{t.workspace_selector.card_section}</p>
 
-                    {loading && <LoadingScreen isFullPage={false} message="Buscando tus espacios..." />}
+                    {loading && <LoadingScreen isFullPage={false} message={t.workspace_selector.loading_workspaces} />}
 
                     {workspaces && !loading && !error && !!response && workspaces.map((wk: IWorkspace, index: number) => (
                         <WorkspaceItem key={index} workspace={wk} />
@@ -40,17 +42,17 @@ function WorkspaceListCard() {
                     {workspaces && workspaces.length === 0 && !loading && !error && !!response && (
                         <div className='workspace-empty-state'>
                             <div className='workspace-empty-icon'>📂</div>
-                            <p className='empty-state-title'>No tienes espacios de trabajo</p>
-                            <p className='empty-state-text'>Parece que aún no eres miembro de ningún espacio. Crea uno nuevo para empezar a colaborar.</p>
-                            <Link to="/create-workspace" className='empty-state-btn'>Crear mi primer espacio</Link>
+                            <p className='empty-state-title'>{t.workspace_selector.empty_title}</p>
+                            <p className='empty-state-text'>{t.workspace_selector.empty_text}</p>
+                            <Link to="/create-workspace" className='empty-state-btn'>{t.workspace_selector.empty_btn}</Link>
                         </div>
                     )}
                 </div>
 
                 <div>
                     <hr className='workspace-content-divider' />
-                    <Link to="/create-workspace" className='workspace-content-footer-link'>Crear un nuevo espacio de trabajo</Link>
-                    <p className='workspace-content-footer-text'>¿No encuentras tu espacio de trabajo? <a href="/login" onClick={handleSwitchEmail} className='workspace-content-footer-link'>Prueba con otro correo electrónico</a></p>
+                    <Link to="/create-workspace" className='workspace-content-footer-link'>{t.workspace_selector.footer_create}</Link>
+                    <p className='workspace-content-footer-text'>{t.workspace_selector.footer_not_found} <a href="/login" onClick={handleSwitchEmail} className='workspace-content-footer-link'>{t.workspace_selector.try_other_email}</a></p>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+import { translations } from '../i18n/translations';
 export type { AppError } from '../helpers/errorHelper';
 
 // ── Entidades de dominio (nombres de campo según DTOs del backend) ─────────────
@@ -138,9 +139,18 @@ export interface DirectChatContextType {
 }
 
 export type Theme = 'light' | 'dark';
+export type Language = 'es' | 'en';
+
+export type TranslationType = typeof translations.es;
 
 export interface ThemeContextType {
     theme: Theme;
     toggleTheme: () => void;
     isDark: boolean;
+}
+
+export interface LanguageContextType {
+    language: Language;
+    setLanguage: (lang: Language) => void;
+    t: TranslationType;
 }

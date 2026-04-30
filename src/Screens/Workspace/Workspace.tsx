@@ -6,9 +6,11 @@ import OuterSidebar from '../../Components/OuterSidebar/OuterSidebar';
 import InnerSidebar from '../../Components/InnerSidebar/InnerSidebar';
 import LoadingScreen from '../../Components/LoadingScreen/LoadingScreen';
 import useVisualViewport from '../../hooks/useVisualViewport/useVisualViewport';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 
 function WorkspaceLayout() {
+    const { t } = useTranslation();
     const { channel_id, loadingChannels } = useChannelContext();
     const { loadingWorkspaces, loadingWorkspace } = useWorkspaceContext();
 
@@ -18,7 +20,7 @@ function WorkspaceLayout() {
     const isInitialLoading = loadingWorkspace || loadingWorkspaces || loadingChannels;
 
     if (isInitialLoading) {
-        return <LoadingScreen message="Cargando tu espacio..." />;
+        return <LoadingScreen message={t.workspace.loading} />;
     };
 
     return (

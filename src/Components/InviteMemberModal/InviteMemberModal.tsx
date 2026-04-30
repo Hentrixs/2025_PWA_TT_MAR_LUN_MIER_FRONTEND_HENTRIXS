@@ -3,6 +3,7 @@ import Modal from "../Modal/Modal";
 import './InviteMemberModal.css';
 import useForm from "../../hooks/useForm/useForm";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
+import { useTranslation } from "../../context/LanguageContext/LanguageContext";
 
 interface InviteMemberModalProps {
     onClose: () => void
@@ -20,7 +21,7 @@ const initialFormState = {
 
 
 const InviteMemberModal = ({ onClose }: InviteMemberModalProps) => {
-
+    const { t } = useTranslation();
     const { workspace_id } = useWorkspaceContext();
 
 
@@ -40,13 +41,13 @@ const InviteMemberModal = ({ onClose }: InviteMemberModalProps) => {
     });
 
     return (
-        <Modal title="Invitar personas" onClose={onClose}>
+        <Modal title={t.sidebar.invite_members_modal.title} onClose={onClose}>
             <form className='invite-member-form' onSubmit={onSubmit}>
-                <p>Envía una invitación a tus colegas.</p>
+                <p>{t.sidebar.invite_members_modal.subtitle}</p>
                 <input
                     name={INVITE_MEMBER_MODAL_FIELDS.EMAIL}
                     type="email"
-                    placeholder="email@example.com"
+                    placeholder={t.sidebar.invite_members_modal.email_placeholder}
                     value={formState[INVITE_MEMBER_MODAL_FIELDS.EMAIL]}
                     onChange={handleChangeInput}
                 />
@@ -56,10 +57,10 @@ const InviteMemberModal = ({ onClose }: InviteMemberModalProps) => {
                     value={formState[INVITE_MEMBER_MODAL_FIELDS.ROLE]}
                     onChange={handleChangeInput}
                 >
-                    <option value={"member"}>Miembro</option>
-                    <option value={"admin"}>Administrador</option>
+                    <option value={"member"}>{t.sidebar.invite_members_modal.role_member}</option>
+                    <option value={"admin"}>{t.sidebar.invite_members_modal.role_admin}</option>
                 </select>
-                <button type="submit" disabled={loading}>{loading && 'Enviando Invitacion...' || 'Enviar Invitacion'}</button>
+                <button type="submit" disabled={loading}>{loading ? t.sidebar.invite_members_modal.inviting : t.sidebar.invite_members_modal.invite_btn}</button>
             </form>
         </Modal>
     );

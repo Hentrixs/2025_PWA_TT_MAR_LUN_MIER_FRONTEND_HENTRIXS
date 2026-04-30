@@ -14,7 +14,7 @@ export const parseError = (error: unknown): AppError => {
         // Errores de respuesta de la API con status
         if (err.status) {
             return {
-                message: typeof err.message === 'string' ? err.message : 'Error del servidor.',
+                message: typeof err.message === 'string' ? err.message : 'Server error.',
                 status: typeof err.status === 'number' ? err.status : 500,
                 ok: false
             };
@@ -22,7 +22,7 @@ export const parseError = (error: unknown): AppError => {
     }
     // Errores de red o de código (JS errors)
     return {
-        message: error instanceof Error ? error.message : 'Ocurrió un error inesperado de red.',
+        message: error instanceof Error ? error.message : 'An unexpected network error occurred.',
         status: 500,
         ok: false
     };

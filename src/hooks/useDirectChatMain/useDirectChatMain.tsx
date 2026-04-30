@@ -11,7 +11,7 @@ function useDirectChatMain() {
 
     useEffect(() => {
         if (!workspace_id || !other_member_id) return;
-        sendRequest({ requestCb: () => getDirectMessageHistory(workspace_id, other_member_id), silent: true });
+        sendRequest({ requestCb: () => getDirectMessageHistory(workspace_id, other_member_id) });
     }, [workspace_id, other_member_id]);
 
     const messagelist = response?.data?.messages || [];

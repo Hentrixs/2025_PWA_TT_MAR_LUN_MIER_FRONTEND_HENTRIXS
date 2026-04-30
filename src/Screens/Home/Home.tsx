@@ -4,6 +4,7 @@ import Logo from '../../Components/Logo/Logo';
 import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle';
 import { useTheme } from '../../context/ThemeContext/ThemeContext';
 import { useContext, useState } from 'react';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import useIsMobile from '../../hooks/useIsMobile/useIsMobile';
 import HomeHero from './components/HomeHero/HomeHero';
@@ -17,6 +18,7 @@ const Home = () => {
     const { isLogged } = useContext(AuthContext);
     const { isMobile } = useIsMobile();
     const { toggleTheme } = useTheme();
+    const { t } = useTranslation();
     const [isHomeNavOpened, setIsHomeNavOpened] = useState(false);
 
     const handleIsHomeNavOpened = () => {
@@ -46,8 +48,8 @@ const Home = () => {
                         ) : (
                             <>
                                 <ThemeToggle />
-                                <Link to="/login" className="home-nav-link">Iniciar sesión</Link>
-                                <Link to="/register" className="home-nav-link home-nav-link--cta">Registrarse</Link>
+                                <Link to="/login" className="home-nav-link">{t.home.login}</Link>
+                                <Link to="/register" className="home-nav-link home-nav-link--cta">{t.home.register}</Link>
                             </>
                         )}
                     </div>
@@ -56,14 +58,14 @@ const Home = () => {
                 {isHomeNavOpened && isMobile && (
                     <div className="mobile-nav-overlay">
                         <Link to="/login" className='mobile-nav-item mobile-login-btn' onClick={() => setIsHomeNavOpened(false)}>
-                            Iniciar sesión
+                            {t.home.login}
                         </Link>
                         <Link to="/register" className='mobile-nav-item mobile-register-btn' onClick={() => setIsHomeNavOpened(false)}>
-                            Registrarse
+                            {t.home.register}
                         </Link>
                         <button className="mobile-nav-item" onClick={toggleTheme}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                                <span>Cambiar Tema</span>
+                                <span>{t.home.change_theme}</span>
                                 <ThemeToggle readonly />
                             </div>
                         </button>
@@ -78,9 +80,9 @@ const Home = () => {
                 <HomeAiContext />
 
                 <section className="home-cta-final">
-                    <h2>¿Listo para empezar?</h2>
-                    <p>Únete a millones de personas que ya están usando GreenSlack.</p>
-                    <Link to="/register" className="home-btn home-btn--primary">Probar gratis</Link>
+                    <h2>{t.home.ready_title}</h2>
+                    <p>{t.home.ready_subtitle}</p>
+                    <Link to="/register" className="home-btn home-btn--primary">{t.home.try_free}</Link>
                 </section>
             </main>
 

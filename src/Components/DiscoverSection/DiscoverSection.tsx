@@ -20,7 +20,11 @@ const starsIcon = (
     </svg>
 );
 
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
+
 function DiscoverSection() {
+    const { t } = useTranslation();
+
     return (
         <div className="workspace-discover-section">
             <div className="discover-header">
@@ -28,28 +32,28 @@ function DiscoverSection() {
                     <path d="M8 16a6 6 0 0 1-6-6 4 4 0 0 1 4-4 2 2 0 0 1 2-2 1 1 0 0 1 1-1h1a1 1 0 0 1 1 1 2 2 0 0 1 2 2 4 4 0 0 1 4 4 6 6 0 0 1-6 6z" />
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
                 </svg>
-                <h3>Descubre más</h3>
+                <h3>{t.workspace_selector.discover_title}</h3>
             </div>
 
             <div className="discover-grid">
                 <DiscoverCard
-                    title="Descargar GreenSlack para Windows"
-                    description="Mantente al día con las notificaciones."
-                    buttonText="Descargar aplicación"
+                    title={t.workspace_selector.discover_card1_title}
+                    description={t.workspace_selector.discover_card1_desc}
+                    buttonText={t.workspace_selector.discover_card1_btn}
                     iconColor="blue"
                     icon={downloadIcon}
                 />
                 <DiscoverCard
-                    title="Conecta tus aplicaciones."
-                    description="Elige entre más de 2600 aplicaciones o crea la tuya propia."
-                    buttonText="Explorar aplicaciones"
+                    title={t.workspace_selector.discover_card2_title}
+                    description={t.workspace_selector.discover_card2_desc}
+                    buttonText={t.workspace_selector.discover_card2_btn}
                     iconColor="green"
                     icon={appsIcon}
                 />
                 <DiscoverCard
-                    title="Novedades de GreenSlack"
-                    description="Descubre ahora las nuevas funciones disponibles."
-                    buttonText="Más información"
+                    title={t.workspace_selector.discover_card3_title}
+                    description={t.workspace_selector.discover_card3_desc}
+                    buttonText={t.workspace_selector.discover_card3_btn}
                     iconColor="orange"
                     icon={starsIcon}
                 />

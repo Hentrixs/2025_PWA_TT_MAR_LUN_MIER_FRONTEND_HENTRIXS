@@ -6,11 +6,13 @@ import useDeleteMember from "../../hooks/useDeleteMember/useDeleteMember";
 import { useEffect, useState } from "react";
 import useUpdateMemberRole from "../../hooks/useUpdateMemberRole/useUpdateMemberRole";
 import { useWorkspaceContext } from "../../context/WorkspaceContext/WorkspaceContext";
+import { useTranslation } from "../../context/LanguageContext/LanguageContext";
 interface ManageMembersModalProps {
     onClose: () => void
 };
 
 const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
+    const { t } = useTranslation();
     const { workspace_id, activeMember } = useWorkspaceContext();
 
     const { member_list, refetchMemberList } = useMemberList(workspace_id);
@@ -34,14 +36,14 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
     }, [responseDelete]);
 
     return (
-        <Modal title="Administrar Miembros" onClose={onClose}>
+        <Modal title={t.sidebar.manage_members_modal.title} onClose={onClose}>
             <table className="manage-members-table">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                        <th>Acciones</th>
+                        <th>{t.sidebar.manage_members_modal.column_name}</th>
+                        <th>{t.sidebar.manage_members_modal.column_email}</th>
+                        <th>{t.sidebar.manage_members_modal.column_role}</th>
+                        <th>{t.sidebar.manage_members_modal.column_actions}</th>
                     </tr>
                 </thead>
                 <tbody className="manage-members-table-body">
@@ -50,11 +52,11 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
 
                         return (
                             <tr key={member.member_id}>
-                                <td data-label="Nombre">{member.user_name}</td>
-                                <td data-label="Email">{member.user_email}</td>
-                                <td data-label="Rol">
+                                <td data-label={t.sidebar.manage_members_modal.column_name}>{member.user_name}</td>
+                                <td data-label={t.sidebar.manage_members_modal.column_email}>{member.user_email}</td>
+                                <td data-label={t.sidebar.manage_members_modal.column_role}>
                                     {isSelf ? (
-                                        <span>{member.member_role === 'admin' ? 'Administrador' : 'Miembro'} <strong>(Tú)</strong></span>
+                                        <span>{member.member_role === 'admin' ? t.sidebar.manage_members_modal.role_admin : t.sidebar.manage_members_modal.role_member} <strong>{t.sidebar.manage_members_modal.self_tag}</strong></span>
                                     ) : (
                                         editingMemberId === member.member_id ? (
                                             <select
@@ -62,30 +64,30 @@ const ManageMembersModal = ({ onClose }: ManageMembersModalProps) => {
                                                 defaultValue={member.member_role}
                                                 onChange={(e) => onRoleChange(member.member_id, e.target.value)}
                                             >
-                                                <option value="admin">Administrador</option>
-                                                <option value="member">Miembro</option>
+                                                <option value="admin">{t.sidebar.manage_members_modal.role_admin}</option>
+                                                <option value="member">{t.sidebar.manage_members_modal.role_member}</option>
                                             </select>
                                         ) : (
                                             <>
-                                                <span>{member.member_role === 'admin' ? 'Administrador' : 'Miembro'}</span>
+                                                <span>{member.member_role === 'admin' ? t.sidebar.manage_members_modal.role_admin : t.sidebar.manage_members_modal.role_member}</span>
                                                 <span
                                                     className="role-change-link"
                                                     onClick={() => setEditingMemberId(member.member_id)}
                                                 >
-                                                    (Cambiar)
+                                                    {t.sidebar.manage_members_modal.change_role}
                                                 </span>
                                             </>
                                         )
                                     )}
                                 </td>
-                                <td data-label="Acciones">
+                                <td data-label={t.sidebar.manage_members_modal.column_actions}>
                                     {!isSelf && (
                                         <button
                                             disabled={loadingDelete}
                                             onClick={() => handleDeleteMember(member.member_id)}
                                             className="btn-delete-member"
                                         >
-                                            {loadingDelete && '...' || 'Eliminar'}
+                                            {loadingDelete ? '...' : t.sidebar.manage_members_modal.delete_btn}
                                         </button>
                                     )}
                                 </td>

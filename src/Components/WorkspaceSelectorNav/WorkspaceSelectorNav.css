@@ -1,16 +1,25 @@
 .workspace-nav {
-    width: 100%;
-    max-width: var(--max-width-page);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--space-md) var(--space-xl);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color-subtle);
+    gap: var(--space-md);
+    flex-wrap: wrap;
 }
 
 .workspace-nav-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
+    flex-shrink: 0;
+}
+
+/* Evitar que el logo se aplaste en pantallas intermedias */
+.workspace-nav .logo-responsive {
+    flex-shrink: 1;
+    min-width: 120px;
 }
 
 .workspace-nav-svg-wrapper svg {
@@ -61,28 +70,44 @@
     font-size: clamp(1px, 0.1vw + 1.3px, 6.5px);
 }
 
-@media (max-width: 1018px) {
+@media (max-width: 1100px) {
     .workspace-nav {
-        padding-left: var(--space-xs);
-        padding-right: var(--space-xs);
+        padding-left: var(--space-md);
+        padding-right: var(--space-md);
+    }
+    
+    .workspace-nav-actions {
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 950px) {
+    .workspace-nav-create-btn {
+        display: none; /* Ocultamos el botón de crear antes para dar espacio a lo demás */
+    }
+}
+
+@media (max-width: 800px) {
+    .workspace-nav {
+        padding: var(--space-sm) var(--space-md);
     }
 
     .workspace-nav-actions {
-        padding: 0 var(--space-xs);
         gap: var(--space-sm);
     }
 
-    .workspace-nav-actions a {
-        font-size: clamp(1px, var(--text-xs), 5rem);
+    .workspace-settings-btn, 
+    .workspace-logout-btn {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: var(--text-xs);
     }
 }
 
 @media (max-width: 768px) {
     .workspace-nav {
-        padding-left: var(--space-sm);
-        padding-right: var(--space-sm);
+        flex-wrap: nowrap;
     }
-
+    
     .workspace-nav-actions {
         padding: 0 var(--space-sm);
     }

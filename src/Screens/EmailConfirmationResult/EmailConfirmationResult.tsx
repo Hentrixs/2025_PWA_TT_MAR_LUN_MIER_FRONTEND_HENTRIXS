@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import './EmailConfirmationResult.css';
 
 const EmailConfirmationResult: React.FC = () => {
+    const { t } = useTranslation();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -17,13 +19,13 @@ const EmailConfirmationResult: React.FC = () => {
                 </div>
 
                 <h1 className="result-title">
-                    {success ? '¡Email Actualizado!' : 'Hubo un problema'}
+                    {success ? t.email_confirmation_result.success_title : t.email_confirmation_result.error_title}
                 </h1>
 
                 <p className="result-message">
                     {success
-                        ? 'Tu dirección de correo electrónico ha sido confirmada y actualizada con éxito. Ya puedes seguir usando la plataforma con tu nuevo email.'
-                        : (message || 'No pudimos confirmar el cambio de email. Es posible que el enlace haya expirado o sea inválido.')
+                        ? t.email_confirmation_result.success_desc
+                        : (message || t.email_confirmation_result.error_desc)
                     }
                 </p>
 
@@ -31,7 +33,7 @@ const EmailConfirmationResult: React.FC = () => {
                     className="btn-back-to-settings"
                     onClick={() => navigate('/settings')}
                 >
-                    Volver a Configuración
+                    {t.email_confirmation_result.back_btn}
                 </button>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import ENVIRONMENT from "../config/environment.config";
-import { LOCAL_STORAGE_TOKEN_KEY } from "../context/AuthContext/AuthContext";
+import { getApiHeaders } from "../helpers/apiHelper";
 
 export const channelMessageHistory = async (fk_id_workspace: string, fk_id_channel: string) => {
     if (!fk_id_workspace || !fk_id_channel || fk_id_channel === 'undefined' || fk_id_workspace === 'undefined') {
@@ -7,10 +7,7 @@ export const channelMessageHistory = async (fk_id_workspace: string, fk_id_chann
     }
     const channelMessageHistory = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${fk_id_workspace}/channel/${fk_id_channel}/message`, {
         method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`,
-            'Content-Type': 'application/json'
-        }
+        headers: getApiHeaders(true)
     });
 
     const response = await channelMessageHistory.json();
@@ -23,10 +20,7 @@ export const createChannelMessage = async (fk_id_workspace: string, fk_id_channe
     }
     const createChannelMessage = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${fk_id_workspace}/channel/${fk_id_channel}/message`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({
             fk_id_channel: fk_id_channel,
             content: content,
@@ -41,10 +35,7 @@ export const createChannelMessage = async (fk_id_workspace: string, fk_id_channe
 export const updateChannelMessage = async (fk_id_channel: string, fk_id_workspace: string, message_id: string, content: string) => {
     const response = await fetch(`${ENVIRONMENT.API_URL}/api/workspace/${fk_id_workspace}/channel/${fk_id_channel}/message/${message_id}`, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`
-        },
+        headers: getApiHeaders(true),
         body: JSON.stringify({ content })
     });
     return await response.json();

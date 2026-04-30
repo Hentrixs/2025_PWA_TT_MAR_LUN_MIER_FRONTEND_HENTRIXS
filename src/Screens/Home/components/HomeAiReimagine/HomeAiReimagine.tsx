@@ -1,26 +1,26 @@
 import './HomeAiReimagine.css';
 import aiMobile from '../../../../assets/slack_ai_mobile.png';
+import { useTranslation } from '../../../../context/LanguageContext/LanguageContext';
 
 const HomeAiReimagine = () => {
+    const { t } = useTranslation();
     return (
         <section className="home-ai-reimagine">
             <div className="ai-reimagine-content">
-                <h2>Reimagina los límites de lo posible con la IA y los agentes.</h2>
+                <h2>{t.home.ai_reimagine.title}</h2>
                 <p className="ai-reimagine-desc">
-                    Con la IA en GreenSlack podrás dejar de darle vueltas a todo, ya que te ayuda a completar tareas.
-                    Resume y hace búsquedas basándose en conversaciones reales y, de este modo, consigue que cada
-                    aplicación y cada agente sean más útiles y más conscientes del contexto que nunca.
+                    {t.home.ai_reimagine.desc}
                 </p>
 
                 <div className="ai-reimagine-grid">
                     <div className="ai-feature-list-card">
                         <ul>
-                            <li className="active">Actualizar negociaciones solo con pedírselo a GreenSlackBot</li>
-                            <li>Resumir una conversación que te perdiste</li>
-                            <li>Obtener respuestas rápidamente con Claude</li>
-                            <li>Activar la función de tomar notas de la IA en las juntas</li>
-                            <li>Revisar código con GitHub Copilot</li>
-                            <li>Buscar datos de clientes en Agentforce</li>
+                            <li className="active">{t.home.ai_reimagine.feature_1}</li>
+                            <li>{t.home.ai_reimagine.feature_2}</li>
+                            <li>{t.home.ai_reimagine.feature_3}</li>
+                            <li>{t.home.ai_reimagine.feature_4}</li>
+                            <li>{t.home.ai_reimagine.feature_5}</li>
+                            <li>{t.home.ai_reimagine.feature_6}</li>
                         </ul>
                     </div>
                     <div className="ai-feature-image">

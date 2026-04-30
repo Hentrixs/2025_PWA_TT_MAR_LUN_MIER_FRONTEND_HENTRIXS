@@ -3,6 +3,7 @@ import useUpdateProfile from '../../hooks/useUpdateProfile/useUpdateProfile';
 import useForm from '../../hooks/useForm/useForm';
 import type { IUser } from '../../types';
 import './ProfileTab.css';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 
 interface ProfileTabProps {
@@ -18,7 +19,7 @@ const PROFILE_TAB_FIELDS = {
 }
 
 const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUpdated }) => {
-
+    const { t } = useTranslation();
     const { handleUpdateProfile, loading, response, error } = useUpdateProfile();
 
     useEffect(() => {
@@ -53,14 +54,14 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUp
 
                         <div className='img-name-wrapper'>
                             <h1>{profile.user_name}</h1>
-                            <span className='change-photo-text'>Cambiar Foto</span>
+                            <span className='change-photo-text'>{t.settings.profile_change_photo}</span>
                         </div>
                     </div>
                 </div>
 
                 <div className='settings-form'>
                     <div className='form-group'>
-                        <label>Descripción</label>
+                        <label>{t.settings.profile_description}</label>
                         <textarea
                             className='form-group-textarea'
                             name={PROFILE_TAB_FIELDS.DESCRIPTION}
@@ -68,12 +69,12 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUp
                             autoComplete='description'
                             onChange={handleChangeInput}
                             disabled={loading}
-                            placeholder={profile.user_description || 'Introduce una descripción aquí...'}>
+                            placeholder={profile.user_description || t.settings.profile_description_placeholder}>
                         </textarea>
                     </div>
 
                     <div className='form-group'>
-                        <label>Nombre Completo</label>
+                        <label>{t.settings.profile_name}</label>
                         <input
                             className='form-group-input'
                             name={PROFILE_TAB_FIELDS.NAME}
@@ -82,13 +83,13 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ profile, avatarUrl, onProfileUp
                             autoComplete='name'
                             onChange={handleChangeInput}
                             disabled={loading}
-                            placeholder={profile.user_name || 'Nombre de Usuario'}>
+                            placeholder={profile.user_name || t.settings.profile_name_placeholder}>
                         </input>
                         {errors[PROFILE_TAB_FIELDS.NAME] && <span className="field-error">{errors[PROFILE_TAB_FIELDS.NAME]}</span>}
                     </div>
 
                     <button className='btn-apply-changes' type='submit'>
-                        Aplicar Cambios
+                        {t.settings.profile_apply_changes}
                     </button>
                 </div>
             </form>

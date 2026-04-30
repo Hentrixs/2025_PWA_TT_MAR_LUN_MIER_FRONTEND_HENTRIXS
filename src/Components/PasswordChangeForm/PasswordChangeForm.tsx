@@ -1,6 +1,7 @@
 import useForm from '../../hooks/useForm/useForm';
 import useUpdatePassword from '../../hooks/useUpdatePassword/useUpdatePassword';
 import SecurityFormLayout from '../SecurityFormLayout/SecurityFormLayout';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const PASSWORD_CHANGE_FORM_NAMES = {
     OLD_PASSWORD: 'old_password',
@@ -17,7 +18,7 @@ interface PasswordChangeFormProps {
 };
 
 function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
-
+    const { t } = useTranslation();
     const { handleUpdatePassword, response, loading, error } = useUpdatePassword();
     const { handleChangeInput, onSubmit, formState, errors } = useForm({
         initialFormState,
@@ -35,15 +36,15 @@ function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
             loading={loading}
             error={error}
             success={response?.ok ? response : undefined}
-            submitText="Cambiar Contraseña"
+            submitText={t.settings.password_change_submit}
             useSuccessView={true}
         >
             <div className="form-group">
-                <label>Contraseña Actual</label>
+                <label>{t.settings.password_change_old_label}</label>
                 <input
                     className="form-input"
                     type="password"
-                    placeholder='Tu Contraseña'
+                    placeholder={t.settings.password_change_old_placeholder}
                     name={PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD}
                     value={formState[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]}
                     autoComplete='old_password'
@@ -52,11 +53,11 @@ function PasswordChangeForm({ onClose }: PasswordChangeFormProps) {
                 {errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD] && <span className="field-error">{errors[PASSWORD_CHANGE_FORM_NAMES.OLD_PASSWORD]}</span>}
             </div>
             <div className="form-group">
-                <label>Nueva Contraseña</label>
+                <label>{t.settings.password_change_new_label}</label>
                 <input
                     className="form-input"
                     type="password"
-                    placeholder='Tu nueva Contraseña'
+                    placeholder={t.settings.password_change_new_placeholder}
                     name={PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD}
                     value={formState[PASSWORD_CHANGE_FORM_NAMES.NEW_PASSWORD]}
                     autoComplete='new_password'

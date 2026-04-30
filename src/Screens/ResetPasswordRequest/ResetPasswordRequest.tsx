@@ -6,8 +6,10 @@ import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 import { Link } from 'react-router';
 import BackButton from '../../Components/BackButton/BackButton';
 import { resetPassword } from '../../services/authService';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 export default function ResetPasswordRequest() {
+    const { t } = useTranslation();
 
     const {
         sendRequest,
@@ -55,11 +57,11 @@ export default function ResetPasswordRequest() {
         <div className='login-container'>
             <div className='split-right'>
                 <BackButton to='/login' />
-                <h1>Restablecer Contraseña</h1>
-                <p style={{ marginTop: '-15px', color: 'var(--text-on-light)', fontSize: '15px' }}>Ingresá tu email y tu nueva contraseña. Te enviaremos un enlace para confirmar el cambio.</p>
+                <h1>{t.reset_password.request_title}</h1>
+                <p style={{ marginTop: '-15px', color: 'var(--text-on-light)', fontSize: '15px' }}>{t.reset_password.request_subtitle}</p>
                 <form onSubmit={onSubmit} className='login-form'>
                     <div>
-                        <label htmlFor="email">Correo Electrónico</label>
+                        <label htmlFor="email">{t.reset_password.email_label}</label>
                         <input
                             type="email"
                             id="email"
@@ -71,7 +73,7 @@ export default function ResetPasswordRequest() {
                         {errors[REQUEST_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REQUEST_FORM_FIELDS.EMAIL]}</span>}
                     </div>
                     <div>
-                        <label htmlFor="new_password">Nueva Contraseña</label>
+                        <label htmlFor="new_password">{t.reset_password.new_password_label}</label>
                         <input
                             type="password"
                             id="new_password"
@@ -81,12 +83,12 @@ export default function ResetPasswordRequest() {
                         />
                         {errors[REQUEST_FORM_FIELDS.NEW_PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REQUEST_FORM_FIELDS.NEW_PASSWORD]}</span>}
                     </div>
-                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
+                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>{t.common.form_errors}</span>}
                     <button type='submit' disabled={loading} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
                         {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-                        {loading ? 'Enviando Solicitud...' : 'Enviar Solicitud'}
+                        {loading ? t.reset_password.submitting : t.reset_password.submit_btn}
                     </button>
-                    <span>¿Recordás tu contraseña? <Link to={'/login'}>Iniciar Sesión</Link></span>
+                    <span>{t.reset_password.back_to_login} <Link to={'/login'}>{t.reset_password.login_link}</Link></span>
                 </form>
                 {response && !loading && !error && <InfoComponent response={response} />}
             </div>

@@ -7,6 +7,7 @@ import useLogin from '../../hooks/useLogin/useLogin';
 import Logo from '../../Components/Logo/Logo';
 import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 import BackButton from '../../Components/BackButton/BackButton';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const LOGIN_FORM_FIELDS = {
     EMAIL: 'email',
@@ -14,6 +15,7 @@ const LOGIN_FORM_FIELDS = {
 };
 
 const Login = () => {
+    const { t } = useTranslation();
 
     const initialFormState = {
         [LOGIN_FORM_FIELDS.EMAIL]: '',
@@ -36,7 +38,7 @@ const Login = () => {
 
     useEffect(() => {
         if (response && response.ok && manageLogin) {
-            manageLogin(response.data.auth_token);
+            manageLogin(response.data.auth_token, response.data.user_language);
         }
     }, [response, manageLogin]);
 
@@ -44,16 +46,16 @@ const Login = () => {
         <div className='login-container'>
             <div className='split-right'>
                 <BackButton to='/' />
-                <h1>Iniciar Sesion</h1>
+                <h1>{t.login.title}</h1>
                 <form onSubmit={onSubmit} className='login-form'>
                     <div>
-                        <label htmlFor="email">Correo Electrónico</label>
+                        <label htmlFor="email">{t.login.email_label}</label>
                         <input type="email" id='email' autoComplete='email' name={LOGIN_FORM_FIELDS.EMAIL} onChange={handleChangeInput} />
                         {errors[LOGIN_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[LOGIN_FORM_FIELDS.EMAIL]}</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="password">Contraseña</label>
+                        <label htmlFor="password">{t.login.password_label}</label>
                         <div className="password-input-wrapper">
                             <input
                                 type={showPassword ? 'text' : 'password'}
@@ -66,7 +68,7 @@ const Login = () => {
                                 type="button"
                                 className="toggle-password-btn"
                                 onClick={() => setShowPassword(p => !p)}
-                                aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                                aria-label={showPassword ? t.login.hide_password : t.login.show_password}
                             >
                                 {showPassword ? (
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
@@ -95,13 +97,13 @@ const Login = () => {
 
 
 
-                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
+                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>{t.common.form_errors}</span>}
                     <button type='submit' disabled={loading} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
                         {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-                        {loading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
+                        {loading ? t.login.submitting : t.login.submit_btn}
                     </button>
-                    <span>No tienes una cuenta? <Link to={'/register'}>Registrarse</Link></span>
-                    <span>Olvidaste tu contraseña? <Link to={'/reset-password-request'}>Restablecer Contraseña</Link></span>
+                    <span>{t.login.no_account} <Link to={'/register'}>{t.login.register_link}</Link></span>
+                    <span>{t.login.forgot_password} <Link to={'/reset-password-request'}>{t.login.reset_password_link}</Link></span>
                 </form>
                 {response && !loading && <InfoComponent response={response} />}
             </div>

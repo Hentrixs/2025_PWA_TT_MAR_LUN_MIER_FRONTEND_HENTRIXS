@@ -11,8 +11,10 @@ import WorkspaceDropdown from '../WorkspaceDropdown/WorkspaceDropdown';
 import WorkspaceSettingsModal from '../WorkspaceSettingsModal/WorkspaceSettingsModal';
 import ChannelSettingsModal from '../ChannelSettingsModal/ChannelSettingsModal';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const InnerSidebar = () => {
+    const { t } = useTranslation();
 
     const {
         workspaceDetail,
@@ -51,7 +53,7 @@ const InnerSidebar = () => {
             <div>
                 <div className='workspace-title'>
                     <div>
-                        <h2>{workspaceDetail?.title ?? 'Cargando...'}</h2>
+                        <h2>{workspaceDetail?.title ?? t.sidebar.loading_workspace}</h2>
                     </div>
                     <div className="chevron-container" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className={`bi bi-chevron-down ${isDropdownOpen ? 'open' : ''}`} viewBox="0 0 16 16">
@@ -78,7 +80,7 @@ const InnerSidebar = () => {
                 )}
 
                 <div className='channel-list'>
-                    <p className='channels-title'>Canales</p>
+                    <p className='channels-title'>{t.sidebar.channels}</p>
 
                     {!!responseChannel && channel_list && !loadingChannels && !errorChannel && channel_list.map((channel: IChannel, index: number) => (
                         <div key={channel.channel_id ?? index} className='channel-item-wrapper'>
@@ -96,7 +98,7 @@ const InnerSidebar = () => {
 
                 </div>
 
-                <button className='create-channel-btn' onClick={() => setIsCreateChannelModalOpen(!isCreateChannelModalOpen)}>Crear Canal</button>
+                <button className='create-channel-btn' onClick={() => setIsCreateChannelModalOpen(!isCreateChannelModalOpen)}>{t.sidebar.add_channel}</button>
 
                 {isCreateChannelModalOpen && <CreateChannelModal
                     onSuccess={() => { refetchChannels(); setIsCreateChannelModalOpen(false); }}
@@ -114,7 +116,7 @@ const InnerSidebar = () => {
             </div>
             <div>
 
-                <p className='channels-title'>Mensajes Directos</p>
+                <p className='channels-title'>{t.sidebar.direct_messages}</p>
                 <div className='channel-list'>
                     {members && members.map((member: IMember) => {
                         return (
@@ -123,7 +125,7 @@ const InnerSidebar = () => {
                     })}
                 </div>
 
-                <button className='create-channel-btn' onClick={() => setIsInviteMemberModalOpen(true)}>Invitar a Personas</button>
+                <button className='create-channel-btn' onClick={() => setIsInviteMemberModalOpen(true)}>{t.sidebar.invite_members}</button>
                 {isInviteMemberModalOpen && <InviteMemberModal
                     onClose={() => setIsInviteMemberModalOpen(false)}
                 />}
@@ -131,7 +133,7 @@ const InnerSidebar = () => {
             </div>
 
             <div>
-                <button className='manage-members-btn' onClick={() => setIsManageMembersModalOpen(true)}>Administrar Miembros</button>
+                <button className='manage-members-btn' onClick={() => setIsManageMembersModalOpen(true)}>{t.sidebar.manage_members}</button>
                 {isManageMembersModalOpen &&
                     <ManageMembersModal onClose={() => setIsManageMembersModalOpen(false)} />
                 }

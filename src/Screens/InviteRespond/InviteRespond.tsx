@@ -1,7 +1,9 @@
-import './InviteRespond.css';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
+import './InviteRespond.css';
 
 function InviteRespond() {
+    const { t } = useTranslation();
     const [searchParams] = useSearchParams();
     const status = searchParams.get('status');
     const message = searchParams.get('message');
@@ -14,25 +16,25 @@ function InviteRespond() {
             <div className='invite-respond-card'>
                 {isAccepted && (
                     <div className="success-content">
-                        <h2>¡Verificación Exitosa!</h2>
-                        <p>Has aceptado la invitación correctamente. Ya eres parte del espacio de trabajo.</p>
-                        <Link to={'/login'} className="btn-primary">Ir al inicio para iniciar sesión</Link>
+                        <h2>{t.invite_respond.success_title}</h2>
+                        <p>{t.invite_respond.success_desc}</p>
+                        <Link to={'/login'} className="btn-primary">{t.invite_respond.success_btn}</Link>
                     </div>
                 )}
 
                 {isRejected && (
                     <div className="warning-content">
-                        <h2>Invitación Rechazada</h2>
-                        <p>Has declinado la invitación al espacio de trabajo. Si fue un error, solicita que te envíen una nueva.</p>
-                        <Link to={'/login'} className="btn-secondary">Volver al inicio</Link>
+                        <h2>{t.invite_respond.rejected_title}</h2>
+                        <p>{t.invite_respond.rejected_desc}</p>
+                        <Link to={'/login'} className="btn-secondary">{t.invite_respond.rejected_btn}</Link>
                     </div>
                 )}
 
                 {!isAccepted && !isRejected && (
                     <div className="error-content">
-                        <h2>Vaya, algo salió mal</h2>
-                        <p>{message || 'La invitación ha expirado, ya fue procesada o hubo un error en el servidor.'}</p>
-                        <Link to={'/login'} className="btn-secondary">Volver al inicio</Link>
+                        <h2>{t.invite_respond.error_title}</h2>
+                        <p>{message || t.invite_respond.error_desc}</p>
+                        <Link to={'/login'} className="btn-secondary">{t.invite_respond.rejected_btn}</Link>
                     </div>
                 )}
             </div>

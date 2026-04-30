@@ -3,6 +3,7 @@ import useForm from '../../hooks/useForm/useForm';
 import useDeleteAccount from '../../hooks/useDeleteAccount/useDeleteAccount';
 import SecurityFormLayout from '../SecurityFormLayout/SecurityFormLayout';
 import { useAuthContext } from '../../context/AuthContext/AuthContext';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const DELETE_ACCOUNT_FORM_NAMES = {
     PASSWORD: 'password'
@@ -17,6 +18,7 @@ interface DeleteAccountFormProps {
 };
 
 function DeleteAccountForm({ onClose }: DeleteAccountFormProps) {
+    const { t } = useTranslation();
     const { manageLogout } = useAuthContext();
     const { handleAccountDeletion, response, loading, error } = useDeleteAccount();
     const { handleChangeInput, onSubmit, formState, errors } = useForm({
@@ -40,15 +42,15 @@ function DeleteAccountForm({ onClose }: DeleteAccountFormProps) {
             onClose={onClose}
             loading={loading}
             error={error}
-            submitText="Borrar Definitivamente"
+            submitText={t.settings.delete_account_submit}
             isDanger={true}
         >
             <div className="form-group danger-group">
-                <label>Para confirmar, ingresa tu contraseña</label>
+                <label>{t.settings.delete_account_password_label}</label>
                 <input
                     className="form-input"
                     type="password"
-                    placeholder='Tu Contraseña'
+                    placeholder={t.settings.delete_account_password_placeholder}
                     name={DELETE_ACCOUNT_FORM_NAMES.PASSWORD}
                     value={formState[DELETE_ACCOUNT_FORM_NAMES.PASSWORD]}
                     autoComplete='current-password'

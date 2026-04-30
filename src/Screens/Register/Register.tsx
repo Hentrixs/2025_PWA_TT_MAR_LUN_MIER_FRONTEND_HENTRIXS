@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Logo from '../../Components/Logo/Logo';
 import InfoComponent from '../../Components/InfoComponent/InfoComponent';
 import BackButton from '../../Components/BackButton/BackButton';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const REGISTER_FORM_FIELDS = {
     EMAIL: 'email',
@@ -14,7 +15,7 @@ const REGISTER_FORM_FIELDS = {
 };
 
 const Register = () => {
-
+    const { t } = useTranslation();
     const { registerSubmit, response, loading } = useRegister();
 
     const initialFormState = {
@@ -54,33 +55,33 @@ const Register = () => {
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                             </svg>
                         </div>
-                        <h1>¡Registro exitoso!</h1>
+                        <h1>{t.register.success_title}</h1>
                         <p className="success-message">
-                            {response.message || 'Tu cuenta ha sido creada correctamente.'}
+                            {response.message || t.register.success_message}
                         </p>
                         <div className="success-instructions">
-                            <p>Hemos enviado un correo de verificación a tu dirección de email. Por favor, revisa tu bandeja de entrada (y la carpeta de spam) para activar tu cuenta.</p>
+                            <p>{t.register.success_instructions}</p>
                         </div>
                         <button onClick={() => navigate('/login')} className="primary-btn login-btn">
-                            Ir al Inicio de Sesión
+                            {t.register.success_btn}
                         </button>
                     </div>
                 ) : (
                     <>
-                        <h1>Registrarse</h1>
+                        <h1>{t.register.title}</h1>
                         <form onSubmit={onSubmit} className='register-form'>
                             <div>
-                                <label htmlFor="name">Nombre</label>
+                                <label htmlFor="name">{t.register.name_label}</label>
                                 <input type="text" id='name' autoComplete='name' name={REGISTER_FORM_FIELDS.NAME} value={formState[REGISTER_FORM_FIELDS.NAME]} onChange={handleChangeInput} />
                                 {errors[REGISTER_FORM_FIELDS.NAME] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.NAME]}</span>}
                             </div>
                             <div>
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">{t.register.email_label}</label>
                                 <input type="email" id='email' autoComplete='email' name={REGISTER_FORM_FIELDS.EMAIL} value={formState[REGISTER_FORM_FIELDS.EMAIL]} onChange={handleChangeInput} />
                                 {errors[REGISTER_FORM_FIELDS.EMAIL] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.EMAIL]}</span>}
                             </div>
                             <div>
-                                <label htmlFor="password">Contraseña</label>
+                                <label htmlFor="password">{t.register.password_label}</label>
                                 <div className="password-input-wrapper">
                                     <input
                                         type={showPassword ? 'text' : 'password'}
@@ -94,7 +95,7 @@ const Register = () => {
                                         type="button"
                                         className="toggle-password-btn"
                                         onClick={() => setShowPassword(p => !p)}
-                                        aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                                        aria-label={showPassword ? t.login.hide_password : t.login.show_password}
                                     >
                                         {showPassword ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
@@ -112,12 +113,12 @@ const Register = () => {
                                 </div>
                                 {errors[REGISTER_FORM_FIELDS.PASSWORD] && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px' }}>{errors[REGISTER_FORM_FIELDS.PASSWORD]}</span>}
                             </div>
-                            {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>Por favor, revisa los errores arriba.</span>}
+                            {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center' }}>{t.common.form_errors}</span>}
                             <button type='submit' disabled={loading} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
                                 {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-                                {loading ? 'Registrando...' : 'Registrarse'}
+                                {loading ? t.register.submitting : t.register.submit_btn}
                             </button>
-                            <span>¿Ya tienes una cuenta? <Link to={'/login'}>Iniciar Sesión</Link></span>
+                            <span>{t.register.have_account} <Link to={'/login'}>{t.register.login_link}</Link></span>
                             {response && !loading && <InfoComponent response={response} />}
                         </form>
                     </>

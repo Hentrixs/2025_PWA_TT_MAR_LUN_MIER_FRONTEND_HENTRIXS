@@ -5,11 +5,13 @@ import BackButton from '../../Components/BackButton/BackButton';
 import useCreateWorkspace from '../../hooks/useCreateWorkspace/useCreateWorkspace';
 import useForm from '../../hooks/useForm/useForm';
 import { useEffect } from 'react';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 const CreateWorkspace = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useTranslation();
     const backUrl = location.state?.from || '/workspace-selector';
 
     const { submitCreateWorkspace, response, loading, error } = useCreateWorkspace();
@@ -37,38 +39,38 @@ const CreateWorkspace = () => {
 
             <main className="create-workspace-main">
                 <BackButton to={backUrl} />
-                <h1>Creá tu espacio de trabajo</h1>
-                <p>Un espacio de trabajo es donde tu equipo se comunica.</p>
+                <h1>{t.create_workspace.title}</h1>
+                <p>{t.create_workspace.subtitle}</p>
 
                 <form className="create-workspace-form" onSubmit={onSubmit}>
                     <div className="create-workspace-field">
-                        <label htmlFor="title">Nombre del espacio</label>
+                        <label htmlFor="title">{t.create_workspace.name_label}</label>
                         <input
                             id="title"
                             name="title"
                             type="text"
-                            placeholder="Ej: Mi empresa"
+                            placeholder={t.create_workspace.name_placeholder}
                             value={formState.title}
                             onChange={handleChangeInput}
                         />
                         {errors.title && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors.title}</span>}
                     </div>
                     <div className="create-workspace-field">
-                        <label htmlFor="description">Descripción <span>(opcional)</span></label>
+                        <label htmlFor="description">{t.create_workspace.description_label} <span>{t.create_workspace.description_optional}</span></label>
                         <input
                             id="description"
                             name="description"
                             type="text"
-                            placeholder="De qué trata este espacio"
+                            placeholder={t.create_workspace.description_placeholder}
                             value={formState.description}
                             onChange={handleChangeInput}
                         />
                         {errors.description && <span style={{ color: 'var(--error-primary)', fontSize: '13px', marginTop: '4px', display: 'block' }}>{errors.description}</span>}
                     </div>
-                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center', marginBottom: '8px', display: 'block' }}>Corrige los errores antes de continuar.</span>}
-                    {error && <p className="create-workspace-error">Algo salió mal, intentá de nuevo.</p>}
+                    {Object.keys(errors).length > 0 && <span style={{ color: 'var(--error-primary)', fontSize: '13px', textAlign: 'center', marginBottom: '8px', display: 'block' }}>{t.create_workspace.error_fix}</span>}
+                    {error && <p className="create-workspace-error">{t.create_workspace.error_generic}</p>}
                     <button type="submit" disabled={loading}>
-                        {loading && 'Creando espacio...' || 'Crear espacio de trabajo'}
+                        {loading ? t.create_workspace.creating : t.create_workspace.create_btn}
                     </button>
                 </form>
             </main>

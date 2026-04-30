@@ -1,5 +1,6 @@
 import React from 'react';
 import './SecurityFormLayout.css';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 interface SecurityFormLayoutProps {
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -16,6 +17,7 @@ interface SecurityFormLayoutProps {
 const SecurityFormLayout: React.FC<SecurityFormLayoutProps> = ({
     onSubmit, onClose, loading, error, success, submitText, children, isDanger = false, useSuccessView = false
 }) => {
+    const { t } = useTranslation();
     return (
         <div className={`security-form-container ${isDanger ? 'danger-container' : ''} fade-in`}>
             {useSuccessView && success ? (
@@ -25,10 +27,10 @@ const SecurityFormLayout: React.FC<SecurityFormLayoutProps> = ({
                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="currentColor" />
                         </svg>
                     </div>
-                    <h3>¡Hecho!</h3>
+                    <h3>{t.common.done}</h3>
                     <p className="success-message">{success.message}</p>
                     <button className="btn-primary" type="button" onClick={onClose}>
-                        Entendido
+                        {t.common.understood}
                     </button>
                 </div>
             ) : (
@@ -44,10 +46,10 @@ const SecurityFormLayout: React.FC<SecurityFormLayoutProps> = ({
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? 'Cargando...' : submitText}
+                            {loading ? t.common.loading : submitText}
                         </button>
                         <button className="btn-cancel" type="button" onClick={onClose} disabled={loading}>
-                            Cancelar
+                            {t.common.cancel}
                         </button>
                     </div>
                 </form>

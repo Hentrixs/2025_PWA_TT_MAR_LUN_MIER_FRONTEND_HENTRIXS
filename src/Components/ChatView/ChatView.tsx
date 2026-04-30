@@ -3,6 +3,7 @@ import type { IMessage, AppError } from "../../types";
 import useForm from "../../hooks/useForm/useForm";
 import MessageItem from "../MessageItem/MessageItem";
 import "./ChatView.css";
+import { useTranslation } from "../../context/LanguageContext/LanguageContext";
 
 
 interface ChatViewProps {
@@ -30,6 +31,7 @@ const ChatView = ({
     onEditSubmit,
     onBack
 }: ChatViewProps) => {
+    const { t } = useTranslation();
 
     const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
     const [editDraft, setEditDraft] = useState<string>('');
@@ -51,7 +53,7 @@ const ChatView = ({
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                         </svg>
-                        Volver
+                        {t.chat.back}
                     </button>
                 )}
                 <h2># {title}</h2>
@@ -72,6 +74,11 @@ const ChatView = ({
                                 </div>
                             ))}
                         </>
+                    )}
+                    {messagelist && !loadingMessages && !errorMessages && messagelist.length === 0 && (
+                        <div className="empty-chat-message">
+                            {t.chat.empty_messages}
+                        </div>
                     )}
                     {messagelist && !loadingMessages && !errorMessages && messagelist.map((m: IMessage, index: number) => (
                         <MessageItem
@@ -101,7 +108,7 @@ const ChatView = ({
                     <input
                         type="text"
                         name="content"
-                        placeholder={loadingSend ? 'Enviando...' : 'Enviar mensaje...'}
+                        placeholder={loadingSend ? t.chat.sending : t.chat.input_placeholder}
                         value={formState.content}
                         onChange={handleChangeInput}
                         disabled={loadingSend}

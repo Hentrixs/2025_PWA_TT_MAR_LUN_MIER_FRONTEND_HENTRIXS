@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import './WorkspaceSettingsModal.css';
 import { useWorkspaceContext } from '../../context/WorkspaceContext/WorkspaceContext';
 import useForm from '../../hooks/useForm/useForm';
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 
 interface WorkspaceSettingsModalProps {
     onClose: () => void;
 }
 
 const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
+    const { t } = useTranslation();
     const { workspaceDetail } = useWorkspaceContext();
     const [activeTab, setActiveTab] = useState<'general' | 'delete'>('general');
     const [loading, setLoading] = useState(false);
@@ -34,10 +36,10 @@ const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
                 if (response.ok) {
                     window.location.reload();
                 } else {
-                    setError(response.message || 'Error al actualizar');
+                    setError(response.message || t.sidebar.workspace_settings_modal.update_error);
                 }
             } catch {
-                setError('Error de conexión');
+                setError(t.sidebar.workspace_settings_modal.conn_error);
             } finally {
                 setLoading(false);
             }
@@ -45,7 +47,7 @@ const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
     });
 
     const handleDelete = async () => {
-        if (!confirm('¿Estás SEGURO de que deseas eliminar este workspace? Esto no se puede deshacer.')) return;
+        if (!confirm(t.sidebar.workspace_settings_modal.delete_confirm)) return;
         setLoading(true);
         setError(null);
         try {
@@ -53,30 +55,30 @@ const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
             if (response.ok) {
                 navigate('/workspace');
             } else {
-                setError(response.message || 'Error al eliminar');
+                setError(response.message || t.sidebar.workspace_settings_modal.delete_error);
             }
         } catch {
-            setError('Error de conexión');
+            setError(t.sidebar.workspace_settings_modal.conn_error);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <Modal title="Configuración de Workspace" onClose={onClose}>
+        <Modal title={t.sidebar.workspace_settings_modal.title} onClose={onClose}>
             <div className="workspace-settings-container">
                 <div className="settings-tabs">
                     <button
                         className={`tab-btn ${activeTab === 'general' ? 'active' : ''}`}
                         onClick={() => setActiveTab('general')}
                     >
-                        General
+                        {t.sidebar.workspace_settings_modal.general_tab}
                     </button>
                     <button
                         className={`tab-btn ${activeTab === 'delete' ? 'active' : ''}`}
                         onClick={() => setActiveTab('delete')}
                     >
-                        Zona de Peligro
+                        {t.sidebar.workspace_settings_modal.danger_tab}
                     </button>
                 </div>
 
@@ -84,44 +86,44 @@ const WorkspaceSettingsModal = ({ onClose }: WorkspaceSettingsModalProps) => {
                     {activeTab === 'general' ? (
                         <form className="settings-form" onSubmit={onSubmit}>
                             <div className="form-group">
-                                <label>Nombre del Espacio de Trabajo</label>
+                                <label>{t.sidebar.workspace_settings_modal.name_label}</label>
                                 <input
                                     type="text"
                                     name="title"
                                     value={formState.title}
                                     onChange={handleChangeInput}
-                                    placeholder="Nombre del espacio..."
+                                    placeholder={t.sidebar.workspace_settings_modal.name_placeholder}
                                 />
                                 {errors.title && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{errors.title}</span>}
                             </div>
                             <div className="form-group">
-                                <label>Descripción</label>
+                                <label>{t.sidebar.workspace_settings_modal.description_label}</label>
                                 <textarea
                                     name="description"
                                     value={formState.description}
                                     onChange={handleChangeInput}
-                                    placeholder="De qué trata este espacio..."
+                                    placeholder={t.sidebar.workspace_settings_modal.description_placeholder}
                                     rows={4}
                                 />
                                 {errors.description && <span style={{ color: 'var(--error-primary)', fontSize: '13px' }}>{errors.description}</span>}
                             </div>
                             <div className="form-actions">
                                 {error && <span className="error-message">{error}</span>}
-                                <button type="button" className="secondary-btn" onClick={onClose} disabled={loading}>Cancelar</button>
+                                <button type="button" className="secondary-btn" onClick={onClose} disabled={loading}>{t.common.cancel}</button>
                                 <button type="submit" className="primary-btn" disabled={loading}>
-                                    {loading ? 'Guardando...' : 'Guardar Cambios'}
+                                    {loading ? t.sidebar.workspace_settings_modal.saving : t.sidebar.workspace_settings_modal.save_changes}
                                 </button>
                             </div>
                         </form>
                     ) : (
                         <div className="danger-zone">
                             <div className="danger-info">
-                                <h3>Eliminar este Espacio de Trabajo</h3>
-                                <p>Esta acción es permanente y no se puede deshacer. Se borrarán todos los canales y mensajes asociados.</p>
+                                <h3>{t.sidebar.workspace_settings_modal.delete_title}</h3>
+                                <p>{t.sidebar.workspace_settings_modal.delete_desc}</p>
                                 {error && <span className="error-message" style={{ display: 'block', marginTop: '10px' }}>{error}</span>}
                             </div>
                             <button className="delete-btn" onClick={handleDelete} disabled={loading}>
-                                {loading ? 'Eliminando...' : 'Eliminar Espacio de Trabajo Definitivamente'}
+                                {loading ? t.sidebar.workspace_settings_modal.deleting : t.sidebar.workspace_settings_modal.delete_btn}
                             </button>
                         </div>
                     )}

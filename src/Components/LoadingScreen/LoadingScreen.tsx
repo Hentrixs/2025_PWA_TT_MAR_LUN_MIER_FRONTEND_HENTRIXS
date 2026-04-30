@@ -1,3 +1,4 @@
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
 import './LoadingScreen.css';
 
 interface LoadingScreenProps {
@@ -5,12 +6,15 @@ interface LoadingScreenProps {
     isFullPage?: boolean;
 }
 
-const LoadingScreen = ({ message = 'Cargando...', isFullPage = true }: LoadingScreenProps) => {
+const LoadingScreen = ({ message, isFullPage = true }: LoadingScreenProps) => {
+    const { t } = useTranslation();
+    const displayMessage = message || t.common.loading;
+
     return (
         <div className={`loading-container ${isFullPage ? 'full-page' : 'inline'}`}>
             <div className="spinner-border text-primary" role="status">
             </div>
-            {message && <p className="loading-message">{message}</p>}
+            {displayMessage && <p className="loading-message">{displayMessage}</p>}
         </div>
     );
 };

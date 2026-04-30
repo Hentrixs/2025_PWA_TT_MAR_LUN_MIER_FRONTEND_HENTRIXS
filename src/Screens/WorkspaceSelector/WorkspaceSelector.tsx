@@ -8,8 +8,11 @@ import WorkspaceSidebar from '../../Components/WorkspaceSidebar/WorkspaceSidebar
 import DiscoverSection from '../../Components/DiscoverSection/DiscoverSection';
 import ConfirmationModal from '../../Components/ConfirmationModal/ConfirmationModal';
 
+import { useTranslation } from '../../context/LanguageContext/LanguageContext';
+
 function WorkspaceSelectorInner() {
     const { isLogoutModalOpen, setIsLogoutModalOpen, confirmLogout } = useWorkspaceSelectorContext();
+    const { t } = useTranslation();
 
     return (
         <div className="workspace-selector">
@@ -26,16 +29,16 @@ function WorkspaceSelectorInner() {
                 </div>
                 <DiscoverSection />
                 <footer className="workspace-footer">
-                    <p>¿Necesitas asistencia?</p>
-                    <p>Encuentra la ayuda que necesitas en nuestro <a href="#">Centro de ayuda</a>.</p>
+                    <p>{t.workspace_selector.footer_help}</p>
+                    <p>{t.workspace_selector.footer_center} <a href="#">{t.workspace_selector.footer_link}</a>.</p>
                 </footer>
             </div>
 
             {isLogoutModalOpen && (
                 <ConfirmationModal
-                    title="Cerrar sesión"
-                    message="¿Estás seguro de que quieres cerrar sesión? Tendrás que volver a ingresar tus credenciales para acceder."
-                    confirmText="Cerrar sesión"
+                    title={t.workspace_selector.logout_modal_title}
+                    message={t.workspace_selector.logout_modal_message}
+                    confirmText={t.workspace_selector.logout_modal_confirm}
                     onConfirm={confirmLogout}
                     onCancel={() => setIsLogoutModalOpen(false)}
                     isDanger={true}
